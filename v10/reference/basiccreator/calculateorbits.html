@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>BasicCreator.prototype.calculateOrbits() - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>BasicCreator.prototype.calculateOrbits()</h1>
+<div>
+<p>The calculateOrbits() method calculates right and left arm movements and prop orbits based on throwing data.</p>
+<svg id="ref_creator_orbits" class="border" width="300" height="300" viewBox="-150 -200 300 300">
+  <defs>
+    <rect id="ref_creator_orbits_hand" x="-10" y="0" width="20" height="5" />
+  </defs>
+  <g stroke="black" fill="none">
+    <circle cx="0" cy="-120" r="20" />
+    <line x1="-50" y1="-90" x2="50" y2="-90" />
+    <line x1="-50" y1="-90" x2="-70" y2="-30" />
+    <line x1="-70" y1="-30" x2="-90" y2="10" />
+    <use x="-90" y="10" href="#ref_creator_orbits_hand" />
+    <line x1="50" y1="-90" x2="70" y2="-30" />
+    <line x1="70" y1="-30" x2="90" y2="10" />
+    <use x="90" y="10" href="#ref_creator_orbits_hand" />
+  </g>
+  <g stroke="green" fill="none" stroke-dasharray="3">
+    <path d="M -70,-30 c 0,9 20,9 20,0 c 0,-9 -20,-9 -20,0" />
+    <path d="M -90,10 c 0,27 60,27 60,0 c 0,-27 -60,-27 -60,0" />
+    <path d="M 70,-30 c 0,9 -20,9 -20,0 c 0,-9 20,-9 20,0" />
+    <path d="M 90,10 c 0,27 -60,27 -60,0 c 0,-27 60,-27 60,0" />
+  </g>
+  <g stroke="red" fill="none" stroke-dasharray="3">
+    <path d="M -90,0 c 0,27 60,27 60,0" />
+    <path d="M -30,0 c 20,-40 40,-60 60,-60 c 20,0 40,20 60,60" />
+    <path d="M 90,0 c 0,27 -60,27 -60,0" />
+    <path d="M 30,0 c -20,-40 -40,-60 -60,-60 c -20,0 -40,20 -60,60" />
+  </g>
+  <g fill="green" text-anchor="middle" font-size="80%">
+    <text x="-60" y="50">arms[0][0]</text>
+    <text x="-110" y="-40">arms[0][1]</text>
+    <text x="60" y="50">arms[1][0]</text>
+    <text x="110" y="-40">arms[1][1]</text>
+    <text x="0" y="-70" fill="red">props[0]</text>
+  </g>
+</svg>
+<p>1 unit is the time it takes for a hand or prop to move from the start point to the end point of the SVGPathElement specified in BasicCreator.prototype.paths. It moves every SVGPathElement by 1 unit, so it will move faster if the path is longer and slower if the path is shorter.</p>
+<p>In siteswap 3, the time a prop is in the air between throws and catches is 2 units, and the time on the palm between catches and the next throw is 1 unit. It makes a parabola in the air for the first 2 units, then moves in an orbit that is BasicCreator.prototype.offset from the palm for the next 1 unit. In siteswap 4 it is 3 units in the air, 5 is 4 units in the air, and so on.</p>
+<p>Siteswaps 2 and 1 are special. If it is 2, a prop will not throw and will always move on the orbit (offset away from the palm). If it is 1, a prop will throw 0.5 units earlier than normal, will move 1 unit through the air, and will catch 0.5 units later in the opposite palm.</p>
+<p>In order to achieve animation, it is necessary to further divide 1 unit, and the number of divisions depends on the maximum value included in the siteswap (a = 10, b = 11, ..., z = 35).</p>
+<table>
+  <tr><th>max value</th><td>1-5</td><td>6</td><td>7</td><td>8-9</td><td>a-b</td><td>c-d</td><td>e-g</td><td>h-l</td><td>m-t</td><td>u-z</td></tr>
+  <tr><th>divisions</th><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td></tr>
+</table>
+<p>For example, for siteswap 3, 1 unit is divided into 12. In the case of 97531, the maximum value is 9, so it will be divided into 9. As the maximum value increases, the number of divisions decreases and the apparent speed increases. Because otherwise you will feel slow.</p>
+<p>The method for calculating the number of divisions is as follows. First, let siteswap 5 have 12 divisions and speed 1, and siteswap 4 and below are the same as 5. Next, for siteswap 6 or greater, increase the speed by 0.1 in increments of 1, divide 12 by the speed, and then round off to find the number of divisions.</p>
+<p>The height a prop thrown into the air can reach also depends on the maximum value included in the siteswap.</p>
+<table>
+  <tr><th>max value</th><td>1-5</td><td>6</td><td>7</td><td>...</td><td>z</td></tr>
+  <tr><th>scale</th><td>1</td><td>1.25</td><td>1.5</td><td>...</td><td>8.5</td></tr>
+  <tr><th>height of 1</th><td>15</td><td>12</td><td>10</td><td>...</td><td>1.76</td></tr>
+  <tr><th>height of 3</th><td>60</td><td>48</td><td>40</td><td>...</td><td>7.06</td></tr>
+  <tr><th>height of 4</th><td>135</td><td>108</td><td>90</td><td>...</td><td>15.88</td></tr>
+  <tr><th>height of 5</th><td>240</td><td>192</td><td>160</td><td>...</td><td>28.24</td></tr>
+  <tr><th>height of 6</th><td>-</td><td>300</td><td>250</td><td>...</td><td>44.12</td></tr>
+  <tr><th>height of 7</th><td>-</td><td>-</td><td>360</td><td>...</td><td>63.53</td></tr>
+  <tr><th>:</th><td>:</td><td>:</td><td>:</td><td>&nbsp;</td><td>:</td></tr>
+  <tr><th>height of z</th><td>-</td><td>-</td><td>-</td><td>...</td><td>2,040</td></tr>
+</table>
+<p>For example, siteswap 7131 has a maximum value of 7, so among the digits it contains, the height of 7 is 360, the height of 1 is 10, and the height of 3 is 40.</p>
+<p>First calculate the scale as shown in the <a href="./getscale.html">getScale()</a> method, then find the height of each number. The height of 1 is 15 &div; scale. If 3 or greater, the height is (number - 1)<sup>2</sup> &times; 15 &div; scale. This is based on a height that uses the entire 300&times;300 drawing area if siteswap 5 is thrown. It is not a value calculated from gravitational acceleration.</p>
+</div>
+
+<h2>Syntax</h2>
+<div>
+<pre><code>calculateOrbits(table, synch)
+</code></pre>
+</div>
+
+<h2>Parameters</h2>
+<div>
+<dl>
+  <dt>table</dt>
+  <dd>An array of throwing data. The throwing data for each prop is an object like this:</dd>
+  <dd>
+<pre><code>{
+    "start": 0,
+    "length": 2,
+    "numbers": [ 5, 1 ],
+    "times": [ 5, 1 ],
+}
+</code></pre>
+  </dd>
+  <dd>You can pass the return value of <a href="../siteswap/separate.html">Siteswap.separate()</a> as is.</dd>
+  <dt>synch</dt>
+  <dd>True if the throwing is synchronous, false otherwise. You can pass the synch property of the return value of <a href="../siteswap/analyze.html">Siteswap.analyze()</a> as is.</dd>
+</dl>
+</div>
+
+<h2>Return value</h2>
+<div>
+<p>An object with the following properties:</p>
+<dl>
+  <dt>arms</dt>
+  <dd>An array of arms. The size of the array is always 2 because there are 2 arms. Each element is an array of joint state lists, the size of the array is the number of joints. By default, there are two joints, the palm and the elbow, each of which has a state list.</dd>
+  <dd>The joint state list is an object like this (same as the prop state list).</dd>
+  <dd>
+<pre><code>{
+    "init": [ pi0, pi1, pi2, ... ],
+    "loop": [ pl0, pl1, pl2, ... ],
+}
+</code></pre>
+  </dd>
+  <dd>The "init" is the initial action and the "loop" is the repeat action. The pi0, pl1, etc. are the coordinates to display the joints. The "init" can be an empty array. The size of the "loop" array is the number of SVGPathElements for that joint multiplied by the number of divisions.</dd>
+  <dt>props</dt>
+  <dd>An array of prop state lists. The size of the array is the number of props. The prop state list is an object like this (same as the joint state list).</dd>
+  <dd>
+<pre><code>{
+    "init": [ pi0, pi1, pi2, ... ],
+    "loop": [ pl0, pl1, pl2, ... ],
+}
+</code></pre>
+  </dd>
+  <dd>The "init" is the initial action and the "loop" is the repeat action. The pi0, pl1, etc. are the coordinates to display the props. The "init" can be an empty array. The size of the "loop" array is the sum of the height (absolute value) for one cycle contained in the argument throwing data, multiplied by the number of divisions.</dd>
+</dl>
+</div>
+
+<h2>Examples</h2>
+<div>
+<pre><code>const result = jmotion.Siteswap.analyze("3");
+const table = jmotion.Siteswap.separate(result.throws, result.synch);
+const creator = new jmotion.BasicCreator();
+const orbits = creator.calculateOrbits(table, result.synch);
+
+// orbits = {
+//     "arms": [
+//         [
+//             {
+//                 "init": [],
+//                 "loop": [
+//                     { "x": -90, "y": 10 },
+//                     { "x": -89, "y": 16 },
+//                     ...
+//                 ],
+//             },
+//             {
+//                 "init": [],
+//                 "loop": [ ... ],
+//             },
+//         ],
+//         [
+//             ...
+//         ],
+//     ],
+//     "props": [
+//         {
+//             "init": [],
+//             "loop": [
+//                 { "x": -90, "y": 0 },
+//                 { "x": -89, "y": 6 },
+//                 ...
+//             ],
+//         },
+//         ...
+//     ],
+// }
+</code></pre>
+</div>
+
+<footer>
+  <p><a href="./index.html">BasicCreator object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

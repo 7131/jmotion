@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Animator.prototype.stop() - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>Animator.prototype.stop()</h1>
+<div>
+<p>The stop() method stops the animation. Nothing happens unless the animation is running.</p>
+</div>
+
+<h2>Syntax</h2>
+<div>
+<pre><code>stop()
+</code></pre>
+</div>
+
+<h2>Parameters</h2>
+<div>
+<p>none</p>
+</div>
+
+<h2>Return value</h2>
+<div>
+<p>none</p>
+</div>
+
+<h2>Examples</h2>
+<div>
+<pre><code>const svg = document.getElementById("board");
+const core = new jmotion.Core(svg);
+const animator = new jmotion.Animator(core);
+
+const pl0 = { "x":   0, "y": -30 };
+const pl1 = { "x": -30, "y":   0 };
+const pl2 = { "x":   0, "y":  30 };
+const pl3 = { "x":  30, "y":   0 };
+
+animator.props = [
+    {
+        "init": [],
+        "loop": [ pl0, pl1, pl2, pl3 ],
+    }
+];
+animator.start(0.1);
+setTimeout(animator.stop.bind(animator), 2000);
+</code></pre>
+</div>
+
+<footer>
+  <p><a href="./index.html">Animator object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Core - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>Core</h1>
+<div>
+<p>The Core object renders a still image in an HTML &lt;svg&gt; tag. It has graphic elements of props and arms inside and draws them at the specified coordinates.</p>
+<svg width="300" height="300">
+  <defs>
+    <rect id="ref_core_index_hand" x="-10" y="0" width="20" height="5" />
+    <circle id="ref_core_index_ball" r="10" />
+  </defs>
+  <symbol id="ref_core_index_frame" viewBox="-200 -305 400 400">
+    <g stroke="black" fill="white">
+      <rect x="-150" y="-255" width="300" height="300" />
+    </g>
+  </symbol>
+  <symbol id="ref_core_index_body" viewBox="-200 -305 400 400">
+    <g stroke="black" fill="white">
+      <circle cx="0" cy="-120" r="20" />
+      <line x1="-50" y1="-90" x2="50" y2="-90" />
+      <line x1="-50" y1="-90" x2="-70" y2="-30" />
+      <line x1="-70" y1="-30" x2="-90" y2="10" />
+      <line x1="50" y1="-90" x2="70" y2="-30" />
+      <line x1="70" y1="-30" x2="90" y2="10" />
+    </g>
+  </symbol>
+  <symbol id="ref_core_index_hands" viewBox="-200 -305 400 400">
+    <g stroke="black" fill="white">
+      <use x="-90" y="10" href="#ref_core_index_hand" />
+      <use x="90" y="10" href="#ref_core_index_hand" />
+    </g>
+  </symbol>
+  <symbol id="ref_core_index_props" viewBox="-200 -305 400 400">
+    <use x="-90" y="0" fill="red" href="#ref_core_index_ball" />
+    <use x="90" y="0" fill="blue" href="#ref_core_index_ball" />
+  </symbol>
+  <symbol id="ref_core_index_axis" viewBox="-200 -305 400 400">
+    <g stroke="black" fill="none">
+      <line x1="-170" y1="0" x2="170" y2="0" stroke-dasharray="5" />
+      <line x1="0" y1="-275" x2="0" y2="70" stroke-dasharray="5" />
+    </g>
+    <g fill="green">
+      <circle cx="-150" cy="-255" r="5" />
+      <circle cx="0" cy="0" r="5" />
+      <circle cx="150" cy="45" r="5" />
+      <text x="-190" y="-280" alignment-baseline="hanging">(-150, -255)</text>
+      <text x="-55" y="-25" alignment-baseline="hanging">(0, 0)</text>
+      <text x="110" y="60" alignment-baseline="hanging">(150, 45)</text>
+    </g>
+  </symbol>
+  <use href="#ref_core_index_frame" />
+  <use href="#ref_core_index_body" />
+  <use href="#ref_core_index_props" />
+  <use href="#ref_core_index_hands" />
+  <use href="#ref_core_index_axis" />
+</svg>
+<p>The default drawing area is 300&times;300. The origin (0, 0) is where the centerline of the body intersects the centerline of the prop's home position. The x-coordinate is positive to the right, but the y-coordinate is positive down, unlike the usual Cartesian coordinates.</p>
+<svg width="300" height="300">
+  <g transform="skewY(-30) scale(0.63,0.9)">
+    <use href="#ref_core_index_frame" x="0" y="75" />
+    <use href="#ref_core_index_body" x="0" y="75" />
+    <use href="#ref_core_index_frame" x="90" y="112" fill-opacity="0.5" />
+    <use href="#ref_core_index_props" x="90" y="112" />
+    <use href="#ref_core_index_frame" x="180" y="149" fill-opacity="0.5" />
+    <use href="#ref_core_index_hands" x="180" y="149" />
+  </g>
+</svg>
+<p>There are 3 drawing layers. Props are drawn on the middle layer, and body parts are drawn on the front or back layer.</p>
+</div>
+
+<h2>Constructor</h2>
+<div>
+<dl>
+  <dt><a href="./constructor.html">Core()</a></dt>
+  <dd>Creates a new Core object.</dd>
+</dl>
+</div>
+
+<h2>Properties</h2>
+<div>
+<dl>
+  <dt>Core.prototype.back</dt>
+  <dd>The back layer. Anything to be drawn behind the props, such as the head or arms, will be placed on this layer.</dd>
+  <dt>Core.prototype.defs</dt>
+  <dd>An object representing a &lt;defs&gt; tag. If it is in Core.prototype.svg it will be used, otherwise it will be created.</dd>
+  <dt>Core.prototype.front</dt>
+  <dd>The front layer. Anything to be drawn in front of the props, such as the palm, will be placed on this layer.</dd>
+  <dt>Core.prototype.middle</dt>
+  <dd>The middle layer. It is used for drawing props, but rarely manipulated from outside the Core object.</dd>
+  <dt>Core.prototype.svg</dt>
+  <dd>An object representing a &lt;svg&gt; tag.</dd>
+</dl>
+</div>
+
+<h2>Methods</h2>
+<div>
+<dl>
+  <dt><a href="./drawarms.html">Core.prototype.drawArms()</a></dt>
+  <dd>Draws all arms given a list of coordinates.</dd>
+  <dt><a href="./drawprops.html">Core.prototype.drawProps()</a></dt>
+  <dd>Draws all props given a list of coordinates.</dd>
+  <dt><a href="./setarms.html">Core.prototype.setArms()</a></dt>
+  <dd>Sets arm graphic elements. By default, the back layer is used.</dd>
+  <dt><a href="./setbody.html">Core.prototype.setBody()</a></dt>
+  <dd>Sets immovable graphic elements such as the head and body. By default, the back layer is used.</dd>
+  <dt><a href="./sethands.html">Core.prototype.setHands()</a></dt>
+  <dd>Sets palm graphic elements. By default, the front layer is used.</dd>
+  <dt><a href="./setprops.html">Core.prototype.setProps()</a></dt>
+  <dd>Sets the graphic elements of the props list. The middle layer is used.</dd>
+  <dt><a href="./setscale.html">Core.prototype.setScale()</a></dt>
+  <dd>Sets the scale applied to the &lt;svg&gt; tag.</dd>
+  <dt><a href="./setstyle.html">Core.prototype.setStyle()</a></dt>
+  <dd>Sets visual styles of graphic elements. By default, it applies to the front and back layers.</dd>
+</dl>
+</div>
+
+<footer>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

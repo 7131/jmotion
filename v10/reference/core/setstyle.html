@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Core.prototype.setStyle() - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>Core.prototype.setStyle()</h1>
+<div>
+<p>The setStyle() method sets visual styles of graphic elements. By default, it applies to the front and back layers.</p>
+<p>Visual styles are applied to all child elements immediately below the layer at once. Visual styles that are invalid for that child element are ignored, even if they are set.</p>
+</div>
+
+<h2>Syntax</h2>
+<div>
+<pre><code>setStyle(style)
+setStyle(style, layer)
+</code></pre>
+</div>
+
+<h2>Parameters</h2>
+<div>
+<dl>
+  <dt>style</dt>
+  <dd>An object that contains visual styles.</dd>
+  <dt>layer (Optional)</dt>
+  <dd>A drawing layer or an array of drawing layers to apply visual styles to.</dd>
+  <dd>If this argument is omitted, visual styles will be applied to Core.prototype.front and Core.prototype.back.</dd>
+</dl>
+</div>
+
+<h2>Return value</h2>
+<div>
+<p>none</p>
+</div>
+
+<h2>Visual styles</h2>
+<div>
+<p>An object with the following properties. All properties are optional and only those specified apply.</p>
+<dl>
+  <dt>fill</dt>
+  <dd>The color that fills the background of graphic elements. The initial value of the default element is white.</dd>
+  <dt>stroke</dt>
+  <dd>The color of lines and outlines of graphic elements.  The initial value of the default element is black.</dd>
+  <dt>stroke-width</dt>
+  <dd>Width of lines and outlines of graphic elements. The initial value of the default element is 1. You can pass the return value of <a href="../basiccreator/getwidth.html">BasicCreator.prototype.getWidth()</a> as is.</dd>
+</dl>
+<p>In addition to these, you can set attributes available on the &lt;svg&gt; graphic elements.</p>
+</div>
+
+<h2>Examples</h2>
+<div>
+<pre><code>const svg = document.getElementById("board");
+const core = new jmotion.Core(svg);
+const style = {
+    "stroke": "blue",
+    "stroke-width": 3,
+};
+core.setStyle(style);
+</code></pre>
+</div>
+
+<footer>
+  <p><a href="./index.html">Core object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

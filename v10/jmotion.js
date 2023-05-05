@@ -1,4 +1,4 @@
-// The entire jmotion namespace
+// jmotion namespace
 var jmotion = jmotion || {};
 jmotion.VERSION = "1.0";
 (function(parent) {
@@ -124,7 +124,7 @@ jmotion.VERSION = "1.0";
             return private.index;
         },
 
-        // get running index
+        // set running index
         "setIndex": function(index) {
             // get index
             const private = privatePart(this);
@@ -189,7 +189,7 @@ jmotion.VERSION = "1.0";
 
     }
 
-    // Image core class (public part)
+    // Drawing core class (public part)
     const CorePublic = function(element, cancel) {
         const private = privatePart(this, new CorePrivate(this));
 
@@ -221,13 +221,13 @@ jmotion.VERSION = "1.0";
         this.svg.appendChild(this.middle);
         this.svg.appendChild(this.front);
 
-        // initial setting
+        // initial settings
         private.initialize(cancel);
         this.setStyle({ "fill": "white", "stroke": "black", "stroke-width": 1 });
         this.setScale(1);
     }
 
-    // Image core prototype (public part)
+    // Drawing core prototype (public part)
     CorePublic.prototype = {
 
         // set body elements
@@ -239,7 +239,7 @@ jmotion.VERSION = "1.0";
                 layer = this.back;
             }
             if (!append) {
-                // remove existing element
+                // remove existing elements
                 const children = Array.from(layer.children);
                 const targets = children.filter(elem => private.hands.indexOf(elem) < 0 && private.arms.every(arm => arm.indexOf(elem) < 0));
                 targets.forEach(layer.removeChild, layer);
@@ -261,7 +261,7 @@ jmotion.VERSION = "1.0";
                 layer = this.back;
             }
 
-            // remove existing element
+            // remove existing elements
             private.arms.forEach(private.eraseLayer, private);
             private.arms = [];
             if (!Array.isArray(arms)) {
@@ -286,7 +286,7 @@ jmotion.VERSION = "1.0";
                 layer = this.front;
             }
 
-            // remove existing element
+            // remove existing elements
             private.eraseLayer(private.hands);
             private.hands = [];
             if (!Array.isArray(elements)) {
@@ -296,7 +296,7 @@ jmotion.VERSION = "1.0";
             // set to the layer
             for (let hand of elements) {
                 if (!(hand instanceof SVGUseElement)) {
-                    // if not use convert to use
+                    // if not SVGUseElement, convert to SVGUseElement
                     if (!hand.id) {
                         hand.id = private.getNewId(`${this.svg.id}_hand`);
                     }
@@ -312,7 +312,7 @@ jmotion.VERSION = "1.0";
         "setProps": function(elements) {
             const private = privatePart(this);
 
-            // remove existing element
+            // remove existing elements
             const targets = Array.from(this.defs.children).filter(elem => 0 <= private.props.indexOf(elem));
             targets.forEach(this.defs.removeChild, this.defs);
             private.props = [];
@@ -451,7 +451,7 @@ jmotion.VERSION = "1.0";
 
     }
 
-    // Image core class (private part)
+    // Drawing core class (private part)
     const CorePrivate = function(public) {
         // properties
         this.public = public;
@@ -462,7 +462,7 @@ jmotion.VERSION = "1.0";
         this.uses = [];
     }
 
-    // Image core prototype (private part)
+    // Drawing core prototype (private part)
     CorePrivate.prototype = {
 
         // initial setting
@@ -554,7 +554,7 @@ jmotion.VERSION = "1.0";
             return shape;
         },
 
-        // get new ID
+        // get new id
         "getNewId": function(head) {
             let i = 0;
             let id = `${head}_${i}`;
@@ -631,7 +631,7 @@ jmotion.VERSION = "1.0";
             private.scale = (max - 1) / 4;
             private.div = private.divisions[Math.min(max - 5, private.divisions.length - 1)];
 
-            // a list of coordinates along the PATH
+            // a list of coordinates along the path
             const orbit = {};
             orbit.right = private.createPathPoints(this.paths.right, this.offset.right);
             orbit.left = private.createPathPoints(this.paths.left, this.offset.left);
@@ -704,7 +704,7 @@ jmotion.VERSION = "1.0";
             return true;
         },
 
-        // create an elliptical PATH
+        // create an elliptical path
         "createEllipsePath": function(sx, sy, ex, ey, dir) {
             // in ellipse x^2/a^2 + y^2/b^2 = 1, let b = 2/3 a (since it is basically ey = sy, a = length / 2 holds)
             const dx = ex - sx;
@@ -720,7 +720,7 @@ jmotion.VERSION = "1.0";
             return path;
         },
 
-        // create a list of coordinates along the PATH
+        // create a list of coordinates along the path
         "createPathPoints": function(moves, offset) {
             const selector = elem => new DOMPoint(elem.x + offset.x, elem.y + offset.y);
             const arms = [];

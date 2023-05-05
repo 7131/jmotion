@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>BasicCreator() - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>BasicCreator()</h1>
+<div>
+<p>The BasicCreator() constructor creates a new BasicCreator object.</p>
+<p>When an object is created, properties are set to default values. BasicCreator.prototype.paths is set to a list of cubic Bezier curves for each joint orbit.</p>
+<svg id="ref_creator_ctor" class="border" width="300" height="300" viewBox="-150 -150 200 200">
+  <defs>
+    <rect id="ref_creator_ctor_hand" x="-10" y="0" width="20" height="5" />
+    <marker id="ref_creator_ctor_arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <polygon points="0,0 10,5 0,10" fill="green" />
+    </marker>
+    <marker id="ref_creator_ctor_dot" refX="2" refY="2" markerWidth="4" markerHeight="4">
+      <circle cx="2" cy="2" r="2" fill="red" />
+    </marker>
+  </defs>
+  <g stroke="black" fill="none">
+    <circle cx="0" cy="-120" r="20" />
+    <line x1="-50" y1="-90" x2="50" y2="-90" />
+    <line x1="-50" y1="-90" x2="-70" y2="-30" />
+    <line x1="-70" y1="-30" x2="-90" y2="10" />
+    <use x="-90" y="10" href="#ref_creator_ctor_hand" />
+  </g>
+  <g stroke="green" fill="none" stroke-dasharray="3" marker-end="url(#ref_creator_ctor_arrow)">
+    <path d="M -90,10 c 0,27 60,27 60,0" />
+  </g>
+  <g stroke="red" marker-start="url(#ref_creator_ctor_dot)" marker-end="url(#ref_creator_ctor_dot)">
+    <line x1="-90" y1="10" x2="-90" y2="37" />
+    <line x1="-30" y1="10" x2="-30" y2="37" />
+  </g>
+  <g fill="red" font-size="60%">
+    <text x="-135" y="0">(-90, 10)</text>
+    <text x="-140" y="40">(-90, 37)</text>
+    <text x="-20" y="12">(-30, 10)</text>
+    <text x="-20" y="40">(-30, 37)</text>
+  </g>
+</svg>
+<p>A cubic Bezier curve has four coordinates: a start point, an end point, and corresponding control points. For example, in the orbit of the right hand "catch-to-throw" has (-90, 10), (-90, 37), (-30, 37), and (-30, 10). A total of 8 Bezier curves (SVGPathElement objects representing them) are set as shown in the table below.</p>
+<table>
+  <tr><th>arm</th><th>direction</th><th>joint</th><th>orbit overview</th></tr>
+  <tr><td rowspan="4">right</td><td rowspan="2">catch-to-throw</td><td>hand</td><td>bottom half of large ellipse from right to left</td></tr>
+  <tr><td>elbow</td><td>bottom half of small ellipse from right to left</td></tr>
+  <tr><td rowspan="2">throw-to-catch</td><td>hand</td><td>top half of large ellipse from left to right</td></tr>
+  <tr><td>elbow</td><td>top half of small ellipse from left to right</td></tr>
+  <tr><td rowspan="4">left</td><td rowspan="2">catch-to-throw</td><td>hand</td><td>bottom half of large ellipse from left to right</td></tr>
+  <tr><td>elbow</td><td>bottom half of small ellipse from left to right</td></tr>
+  <tr><td rowspan="2">throw-to-catch</td><td>hand</td><td>top half of large ellipse from right to left</td></tr>
+  <tr><td>elbow</td><td>top half of small ellipse from right to left</td></tr>
+</table>
+<p>Note that these are approximate representations of ellipses, not exact ellipses.</p>
+</div>
+
+<h2>Syntax</h2>
+<div>
+<pre><code>new BasicCreator()
+</code></pre>
+</div>
+
+<h2>Parameters</h2>
+<div>
+<p>none</p>
+</div>
+
+<h2>Examples</h2>
+<div>
+<pre><code>const creator = new jmotion.BasicCreator();
+
+// creator = {
+//     "offset": {
+//         "left": { "x": 0, "y": -10 },
+//         "right": { "x": 0, "y": -10 },
+//     },
+//     "paths": {
+//         "left": [
+//             [ path, path ],
+//             [ path, path ],
+//         ],
+//         "right": [
+//             [ path, path ],
+//             [ path, path ],
+//         ],
+//     },
+// }
+</code></pre>
+</div>
+
+<footer>
+  <p><a href="./index.html">BasicCreator object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

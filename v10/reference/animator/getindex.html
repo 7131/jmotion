@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Animator.prototype.getIndex() - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>Animator.prototype.getIndex()</h1>
+<div>
+<p>The getIndex() method returns the animation index number.</p>
+</div>
+
+<h2>Syntax</h2>
+<div>
+<pre><code>getIndex()
+</code></pre>
+</div>
+
+<h2>Parameters</h2>
+<div>
+<p>none</p>
+</div>
+
+<h2>Return value</h2>
+<div>
+<p>A 0-based index number.</p>
+</div>
+
+<h2>Examples</h2>
+<div>
+<pre><code>const svg = document.getElementById("board");
+const core = new jmotion.Core(svg);
+const animator = new jmotion.Animator(core);
+const index = animator.getIndex();
+
+// index = 0
+</code></pre>
+</div>
+
+<footer>
+  <p><a href="./index.html">Animator object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

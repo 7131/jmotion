@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Core.prototype.setHands() - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>Core.prototype.setHands()</h1>
+<div>
+<p>The setHands() method sets palm graphic elements. By default, the front layer is used.</p>
+<svg id="ref_core_sethands" class="border" width="300" height="300" viewBox="-150 -255 300 300">
+  <defs>
+    <rect id="ref_core_sethands_hand" x="-10" y="0" width="20" height="5" />
+  </defs>
+  <g fill="none" stroke="black">
+    <circle cx="0" cy="-120" r="20" />
+    <line x1="-50" y1="-90" x2="50" y2="-90" />
+    <line x1="-50" y1="-90" x2="-70" y2="-30" />
+    <line x1="-70" y1="-30" x2="-90" y2="10" />
+    <use x="-90" y="10" href="#ref_core_sethands_hand" />
+    <line x1="50" y1="-90" x2="70" y2="-30" />
+    <line x1="70" y1="-30" x2="90" y2="10" />
+    <use x="90" y="10" href="#ref_core_sethands_hand" />
+  </g>
+  <g fill="green" text-anchor="middle">
+    <text x="-120" y="0">hand0</text>
+    <text x="120" y="0">hand1</text>
+  </g>
+</svg>
+<p>Both palms are expected to be SVGUseElement objects (&lt;use&gt; tags). If you specify a different graphic element, the specified element is added to Core.prototype.defs and an SVGUseElement object referencing it is created internally and added to the drawing layer.</p>
+<p>The palms to be moved by <a href="./drawarms.html">drawArms()</a> must be set in advance by this method.</p>
+</div>
+
+<h2>Syntax</h2>
+<div>
+<pre><code>setHands(elements)
+setHands(elements, layer)
+</code></pre>
+</div>
+
+<h2>Parameters</h2>
+<div>
+<dl>
+  <dt>elements</dt>
+  <dd>An array of graphic elements.</dd>
+  <dt>layer (Optional)</dt>
+  <dd>A drawing layer on which to place graphic elements.</dd>
+  <dd>If this argument is omitted, the graphic elements are placed on Core.prototype.front.</dd>
+  <dd>In either case, existing palm elements are deleted.</dd>
+</dl>
+</div>
+
+<h2>Return value</h2>
+<div>
+<p>none</p>
+</div>
+
+<h2>Examples</h2>
+<div>
+<pre><code>const svg = document.getElementById("board");
+const core = new jmotion.Core(svg, true);
+
+const elements = [
+    document.getElementById("hand"),
+];
+core.setHands(elements);
+
+// core.front = {
+//     "board_hand_use": use#board_hand_use,
+// }
+</code></pre>
+</div>
+
+<footer>
+  <p><a href="./index.html">Core object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

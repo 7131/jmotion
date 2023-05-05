@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Core.prototype.setArms() - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>Core.prototype.setArms()</h1>
+<div>
+<p>The setArms() method sets arm graphic elements. By default, the back layer is used.</p>
+<svg id="ref_core_setarms" class="border" width="300" height="300" viewBox="-150 -255 300 300">
+  <defs>
+    <rect id="ref_core_setarms_hand" x="-10" y="0" width="20" height="5" />
+  </defs>
+  <g fill="none" stroke="black">
+    <circle cx="0" cy="-120" r="20" />
+    <line x1="-50" y1="-90" x2="50" y2="-90" />
+    <line x1="-50" y1="-90" x2="-70" y2="-30" />
+    <line x1="-70" y1="-30" x2="-90" y2="10" />
+    <use x="-90" y="10" href="#ref_core_setarms_hand" />
+    <line x1="50" y1="-90" x2="70" y2="-30" />
+    <line x1="70" y1="-30" x2="90" y2="10" />
+    <use x="90" y="10" href="#ref_core_setarms_hand" />
+  </g>
+  <g fill="green" text-anchor="middle">
+    <text x="-110" y="-75">right1</text>
+    <text x="-120" y="-20">right0</text>
+    <text x="110" y="-75">left1</text>
+    <text x="120" y="-20">left0</text>
+    <g font-size="55" stroke="white">
+      <text x="-80" y="-50" transform="rotate(18 -80,-50)">{</text>
+      <text x="80" y="-50" transform="rotate(-18 80,-50)">}</text>
+    </g>
+    <g font-size="30">
+      <text x="-92" y="-8" transform="rotate(25 -92,-8)">{</text>
+      <text x="92" y="-8" transform="rotate(-25 92,-8)">}</text>
+    </g>
+  </g>
+</svg>
+<p>Suppose right0 is the right forearm, right1 is the right upper arm, left0 is the left forearm, and left1 is the left upper arm, the element list will be an array of arrays like this:</p>
+<pre><code>[
+    [ right0, right1 ],
+    [ left0, left1 ],
+]
+</code></pre>
+<p>The graphic elements specified here are added to the drawing layer. These can be moved by calling <a href="./drawarms.html">drawArms()</a>, and calling drawArms() will only move the elements specified here or the default.</p>
+<p>All graphic elements specified here must be SVGLineElement objects (&lt;line&gt; tags) connecting the two points.</p>
+<p>If the number of arms or parts is different from the default, specify the number of elements you want.</p>
+<pre><code>[
+    [ arm00, arm01, arm02, arm03, ... ],
+    [ arm10, arm11, arm12, arm13, ... ],
+    [ arm20, arm21, arm22, arm23, ... ],
+    ...
+]
+</code></pre>
+</div>
+
+<h2>Syntax</h2>
+<div>
+<pre><code>setArms(arms)
+setArms(arms, layer)
+</code></pre>
+</div>
+
+<h2>Parameters</h2>
+<div>
+<dl>
+  <dt>arms</dt>
+  <dd>An array of arrays of graphic elements for each arm.</dd>
+  <dt>layer (Optional)</dt>
+  <dd>A drawing layer on which to place graphic elements.</dd>
+  <dd>If this argument is omitted, the graphic elements are placed on Core.prototype.back.</dd>
+  <dd>In either case, existing arm elements are deleted.</dd>
+</dl>
+</div>
+
+<h2>Return value</h2>
+<div>
+<p>none</p>
+</div>
+
+<h2>Examples</h2>
+<div>
+<pre><code>const svg = document.getElementById("board");
+const core = new jmotion.Core(svg, true);
+
+const arm = [
+    [
+        document.getElementById("arm0"),
+        document.getElementById("arm1"),
+        document.getElementById("arm2"),
+    ],
+];
+core.setArms(arm);
+
+// core.back = {
+//     "arm0": line#arm0,
+//     "arm1": line#arm1,
+//     "arm2": line#arm2,
+// }
+</code></pre>
+</div>
+
+<footer>
+  <p><a href="./index.html">Core object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

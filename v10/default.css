@@ -1,0 +1,77 @@
+@charset "utf-8";
+
+article {
+    line-height: 1.8;
+    margin-bottom: 10ex;
+}
+
+pre {
+    padding: 2ex;
+    background-color: whitesmoke;
+    font-size: large;
+}
+
+ul {
+    margin-top: 1ex;
+}
+
+ul li {
+    margin-bottom: 1ex;
+}
+
+dl dt {
+    margin-top: 2ex;
+}
+
+dl dd {
+    margin-left: 3ex;
+}
+
+svg {
+    margin-top: 1ex;
+}
+
+svg.border {
+    border: 1px solid gray;
+}
+
+table {
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+
+table th {
+    border: 1px solid gray;
+    padding: 0.5ex 1ex;
+}
+
+table td {
+    border: 1px solid gray;
+    padding: 0.5ex 1ex;
+    text-align: center;
+}
+
+footer {
+    margin-top: 5ex;
+}
+
+.color1 {
+    color: red;
+}
+
+.color2 {
+    color: lime;
+}
+
+.color3 {
+    color: blue;
+}
+
+@media (orientation: landscape) {
+
+    article {
+        line-height: 1.5;
+    }
+
+}
+

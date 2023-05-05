@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Siteswap.analyze() - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>Siteswap.analyze()</h1>
+<div>
+<p>The analyze() method parses an input string and returns siteswap data.</p>
+</div>
+
+<h2>Syntax</h2>
+<div>
+<pre><code>analyze(text)
+</code></pre>
+</div>
+
+<h2>Parameters</h2>
+<div>
+<dl>
+  <dt>text</dt>
+  <dd>A string representing the siteswap pattern.</dd>
+</dl>
+</div>
+
+<h2>Return value</h2>
+<div>
+<p>An object with the following properties:</p>
+<dl>
+  <dt>count</dt>
+  <dd>The number of props for the specified siteswap. For example, if the pattern string is "51", it will be 3.</dd>
+  <dt>message</dt>
+  <dd>A message string if the pattern is not a valid siteswap.</dd>
+  <dt>period</dt>
+  <dd>The length of period for the specified siteswap. For example, 4 if the pattern string is "7131", 2 if "(4x,2x)", and so on.</dd>
+  <dt>state</dt>
+  <dd>A numeric array representing the state of the siteswap. For example, [1, 1, 0, 1] if the pattern string is "51", [2, 1] if "[34]20", and so on.</dd>
+  <dt>synch</dt>
+  <dd>True if the siteswap is synchronous, false otherwise.</dd>
+  <dt>text</dt>
+  <dd>The pattern string. Double-byte characters in the argument string are converted to single-byte characters, and uppercase letters are converted to lowercase letters.</dd>
+  <dt>throws</dt>
+  <dd>An array of numeric arrays converted from the pattern string. For example, [[3]] for pattern string "3" and [[3, 4], [2], [0]] for "[34]20". For synchronous, numbers with "x" are converted to odd numbers, where +1 is added to the left number and -1 to the right number. For example, "(4x,2x)" becomes [[5], [1]].</dd>
+  <dt>valid</dt>
+  <dd>This property always exists. True if the input string is a valid siteswap, false otherwise.</dd>
+</dl>
+</div>
+
+<h2>Examples</h2>
+<div>
+<pre><code>const result = jmotion.Siteswap.analyze("531");
+
+// result = {
+//     "count": 3,
+//     "period": 3,
+//     "state": [1, 1, 1],
+//     "synch": false,
+//     "text": "531",
+//     "throws": [
+//         [5],
+//         [3],
+//         [1],
+//     ],
+//     "valid": true,
+// }
+</code></pre>
+</div>
+
+<footer>
+  <p><a href="./index.html">Siteswap object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="./default.css">
+<title>jmotion - Juggling Simulator Library</title>
+</head>
+
+<body>
+<article>
+<h1>jmotion - Juggling Simulator Library</h1>
+<div>
+<p>jmotion is a JavaScript library for running juggling simulator on the web. You can easily execute animation by specifying "siteswap", which is a numerical sequence that represents the juggling pattern, or you can control its part by directly specifying the coordinates of graphic elements.</p>
+<p><a href="./sample.html">sample app</a></p>
+</div>
+
+<h2>How to use</h2>
+<div>
+<p>First, write the following line in &lt;head&gt; block of the HTML file.</p>
+<pre><code>&lt;script src="https://7131.github.io/jmotion/v10/jmotion.js"&gt;&lt;/script&gt;
+</code></pre>
+<p>The URL of the original file is specified in the src attribute. You can <a href="./jmotion.js" download="jmotion.js">download</a> this file and install it on your own computer or server, but then specify the installed location in the src attribute.</p>
+<p>Then put the &lt;svg&gt; tag in the &lt;body&gt; block.</p>
+<pre><code>&lt;svg id="board" width="300" height="300"&gt;&lt;/svg&gt;
+</code></pre>
+<p>The id attribute can be any string, but here I set it to "board". You can also set the size freely. I think it is usually set in the stylesheet. Depending on the environment, the namespace attribute xmlns="http://www.w3.org/2000/svg" is required, so specify it if it does not display.</p>
+<p>Preparations are over. After the &lt;svg&gt; is displayed, you can run the simulator by passing it to the Facade object inside the &lt;script&gt; tag. For example, the JavaScript for throwing siteswap 3 would be:</p>
+<pre><code>&lt;script&gt;
+const facade = new jmotion.Facade(document.getElementById("board"));
+facade.startJuggling("3");
+&lt;/script&gt;
+</code></pre>
+</div>
+
+<h2>Object correlation</h2>
+<div>
+<p>The following diagram shows the correlation between the objects defined in the jmotion namespace and the HTML tags.</p>
+<svg id="jmotion_correlate" width="380" height="270">
+  <marker id="jmotion_correlate_arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+    <polygon points="0,0 10,5 0,10" fill="green" />
+  </marker>
+  <g fill="none" stroke="black">
+    <rect x="10" y="10" width="160" height="190" />
+    <rect x="20" y="50" width="140" height="80" />
+    <rect x="30" y="90" width="120" height="30" />
+    <rect x="20" y="150" width="140" height="30" />
+    <rect x="10" y="230" width="160" height="30" />
+    <rect x="240" y="10" width="120" height="140" />
+    <rect x="250" y="50" width="100" height="30" />
+    <rect x="250" y="100" width="100" height="30" />
+  </g>
+  <g text-anchor="middle">
+    <text x="90" y="25" alignment-baseline="middle">Facade</text>
+    <text x="90" y="65" alignment-baseline="middle">Animator</text>
+    <text x="90" y="105" alignment-baseline="middle">Core</text>
+    <text x="90" y="165" alignment-baseline="middle">BasicCreator</text>
+    <text x="90" y="245" alignment-baseline="middle">Siteswap</text>
+    <text x="300" y="25" alignment-baseline="middle">&lt;html&gt;</text>
+    <text x="300" y="65" alignment-baseline="middle">&lt;svg&gt;</text>
+    <text x="300" y="115" alignment-baseline="middle">&lt;script&gt;</text>
+  </g>
+  <g stroke="green" marker-end="url(#jmotion_correlate_arrow)">
+    <line x1="250" y1="115" x2="175" y2="115" />
+    <line x1="150" y1="105" x2="245" y2="65" />
+    <line x1="90" y1="200" x2="90" y2="225" />
+  </g>
+  <g fill="green" text-anchor="middle">
+    <text x="200" y="75" transform="rotate(-25 200,75)">draw</text>
+    <text x="210" y="135">create</text>
+    <text x="110" y="220">use</text>
+  </g>
+</svg>
+<dl>
+  <dt>Facade</dt>
+  <dd>This object controls other objects as an interface for the simulator.</dd>
+  <dt>Animator</dt>
+  <dd>This object performs animation by gradually changing the coordinates of props and arms and letting the Core draw them.</dd>
+  <dt>Core</dt>
+  <dd>This object draws props and arms into the &lt;svg&gt; tag.</dd>
+  <dt>BasicCreator</dt>
+  <dd>This object generates a list of coordinates representing props and arms movements.</dd>
+  <dt>Siteswap</dt>
+  <dd>This object parses the input string and converts it into data that can be easily handled by the program.</dd>
+</dl>
+</div>
+
+<h2>Reference</h2>
+<div>
+<p>When you load this library, it adds the jmotion namespace to your global namespace. All the objects shown below belong to the jmotion namespace.</p>
+<ul>
+  <li><a href="./reference/animator/index.html">Animator</a> object
+    <ul>
+      <li><a href="./reference/animator/constructor.html">constructor</a></li>
+      <li><a href="./reference/animator/getindex.html">getIndex()</a></li>
+      <li><a href="./reference/animator/getstatus.html">getStatus()</a></li>
+      <li><a href="./reference/animator/setindex.html">setIndex()</a></li>
+      <li><a href="./reference/animator/start.html">start()</a></li>
+      <li><a href="./reference/animator/stop.html">stop()</a></li>
+    </ul>
+  </li>
+  <li><a href="./reference/basiccreator/index.html">BasicCreator</a> object
+    <ul>
+      <li><a href="./reference/basiccreator/constructor.html">constructor</a></li>
+      <li><a href="./reference/basiccreator/calculateorbits.html">calculateOrbits()</a></li>
+      <li><a href="./reference/basiccreator/getscale.html">getScale()</a></li>
+      <li><a href="./reference/basiccreator/getwidth.html">getWidth()</a></li>
+    </ul>
+  </li>
+  <li><a href="./reference/core/index.html">Core</a> object
+    <ul>
+      <li><a href="./reference/core/constructor.html">constructor</a></li>
+      <li><a href="./reference/core/drawarms.html">drawArms()</a></li>
+      <li><a href="./reference/core/drawprops.html">drawProps()</a></li>
+      <li><a href="./reference/core/setarms.html">setArms()</a></li>
+      <li><a href="./reference/core/setbody.html">setBody()</a></li>
+      <li><a href="./reference/core/sethands.html">setHands()</a></li>
+      <li><a href="./reference/core/setprops.html">setProps()</a></li>
+      <li><a href="./reference/core/setscale.html">setScale()</a></li>
+      <li><a href="./reference/core/setstyle.html">setStyle()</a></li>
+    </ul>
+  </li>
+  <li><a href="./reference/facade/index.html">Facade</a> object
+    <ul>
+      <li><a href="./reference/facade/constructor.html">constructor</a></li>
+      <li><a href="./reference/facade/startjuggling.html">startJuggling()</a></li>
+      <li><a href="./reference/facade/stopjuggling.html">stopJuggling()</a></li>
+    </ul>
+  </li>
+  <li><a href="./reference/siteswap/index.html">Siteswap</a> object
+    <ul>
+      <li><a href="./reference/siteswap/analyze.html">analyze()</a></li>
+      <li><a href="./reference/siteswap/separate.html">separate()</a></li>
+    </ul>
+  </li>
+</ul>
+</div>
+
+</article>
+
+</body>
+</html>

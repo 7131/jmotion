@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Animator - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>Animator</h1>
+<div>
+<p>The Animator object achieves animation by having <a href="../core/index.html">Core</a> continuously draw still images. The graphic elements of the still image are preset in Core, and the display positions are shifted for each index number. The index number changes every 40 milliseconds, resulting in an animation of 25 frames per second.</p>
+<table>
+  <tr><th colspan="2">index number</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr>
+  <tr><th rowspan="2">prop A</th><th>init</th><td>ai0</td><td>ai1</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr><th>loop</th><td>&nbsp;</td><td>&nbsp;</td><td>al0</td><td>al1</td><td>al2</td><td>al3</td><td>al4</td><td>al5</td><td>(al0)</td><td>(al1)</td></tr>
+  <tr><th rowspan="2">prop B</th><th>init</th><td>bi0</td><td>bi1</td><td>bi2</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr><th>loop</th><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>bl0</td><td>bl1</td><td>bl2</td><td>bl3</td><td>bl4</td><td>bl5</td><td>bl6</td></tr>
+  <tr><th rowspan="2">prop C</th><th>init</th><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr><th>loop</th><td>cl0</td><td>cl1</td><td>cl2</td><td>cl3</td><td>(cl0)</td><td>(cl1)</td><td>(cl2)</td><td>(cl3)</td><td>(cl0)</td><td>(cl1)</td></tr>
+</table>
+<p>The ai0, bl1, etc. in the table are objects with x and y properties as the coordinates to display the props.</p>
+<p>Prop A has two initial actions, ai0 and ai1, and six loop actions, al0 through al5. Initially the "init" coordinates are used in order, and when the end of the "init" is reached, the "loop" coordinates are used in order. When the end of the "loop" is reached, the iteration returns to the first coordinate al0 and is used again in order.</p>
+<p>Prop B has 3 "init" coordinates and 7 (or more) "loop" coordinates. In this way, there is no problem even if the number of "init" and "loop" are different for each prop.</p>
+<p>Prop C has 0 "init" coordinates and 4 "loop" coordinates. If there are no "init" coordinates, the "loop" coordinates are used from the beginning. If there are no "loop" coordinates, subsequent index numbers do not change the display.</p>
+</div>
+
+<h2>Constructor</h2>
+<div>
+<dl>
+  <dt><a href="./constructor.html">Animator()</a></dt>
+  <dd>Creates a new Animator object.</dd>
+</dl>
+</div>
+
+<h2>Properties</h2>
+<div>
+<dl>
+  <dt>Animator.prototype.arms</dt>
+  <dd>An array of arms. One arm is an array of joint state lists, set arms as an array. The state list is an object like the following (same as the prop state list), and set the objects as an array for the number of joints.</dd>
+  <dd>
+<pre><code>{
+    "init": [ pi0, pi1, pi2, ... ],
+    "loop": [ pl0, pl1, pl2, ... ],
+}
+</code></pre>
+  </dd>
+  <dd>You can set the arms property of the return value of <a href="../basiccreator/calculateorbits.html">BasicCreator.prototype.calculateOrbits()</a> as it is.</dd>
+  <dt>Animator.prototype.core</dt>
+  <dd>An instance of a <a href="../core/index.html">Core</a> object that displays the still image. Set the graphic elements used for animation directly to this property.</dd>
+  <dt>Animator.prototype.props</dt>
+  <dd>An array of prop state lists. The state list is an object like the following (same as the joint state list), and set the objects as an array for the number of props.</dd>
+  <dd>
+<pre><code>{
+    "init": [ pi0, pi1, pi2, ... ],
+    "loop": [ pl0, pl1, pl2, ... ],
+}
+</code></pre>
+  </dd>
+  <dd>You can set the props property of the return value of <a href="../basiccreator/calculateorbits.html">BasicCreator.prototype.calculateOrbits()</a> as it is.</dd>
+</dl>
+</div>
+
+<h2>Methods</h2>
+<div>
+<dl>
+  <dt><a href="./getindex.html">Animator.prototype.getIndex()</a></dt>
+  <dd>Returns the animation index number.</dd>
+  <dt><a href="./getstatus.html">Animator.prototype.getStatus()</a></dt>
+  <dd>Returns the execution status of the animation.</dd>
+  <dt><a href="./setindex.html">Animator.prototype.setIndex()</a></dt>
+  <dd>Sets the animation index number.</dd>
+  <dt><a href="./start.html">Animator.prototype.start()</a></dt>
+  <dd>Starts the animation.</dd>
+  <dt><a href="./stop.html">Animator.prototype.stop()</a></dt>
+  <dd>Stops the animation.</dd>
+</dl>
+</div>
+
+<footer>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

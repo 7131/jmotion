@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>BasicCreator - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>BasicCreator</h1>
+<div>
+<p>The BasicCreator object creates arms and props state list from each arm's orbit data and each props throwing data. The reason it has the word Basic in its name is because it has the following features: the number of arms is fixed at two, alternating between "catch-to-throw" and "throw-to-catch" movements, and their times are equal.</p>
+</div>
+
+<h2>Constructor</h2>
+<div>
+<dl>
+  <dt><a href="./constructor.html">BasicCreator()</a></dt>
+  <dd>Creates a new BasicCreator object.</dd>
+</dl>
+</div>
+
+<h2>Properties</h2>
+<div>
+<dl>
+  <dt>BasicCreator.prototype.offset</dt>
+  <dd>An object with coordinates of the prop relative to the palm where the prop is on the palm.</dd>
+  <dd>The object has right and left properties, where right is relative to the right palm and left is relative to the left palm.</dd>
+  <dd>
+    <svg id="ref_creator_index_offset" class="border" width="300" height="300" viewBox="-160 -160 200 200">
+      <defs>
+        <circle id="ref_creator_index_ball" r="10" />
+        <rect id="ref_creator_index_hand" x="-10" y="0" width="20" height="5" />
+        <marker id="ref_creator_index_arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <polygon points="0,0 10,5 0,10" fill="green" />
+        </marker>
+      </defs>
+      <g id="ref_creator_index_body" stroke="black" fill="none">
+        <circle cx="0" cy="-120" r="20" />
+        <line x1="-50" y1="-90" x2="50" y2="-90" />
+        <line x1="-50" y1="-90" x2="-70" y2="-30" />
+        <line x1="-70" y1="-30" x2="-90" y2="10" />
+        <use x="-90" y="10" href="#ref_creator_index_hand" />
+      </g>
+      <use x="-90" y="0" stroke="red" fill="white" href="#ref_creator_index_ball" />
+      <g stroke="green" marker-end="url(#ref_creator_index_arrow)">
+        <line x1="-90" y1="10" x2="-90" y2="0" />
+      </g>
+      <g fill="green" font-size="70%">
+        <text x="-70" y="5">right = (0, -10)</text>
+      </g>
+    </svg>
+  </dd>
+  <dd>By default, both right and left are (0, -10).</dd>
+  <dt>BasicCreator.prototype.paths</dt>
+  <dd>An object with arrays of arrays of orbits for each joint.</dd>
+  <dd>The object has right and left properties, where right is an array of arrays of right hand orbits and left is an array of arrays of left hand orbits. The orbit is an SVGPathElement object (&lt;path&gt; tag), but the transform attribute in that object has no effect, so specify it without transform.</dd>
+  <dd>
+    <svg id="ref_creator_index_paths" class="border" width="300" height="300" viewBox="-160 -160 200 200">
+      <use href="#ref_creator_index_body" />
+      <g stroke="green" fill="none" stroke-dasharray="3" marker-end="url(#ref_creator_index_arrow)">
+        <path d="M -70,-30 c 0,9 20,9 20,0" />
+        <path d="M -90,10 c 0,27 60,27 60,0" />
+      </g>
+      <g fill="green" font-size="70%">
+        <text x="-40" y="-25">elbow</text>
+        <text x="-20" y="15">hand</text>
+      </g>
+    </svg>
+  </dd>
+  <dd>The inner array contains all the joint orbits for one arm's "catch-to-throw" or "throw-to-catch" movement. The outer array contains them alternately as many times as desired. Usually the ending coordinate of one orbit and the starting coordinate of the subsequent orbit are the same.</dd>
+  <dd>
+<pre><code>[
+    [ hand0, elbow0, ... ],
+    [ hand1, elbow1, ... ],
+    ...
+]
+</code></pre>
+  </dd>
+  <dd>By default, both right and left draw the bottom half of the ellipse as "catch-to-throw" and the top half of the ellipse as "throw-to-catch". Both have two orbits, one for the hand and the other for the elbow.</dd>
+  <dd>If you set it yourself, make sure that the joints are in order from the palm to the shoulder.</dd>
+</dl>
+</div>
+
+<h2>Methods</h2>
+<div>
+<dl>
+  <dt><a href="./calculateorbits.html">BasicCreator.prototype.calculateOrbits()</a></dt>
+  <dd>Calculates right and left arm movements and prop orbits based on throwing data.</dd>
+  <dt><a href="./getscale.html">BasicCreator.prototype.getScale()</a></dt>
+  <dd>Returns the scale that should be used for graphics.</dd>
+  <dt><a href="./getwidth.html">BasicCreator.prototype.getWidth()</a></dt>
+  <dd>Returns the line width that should be used for graphics.</dd>
+</dl>
+</div>
+
+<footer>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

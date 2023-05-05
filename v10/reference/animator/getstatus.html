@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Animator.prototype.getStatus() - jMotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>Animator.prototype.getStatus()</h1>
+<div>
+<p>The getStatus() methhod returns the execution status of the animation.</p>
+</div>
+
+<h2>Syntax</h2>
+<div>
+<pre><code>getStatus()
+</code></pre>
+</div>
+
+<h2>Parameters</h2>
+<div>
+<p>none</p>
+</div>
+
+<h2>Return value</h2>
+<div>
+<p>An object with the following properties:</p>
+<dl>
+  <dt>runnable</dt>
+  <dd>True if the state list is set to Animator.prototype.props or Animator.prototype.arms, false otherwise.</dd>
+  <dt>running</dt>
+  <dd>True if the animation is running, false otherwise.</dd>
+</dl>
+</div>
+
+<h2>Examples</h2>
+<div>
+<pre><code>const svg = document.getElementById("board");
+const core = new jmotion.Core(svg);
+const animator = new jmotion.Animator(core);
+const status = animator.getStatus();
+
+// status = {
+//     "runnable": false,
+//     "running": false,
+// }
+</code></pre>
+</div>
+
+<footer>
+  <p><a href="./index.html">Animator object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

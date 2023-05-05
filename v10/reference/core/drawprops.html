@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Core.prototype.drawProps() - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>Core.prototype.drawProps()</h1>
+<div>
+<p>The drawProps() method draws all props given a list of coordinates.</p>
+<svg id="ref_core_drawprops" class="border" width="300" height="300" viewBox="-150 -255 300 300">
+  <defs>
+    <rect id="ref_core_drawprops_hand" x="-10" y="0" width="20" height="5" />
+    <circle id="ref_core_drawprops_ball" r="10" />
+    <marker id="ref_core_drawprops_arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <polygon points="0,0 10,5 0,10" fill="green" />
+    </marker>
+  </defs>
+  <g fill="none" stroke="black">
+    <circle cx="0" cy="-120" r="20" />
+    <line x1="-50" y1="-90" x2="50" y2="-90" />
+    <line x1="-50" y1="-90" x2="-62" y2="-23" />
+    <line x1="-62" y1="-23" x2="-67" y2="31" />
+    <use x="-67" y="31" href="#ref_core_drawprops_hand" />
+    <line x1="50" y1="-90" x2="58" y2="-37" />
+    <line x1="58" y1="-37" x2="53" y2="-11" />
+    <use x="53" y="-11" href="#ref_core_drawprops_hand" />
+  </g>
+  <use x="12" y="-219" fill="red" href="#ref_core_drawprops_ball" />
+  <use x="5" y="-39" fill="lime" href="#ref_core_drawprops_ball" />
+  <use x="-67" y="21" fill="blue" href="#ref_core_drawprops_ball" />
+  <g stroke="green" marker-end="url(#ref_core_drawprops_arrow)">
+    <line x1="-12" y1="-191" x2="0" y2="-203" />
+    <line x1="-25" y1="-65" x2="-13" y2="-53" />
+    <line x1="-97" y1="-5" x2="-85" y2="7" />
+  </g>
+  <g fill="green" text-anchor="middle">
+    <text x="-15" y="-176">p0</text>
+    <text x="-30" y="-70">p1</text>
+    <text x="-102" y="-10">p2</text>
+  </g>
+</svg>
+<p>Specify the coordinates of the number of props as an array. The number of props specified here will be drawn in Core.prototype.middle regardless of the number set by <a href="./setprops.html">setProps()</a> method. A coordinate is a DOMPoint-like object with x and y properties.</p>
+<pre><code>{ "x": 0, "y": 0 }
+</code></pre>
+</div>
+
+<h2>Syntax</h2>
+<div>
+<pre><code>drawProps(props)
+</code></pre>
+</div>
+
+<h2>Parameters</h2>
+<div>
+<dl>
+  <dt>props</dt>
+  <dd>An array of prop coordinates.</dd>
+</dl>
+</div>
+
+<h2>Return value</h2>
+<div>
+<p>none</p>
+</div>
+
+<h2>Examples</h2>
+<div>
+<pre><code>const svg = document.getElementById("board");
+const core = new jmotion.Core(svg);
+const props = [
+    { "x": 12, "y": -219 },
+    { "x": 5, "y": -39 },
+    { "x": -67, "y": 21 },
+];
+core.drawProps(props);
+</code></pre>
+</div>
+
+<footer>
+  <p><a href="./index.html">Core object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

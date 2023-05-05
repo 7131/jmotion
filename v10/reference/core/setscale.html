@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Core.prototype.setScale() - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>Core.prototype.setScale()</h1>
+<div>
+<p>The setScale() method sets the scale applied to the &lt;svg&gt; tag.</p>
+<div>
+  <svg class="border" width="300" height="300">
+    <symbol id="ref_core_setscale" viewBox="-150 -255 300 300">
+      <defs>
+        <rect id="ref_core_setscale_hand" x="-10" y="0" width="20" height="5" />
+        <circle id="ref_core_setscale_ball" r="10" />
+      </defs>
+      <g stroke="black" fill="none">
+        <circle cx="0" cy="-120" r="20" />
+        <line x1="-50" y1="-90" x2="50" y2="-90" />
+        <line x1="-50" y1="-90" x2="-70" y2="-30" />
+        <line x1="-70" y1="-30" x2="-90" y2="10" />
+        <use x="-90" y="10" href="#ref_core_setscale_hand" />
+        <line x1="50" y1="-90" x2="70" y2="-30" />
+        <line x1="70" y1="-30" x2="90" y2="10" />
+        <use x="90" y="10" href="#ref_core_setscale_hand" />
+      </g>
+      <use x="-90" y="0" fill="red" href="#ref_core_setscale_ball" />
+      <use x="90" y="0" fill="blue" href="#ref_core_setscale_ball" />
+    </symbol>
+    <use href="#ref_core_setscale" />
+    <text x="150" y="50" fill="green" text-anchor="middle">scale = 1</text>
+  </svg>
+</div>
+<div>
+  <svg class="border" width="300" height="300" viewBox="0 0 600 600">
+    <use href="#ref_core_setscale" x="150" y="240" width="300" height="300" />
+    <text x="300" y="100" fill="green" text-anchor="middle" font-size="200%">scale = 2</text>
+  </svg>
+</div>
+<p>If the scale is greater than 1, the drawing area will be larger and the person and props will be smaller.</p>
+<div>
+  <svg class="border" width="300" height="300" viewBox="0 0 150 150">
+    <use href="#ref_core_setscale" x="-75" y="-30" width="300" height="300" />
+    <text x="75" y="25" fill="green" text-anchor="middle" font-size="50%">scale = 0.5</text>
+  </svg>
+</div>
+<p>If the scale is less than 1, the drawing area will be smaller and the person and props will be larger.</p>
+</div>
+
+<h2>Syntax</h2>
+<div>
+<pre><code>setScale(scale)
+</code></pre>
+</div>
+
+<h2>Parameters</h2>
+<div>
+<dl>
+  <dt>scale</dt>
+  <dd>A positive real value representing the scale. If you specify a value less than 0 or a non-numeric value, it will be ignored. You can pass the return value of <a href="../basiccreator/getscale.html">BasicCreator.prototype.getScale()</a> as is.</dd>
+</dl>
+</div>
+
+<h2>Return value</h2>
+<div>
+<p>none</p>
+</div>
+
+<h2>Examples</h2>
+<div>
+<pre><code>const svg = document.getElementById("board");
+const core = new jmotion.Core(svg);
+core.setScale(2);
+</code></pre>
+</div>
+
+<footer>
+  <p><a href="./index.html">Core object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Core.prototype.setProps() - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>Core.prototype.setProps()</h1>
+<div>
+<p>The setProps() method sets the graphic elements of the props list. The middle layer is used.</p>
+<svg id="ref_core_setprops" class="border" width="300" height="300" viewBox="-150 -255 300 300">
+  <defs>
+    <rect id="ref_core_setprops_hand" x="-10" y="0" width="20" height="5" />
+    <circle id="ref_core_setprops_ball" r="10" />
+  </defs>
+  <g fill="none" stroke="black">
+    <circle cx="0" cy="-120" r="20" />
+    <line x1="-50" y1="-90" x2="50" y2="-90" />
+    <line x1="-50" y1="-90" x2="-62" y2="-23" />
+    <line x1="-62" y1="-23" x2="-67" y2="31" />
+    <use x="-67" y="31" href="#ref_core_setprops_hand" />
+    <line x1="50" y1="-90" x2="58" y2="-37" />
+    <line x1="58" y1="-37" x2="53" y2="-11" />
+    <use x="53" y="-11" href="#ref_core_setprops_hand" />
+  </g>
+  <use x="12" y="-219" fill="red" href="#ref_core_setprops_ball" />
+  <use x="5" y="-39" fill="lime" href="#ref_core_setprops_ball" />
+  <use x="-67" y="21" fill="blue" href="#ref_core_setprops_ball" />
+  <g fill="green" text-anchor="middle">
+    <text x="15" y="-190">prop0</text>
+    <text x="5" y="-10">prop1</text>
+    <text x="-110" y="25">prop2</text>
+  </g>
+</svg>
+<p>Any graphic elements that can be set in the &lt;svg&gt; tag will be added to Core.prototype.defs in the specified order. However, at the moment no drawing has been done yet, and for that you need to call <a href="./drawprops.html">drawProps()</a> method. That method internally creates SVGUseElement objects (&lt;use&gt; tag) for the number of props, and sequentially references the elements specified here. When there are no more elements to reference, it starts over and uses the same elements in order.</p>
+</div>
+
+<h2>Syntax</h2>
+<div>
+<pre><code>setProps(elements)
+</code></pre>
+</div>
+
+<h2>Parameters</h2>
+<div>
+<dl>
+  <dt>elements</dt>
+  <dd>An array of graphic elements.</dd>
+</dl>
+</div>
+
+<h2>Return value</h2>
+<div>
+<p>none</p>
+</div>
+
+<h2>Examples</h2>
+<div>
+<pre><code>const svg = document.getElementById("board");
+const core = new jmotion.Core(svg, true);
+const elements = [
+    document.getElementById("ball"),
+    document.getElementById("ring"),
+    document.getElementById("club"),
+];
+core.setProps(elements);
+
+// core.defs = {
+//     "ball": circle#ball,
+//     "club": rect#club,
+//     "ring": circle#ring,
+// }
+</code></pre>
+</div>
+
+<footer>
+  <p><a href="./index.html">Core object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>

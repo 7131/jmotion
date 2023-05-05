@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>BasicCreator.prototype.getWidth() - jmotion reference</title>
+</head>
+
+<body>
+<article>
+<h1>BasicCreator.prototype.getWidth()</h1>
+<div>
+<p>The getWidth() method returns the line width that should be used for graphics.</p>
+<svg id="ref_creator_getwidth" class="border" width="300" height="300" viewBox="-825 -1403 1650 1650">
+  <defs>
+    <rect id="ref_creator_getwidth_hand" x="-10" y="0" width="20" height="5" fill="none" stroke="black" />
+    <circle id="ref_creator_getwidth_ball" r="10" />
+  </defs>
+  <g fill="none" stroke="black" stroke-width="1.3">
+    <circle cx="0" cy="-120" r="20" />
+    <line x1="-50" y1="-90" x2="50" y2="-90" />
+    <line x1="-50" y1="-90" x2="-60" y2="-23" />
+    <line x1="-60" y1="-23" x2="-60" y2="30" />
+    <use x="-60" y="30" href="#ref_creator_getwidth_hand" />
+    <line x1="50" y1="-90" x2="60" y2="-37" />
+    <line x1="60" y1="-37" x2="60" y2="-10" />
+    <use x="60" y="-10" href="#ref_creator_getwidth_hand" />
+  </g>
+  <use x="11" y="-1186" fill="red" href="#ref_creator_getwidth_ball" />
+  <use x="5" y="-859" fill="lime" href="#ref_creator_getwidth_ball" />
+  <use x="-22" y="-335" fill="blue" href="#ref_creator_getwidth_ball" />
+  <use x="-60" y="20" fill="orange" href="#ref_creator_getwidth_ball" />
+  <use x="76" y="-532" fill="gray" href="#ref_creator_getwidth_ball" />
+  <use x="-60" y="-990" fill="maroon" href="#ref_creator_getwidth_ball" />
+  <use x="44" y="-1252" fill="green" href="#ref_creator_getwidth_ball" />
+  <use x="-27" y="-1317" fill="aqua" href="#ref_creator_getwidth_ball" />
+</svg>
+<p>The larger the scale, the thinner the body line. Use this method to get the appropriate line width for visibility and set it to <a href="../core/setstyle.html">Core.prototype.setStyle()</a>.</p>
+</div>
+
+<h2>Syntax</h2>
+<div>
+<pre><code>getWidth()
+</code></pre>
+</div>
+
+<h2>Parameters</h2>
+<div>
+<p>none</p>
+</div>
+
+<h2>Return value</h2>
+<div>
+<p>A positive real value representing the width of the line.</p>
+<p>The line width is calculated from the number of divisions of the unit time of the last <a href="./calculateorbits.html">calculateOrbits()</a> call. Specifically, 12 &div; number of divisions.</p>
+<table>
+  <tr><th>max value</th><td>1-5</td><td>6</td><td>7</td><td>8-9</td><td>a-b</td><td>c-d</td><td>e-g</td><td>h-l</td><td>m-t</td><td>u-z</td></tr>
+  <tr><th>divisions</th><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td></tr>
+  <tr><th>line width</th><td>1</td><td>1.1</td><td>1.2</td><td>1.3</td><td>1.5</td><td>1.7</td><td>2</td><td>2.4</td><td>3</td><td>4</td></tr>
+</table>
+<p>For example, for siteswap 3, the line width is 1. In the case of 7531, the maximum value is 7, so the line width is 1.2.</p>
+</div>
+
+<h2>Examples</h2>
+<div>
+<pre><code>const result = jmotion.Siteswap.analyze("7531");
+const table = jmotion.Siteswap.separate(result.throws, result.synch);
+const creator = new jmotion.BasicCreator();
+const orbits = creator.calculateOrbits(table, result.synch);
+const width = creator.getWidth();
+
+// width = 1.2
+</code></pre>
+</div>
+
+<footer>
+  <p><a href="./index.html">BasicCreator object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</article>
+
+</body>
+</html>
