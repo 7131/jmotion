@@ -19,6 +19,8 @@
     <dd>The style sheet for the test page.</dd>
   <dt>test.js</dt>
     <dd>A controller that receives the input of the test page and outputs the test result to the table.</dd>
+  <dt>reference / *</dt>
+    <dd>The reference manual for jmotion.</dd>
 </dl>
 
 # Siteswap specifications by ABNF
