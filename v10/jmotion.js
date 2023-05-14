@@ -313,8 +313,8 @@ jmotion.VERSION = "1.0";
             const private = privatePart(this);
 
             // remove existing elements
-            const targets = Array.from(this.defs.children).filter(elem => 0 <= private.props.indexOf(elem));
-            targets.forEach(this.defs.removeChild, this.defs);
+            const targets = private.pool.map(elem => document.getElementById(elem)).filter(elem => elem);
+            Array.from(targets).forEach(this.defs.removeChild, this.defs);
             private.props = [];
             private.pool = [];
             if (!Array.isArray(elements)) {
