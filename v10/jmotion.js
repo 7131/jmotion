@@ -716,7 +716,7 @@ jmotion.VERSION = "1.0";
             // control points of the Bezier curve are (a,0), (a,h), (-a,h), (-a,0), since h = 4/3 b, dir = -1 for counterclockwise
             const h = dir * b * 4 / 3;
             const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            path.setAttribute("d", `M ${sx},${sy} c 0,${h} ${dx},${h} ${dx},0`);
+            path.setAttribute("d", `M ${sx},${sy} c 0,${h} ${dx},${dy + h} ${dx},${dy}`);
             return path;
         },
 
