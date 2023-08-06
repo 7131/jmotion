@@ -722,7 +722,7 @@ jmotion.VERSION = "1.0";
 
         // create a list of coordinates along the path
         "createPathPoints": function(moves, offset) {
-            const selector = elem => new DOMPoint(elem.x + offset.x, elem.y + offset.y);
+            const convert = elem => new DOMPoint(elem.x + offset.x, elem.y + offset.y);
             const arms = [];
             const prop = [];
             for (const paths of moves) {
@@ -742,7 +742,7 @@ jmotion.VERSION = "1.0";
 
                 // prop orbit
                 if (0 < points.length) {
-                    prop.push(points[0].map(selector));
+                    prop.push(points[0].map(convert));
                 }
             }
             return { "arms": arms, "prop": prop };
