@@ -171,7 +171,7 @@ Controller.prototype = {
 
     // execute all tests
     "_executeAll": function(e) {
-        this._buttons.forEach(elem => this._executeTable(elem));
+        this._buttons.forEach(this._executeTable, this);
     },
 
     // execute a test
