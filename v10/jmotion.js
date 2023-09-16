@@ -1065,8 +1065,7 @@ jmotion.VERSION = "1.0";
             if (term.text == "*") {
                 // mirror pattern
                 const follow = [];
-                for (let i = 0; i < root.children.length; i++) {
-                    const both = root.children[i];
+                for (const both of root.children) {
                     const nodes = [ both.children[0], both.children[3], both.children[2], both.children[1], both.children[4] ];
                     const text = nodes.reduce(join, "");
                     const mirror = new SiteswapTree(both.label, text);
@@ -1088,13 +1087,13 @@ jmotion.VERSION = "1.0";
         "_validateAsync": function(tree) {
             // convert to array of numeric arrays
             const throws = [];
-            for (let i = 0; i < tree.children.length; i++) {
+            for (const child of tree.children) {
                 const props = [];
-                const each = tree.children[i].children[0];
+                const each = child.children[0];
                 if (each.label == "AsyncMulti") {
                     // multiplex pattern
-                    for (let j = 1; j < each.children.length - 1; j++) {
-                        props.push(this._alphabet.indexOf(each.children[j].text));
+                    for (let i = 1; i < each.children.length - 1; i++) {
+                        props.push(this._alphabet.indexOf(each.children[i].text));
                     }
                 } else {
                     // uniplex pattern
@@ -1113,15 +1112,14 @@ jmotion.VERSION = "1.0";
         "_validateSynch": function(tree) {
             // convert to array of numeric arrays
             const throws = [];
-            for (let i = 0; i < tree.children.length; i++) {
-                const both = tree.children[i];
+            for (const both of tree.children) {
                 for (let side = 0; side <= 1; side++) {
                     const props = [];
                     const one = both.children[side * 2 + 1].children[0];
                     if (one.label == "SynchMulti") {
                         // multiplex pattern
-                        for (let j = 1; j < one.children.length - 1; j++) {
-                            props.push(this._convertSynchBeat(one.children[j], side));
+                        for (let i = 1; i < one.children.length - 1; i++) {
+                            props.push(this._convertSynchBeat(one.children[i], side));
                         }
                     } else {
                         // uniplex pattern
@@ -1166,13 +1164,12 @@ jmotion.VERSION = "1.0";
             let sum = 0;
             let max = 0;
             for (let i = 0; i < period; i++) {
-                const props = throws[i];
-                for (let j = 0; j < props.length; j++) {
-                    const number = (props[j] + i) % period;
+                for (const prop of throws[i]) {
+                    const number = (prop + i) % period;
                     drops[number]++;
-                    sum += props[j];
-                    if (0 < props[j]) {
-                        max = Math.max(max, props[j] + i);
+                    sum += prop;
+                    if (0 < prop) {
+                        max = Math.max(max, prop + i);
                     }
                 }
             }
@@ -1204,9 +1201,8 @@ jmotion.VERSION = "1.0";
             let position = 0;
             for (let i = 0; i < loop; i++) {
                 for (let j = 0; j < period; j++) {
-                    const props = throws[j];
-                    for (let k = 0; k < props.length; k++) {
-                        const number = position + props[k] + j;
+                    for (const prop of throws[j]) {
+                        const number = position + prop + j;
                         if (width <= number) {
                             result.state[number - width]++;
                         }
@@ -1231,8 +1227,8 @@ jmotion.VERSION = "1.0";
 
         // lexical analysis elements
         this._elements = [];
-        for (let i = 0; i < terms.length; i++) {
-            this._elements.push(new RegExp("^(" + terms[i] + ")", SiteswapGrammar.flag));
+        for (const term of terms) {
+            this._elements.push(new RegExp("^(" + term + ")", SiteswapGrammar.flag));
         }
 
         // production rules
@@ -1252,14 +1248,14 @@ jmotion.VERSION = "1.0";
 
         // parsing table
         this._table = [];
-        for (let i = 0; i < SiteswapGrammar.table.length; i++) {
+        for (const line of SiteswapGrammar.table) {
             const row = {};
-            for (let j = 0; j < symbols.length; j++) {
-                const match = SiteswapGrammar.table[i][j].match(/^(s|r|g)([0-9]+)$/);
+            for (let i = 0; i < symbols.length; i++) {
+                const match = line[i].match(/^(s|r|g)([0-9]+)$/);
                 if (match) {
                     const symbol = match[1];
                     const number = parseInt(match[2], 10);
-                    row[symbols[j]] = { "symbol": symbol, "number": number };
+                    row[symbols[i]] = { "symbol": symbol, "number": number };
                 }
             }
             this._table.push(row);
@@ -1385,8 +1381,8 @@ jmotion.VERSION = "1.0";
 
             // join all child elements
             let text = "";
-            for (let i = 0; i < tree.children.length; i++) {
-                text += " " + this._joinTree(tree.children[i]);
+            for (const child of tree.children) {
+                text += " " + this._joinTree(child);
             }
             return text;
         },
