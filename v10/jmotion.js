@@ -623,7 +623,7 @@ jmotion.VERSION = "1.0";
 
             // get numbers in data
             const numbers = new Set();
-            table.forEach(elem => Set.prototype.add.apply(numbers, elem.numbers));
+            table.forEach(elem => elem.numbers.forEach(numbers.add, numbers));
             numbers.delete(2);
 
             // get scale
