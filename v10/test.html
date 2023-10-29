@@ -46,7 +46,8 @@
   <tr><td></td><td>[34][32]0</td><td>{"valid":true,"count":4,"period":3,"throws":[[3,4],[3,2],[0]],"state":[2,2],"synch":false,"text":"[34][32]0"}</td><td></td></tr>
   <tr><td></td><td>[123]</td><td>{"valid":true,"count":6,"period":1,"throws":[[1,2,3]],"state":[3,2,1],"synch":false,"text":"[123]"}</td><td></td></tr>
   <tr><td></td><td>[abcd]</td><td>{"valid":true,"count":46,"period":1,"throws":[[10,11,12,13]],"state":[4,4,4,4,4,4,4,4,4,4,3,2,1],"synch":false,"text":"[abcd]"}</td><td></td></tr>
-  <tr><td></td><td>[30]</td><td>{"valid":false,"message":"syntax error: 0 ]"}</td><td></td></tr>
+  <tr><td></td><td>[30]</td><td>{"valid":true,"count":3,"period":1,"throws":[[3]],"state":[1,1,1],"synch":false,"text":"[30]"}</td><td></td></tr>
+  <tr><td></td><td>[00]</td><td>{"valid":true,"count":0,"period":1,"throws":[[0]],"state":[0],"synch":false,"text":"[00]"}</td><td></td></tr>
   <tr><td></td><td>[3]</td><td>{"valid":false,"message":"syntax error: ]"}</td><td></td></tr>
   <tr><td></td><td>3[]</td><td>{"valid":false,"message":"syntax error: ]"}</td><td></td></tr>
   <tr><td></td><td>[]</td><td>{"valid":false,"message":"syntax error: ]"}</td><td></td></tr>
@@ -56,6 +57,8 @@
   <tr><td></td><td>]34]</td><td>{"valid":false,"message":"syntax error: ] 3 4 ]"}</td><td></td></tr>
   <tr><td></td><td>[3[12]]</td><td>{"valid":false,"message":"syntax error: [ 1 2 ] ]"}</td><td></td></tr>
   <tr><td></td><td>(4,2)</td><td>{"valid":true,"count":3,"period":2,"throws":[[4],[2]],"state":[1,1,1],"synch":true,"text":"(4,2)"}</td><td></td></tr>
+  <tr><td></td><td>(4,0)</td><td>{"valid":true,"count":2,"period":2,"throws":[[4],[0]],"state":[1,0,1],"synch":true,"text":"(4,0)"}</td><td></td></tr>
+  <tr><td></td><td>(0,0)</td><td>{"valid":true,"count":0,"period":2,"throws":[[0],[0]],"state":[0],"synch":true,"text":"(0,0)"}</td><td></td></tr>
   <tr><td></td><td>(4,3)</td><td>{"valid":false,"message":"syntax error: 3 )"}</td><td></td></tr>
   <tr><td></td><td>(4,22)</td><td>{"valid":false,"message":"syntax error: 2 )"}</td><td></td></tr>
   <tr><td></td><td>(44,2)</td><td>{"valid":false,"message":"syntax error: 4 , 2 )"}</td><td></td></tr>
@@ -78,14 +81,19 @@
   <tr><td></td><td>(4,x)</td><td>{"valid":false,"message":"syntax error: x )"}</td><td></td></tr>
   <tr><td></td><td>(4,x2)</td><td>{"valid":false,"message":"syntax error: x 2 )"}</td><td></td></tr>
   <tr><td></td><td>(4,2x)</td><td>{"valid":false,"count":0,"period":0,"throws":[],"state":[],"synch":true,"text":"(4,2x)","message":"impossible to juggle"}</td><td></td></tr>
+  <tr><td></td><td>(4,0x)</td><td>{"valid":true,"count":2,"period":2,"throws":[[4],[0]],"state":[1,0,1],"synch":true,"text":"(4,0x)"}</td><td></td></tr>
+  <tr><td></td><td>(0,0x)</td><td>{"valid":true,"count":0,"period":2,"throws":[[0],[0]],"state":[0],"synch":true,"text":"(0,0x)"}</td><td></td></tr>
   <tr><td></td><td>(4,2x)(2x,4)</td><td>{"valid":true,"count":3,"period":4,"throws":[[4],[1],[3],[4]],"state":[1,1,0,1],"synch":true,"text":"(4,2x)(2x,4)"}</td><td></td></tr>
   <tr><td></td><td>(4,2x)*</td><td>{"valid":true,"count":3,"period":4,"throws":[[4],[1],[3],[4]],"state":[1,1,0,1],"synch":true,"text":"(4,2x)(2x,4)"}</td><td></td></tr>
+  <tr><td></td><td>(0,0x)*</td><td>{"valid":true,"count":0,"period":4,"throws":[[0],[0],[0],[0]],"state":[0],"synch":true,"text":"(0,0x)(0x,0)"}</td><td></td></tr>
   <tr><td></td><td>(4x,2x)</td><td>{"valid":true,"count":3,"period":2,"throws":[[5],[1]],"state":[1,1,0,1],"synch":true,"text":"(4x,2x)"}</td><td></td></tr>
   <tr><td></td><td>(4x,2x)*</td><td>{"valid":false,"count":0,"period":0,"throws":[],"state":[],"synch":true,"text":"(4x,2x)(2x,4x)","message":"impossible to juggle"}</td><td></td></tr>
   <tr><td></td><td>(6x,0)*</td><td>{"valid":true,"count":3,"period":4,"throws":[[7],[0],[0],[5]],"state":[1,0,0,1,1],"synch":true,"text":"(6x,0)(0,6x)"}</td><td></td></tr>
   <tr><td></td><td>(4x,6x)(2,4)</td><td>{"valid":true,"count":4,"period":4,"throws":[[5],[5],[2],[4]],"state":[1,1,1,1],"synch":true,"text":"(4x,6x)(2,4)"}</td><td></td></tr>
   <tr><td></td><td>(6,4)([44x],2x)</td><td>{"valid":true,"count":5,"period":4,"throws":[[6],[4],[4,5],[1]],"state":[1,1,2,1],"synch":true,"text":"(6,4)([44x],2x)"}</td><td></td></tr>
   <tr><td></td><td>(2,4)([44x],2x)*</td><td>{"valid":true,"count":4,"period":8,"throws":[[2],[4],[4,5],[1],[4],[2],[3],[4,3]],"state":[1,1,1,1],"synch":true,"text":"(2,4)([44x],2x)(4,2)(2x,[44x])"}</td><td></td></tr>
+  <tr><td></td><td>(4,[00])</td><td>{"valid":true,"count":2,"period":2,"throws":[[4],[0]],"state":[1,0,1],"synch":true,"text":"(4,[00])"}</td><td></td></tr>
+  <tr><td></td><td>(4,[0x0])</td><td>{"valid":true,"count":2,"period":2,"throws":[[4],[0]],"state":[1,0,1],"synch":true,"text":"(4,[0x0])"}</td><td></td></tr>
   <tr><td></td><td>(4,[2])</td><td>{"valid":false,"message":"syntax error: ] )"}</td><td></td></tr>
   <tr><td></td><td>[(4,2)]</td><td>{"valid":false,"message":"syntax error: ( 4 , 2 ) ]"}</td><td></td></tr>
 </table>
@@ -98,12 +106,14 @@
   <tr><th>No.</th><th>argument(s)</th><th>expected</th><th>result</th></tr>
   <tr><td></td><td>false</td><td>[]</td><td></td></tr>
   <tr><td></td><td>[]</td><td>[]</td><td></td></tr>
+  <tr><td></td><td>[3]</td><td>[]</td><td></td></tr>
   <tr><td></td><td>[false]</td><td>[]</td><td></td></tr>
-  <tr><td></td><td>[false,false]</td><td>[]</td><td></td></tr>
+  <tr><td></td><td>[3,false]</td><td>[]</td><td></td></tr>
   <tr><td></td><td>[[3],false]</td><td>[]</td><td></td></tr>
   <tr><td></td><td>[[[]],false]</td><td>[]</td><td></td></tr>
   <tr><td></td><td>[[["a"]],false]</td><td>[]</td><td></td></tr>
   <tr><td></td><td>[[3]]</td><td>[]</td><td></td></tr>
+  <tr><td></td><td>[[[3]]]</td><td>[{"start":0,"times":[3,3],"numbers":[3,3],"length":2},{"start":1,"times":[3,3],"numbers":[3,3],"length":2},{"start":2,"times":[3,3],"numbers":[3,3],"length":2}]</td><td></td></tr>
   <tr><td></td><td>[false,[[3]]]</td><td>[]</td><td></td></tr>
   <tr><td></td><td>[[[0]],false]</td><td>[]</td><td></td></tr>
   <tr><td></td><td>[[[1]],false]</td><td>[{"start":0,"times":[1,1],"numbers":[1,1],"length":2}]</td><td></td></tr>
@@ -124,10 +134,12 @@
   <tr><td></td><td>[[[1,2,3]],false]</td><td>[{"start":0,"times":[1,1],"numbers":[1,1],"length":2},{"start":0,"times":[2],"numbers":[2],"length":1},{"start":1,"times":[2],"numbers":[2],"length":1},{"start":0,"times":[3,3],"numbers":[3,3],"length":2},{"start":1,"times":[3,3],"numbers":[3,3],"length":2},{"start":2,"times":[3,3],"numbers":[3,3],"length":2}]</td><td></td></tr>
   <tr><td></td><td>[[[10,11,12,13]],false]</td><td>[{"start":8,"times":[10],"numbers":[10],"length":1},{"start":9,"times":[10],"numbers":[10],"length":1},{"start":0,"times":[10],"numbers":[10],"length":1},{"start":1,"times":[10],"numbers":[10],"length":1},{"start":2,"times":[10],"numbers":[10],"length":1},{"start":3,"times":[10],"numbers":[10],"length":1},{"start":4,"times":[10],"numbers":[10],"length":1},{"start":5,"times":[10],"numbers":[10],"length":1},{"start":6,"times":[10],"numbers":[10],"length":1},{"start":7,"times":[10],"numbers":[10],"length":1},{"start":7,"times":[11,11],"numbers":[11,11],"length":2},{"start":8,"times":[11,11],"numbers":[11,11],"length":2},{"start":9,"times":[11,11],"numbers":[11,11],"length":2},{"start":10,"times":[11,11],"numbers":[11,11],"length":2},{"start":1,"times":[11,11],"numbers":[11,11],"length":2},{"start":0,"times":[11,11],"numbers":[11,11],"length":2},{"start":2,"times":[11,11],"numbers":[11,11],"length":2},{"start":3,"times":[11,11],"numbers":[11,11],"length":2},{"start":4,"times":[11,11],"numbers":[11,11],"length":2},{"start":4,"times":[12,11,11,11,11,11,11,11],"numbers":[12,11,11,11,11,11,11,11],"length":8},{"start":5,"times":[11,12,11],"numbers":[11,12,11],"length":3},{"start":5,"times":[12,11,12,12,12,12,12,12],"numbers":[12,11,12,12,12,12,12,12],"length":8},{"start":6,"times":[11,12,12,12,12,12,12,12],"numbers":[11,12,12,12,12,12,12,12],"length":8},{"start":6,"times":[12],"numbers":[12],"length":1},{"start":7,"times":[12],"numbers":[12],"length":1},{"start":8,"times":[12],"numbers":[12],"length":1},{"start":9,"times":[12],"numbers":[12],"length":1},{"start":10,"times":[12],"numbers":[12],"length":1},{"start":11,"times":[12],"numbers":[12],"length":1},{"start":12,"times":[12],"numbers":[12],"length":1},{"start":0,"times":[12,13,12,12,12,12,12,12],"numbers":[12,13,12,12,12,12,12,12],"length":8},{"start":0,"times":[13,12,13,12,12,12,12,12],"numbers":[13,12,13,12,12,12,12,12],"length":8},{"start":1,"times":[12,13,12,13],"numbers":[12,13,12,13],"length":4},{"start":1,"times":[13,12,13,12],"numbers":[13,12,13,12],"length":4},{"start":2,"times":[12,13,12,13,13,13,13,13],"numbers":[12,13,12,13,13,13,13,13],"length":8},{"start":2,"times":[13,12,13],"numbers":[13,12,13],"length":3},{"start":3,"times":[12,13,13,13,13,13,13],"numbers":[12,13,13,13,13,13,13],"length":7},{"start":3,"times":[13,13],"numbers":[13,13],"length":2},{"start":4,"times":[13,13],"numbers":[13,13],"length":2},{"start":5,"times":[13,13],"numbers":[13,13],"length":2},{"start":6,"times":[13,13],"numbers":[13,13],"length":2},{"start":7,"times":[13,13],"numbers":[13,13],"length":2},{"start":8,"times":[13,13],"numbers":[13,13],"length":2},{"start":9,"times":[13,13],"numbers":[13,13],"length":2},{"start":10,"times":[13,13],"numbers":[13,13],"length":2},{"start":11,"times":[13,13],"numbers":[13,13],"length":2}]</td><td></td></tr>
   <tr><td></td><td>[[[4],[2]],true]</td><td>[{"start":0,"times":[4],"numbers":[4],"length":1},{"start":1,"times":[2],"numbers":[2],"length":1},{"start":2,"times":[4],"numbers":[4],"length":1}]</td><td></td></tr>
-  <tr><td></td><td>[[[4],[1]],true]</td><td>[]</td><td></td></tr>
+  <tr><td></td><td>[[[4],[0]],true]</td><td>[{"start":0,"times":[4],"numbers":[4],"length":1},{"start":2,"times":[4],"numbers":[4],"length":1}]</td><td></td></tr>
+  <tr><td></td><td>[[[0],[0]],true]</td><td>[]</td><td></td></tr>
+  <tr><td></td><td>[[[4],[3]],true]</td><td>[]</td><td></td></tr>
   <tr><td></td><td>[[[4],[1],[3],[4]],true]</td><td>[{"start":0,"times":[4],"numbers":[4],"length":1},{"start":1,"times":[1,3],"numbers":[-2,-2],"length":2},{"start":3,"times":[4],"numbers":[4],"length":1}]</td><td></td></tr>
+  <tr><td></td><td>[[[0],[0],[0],[0]],true]</td><td>[]</td><td></td></tr>
   <tr><td></td><td>[[[5],[1]],true]</td><td>[{"start":0,"times":[5,1],"numbers":[-4,-2],"length":2},{"start":1,"times":[1,5],"numbers":[-2,-4],"length":2},{"start":3,"times":[1,5],"numbers":[-2,-4],"length":2}]</td><td></td></tr>
-  <tr><td></td><td>[[[5],[1],[3],[3]],true]</td><td>[]</td><td></td></tr>
   <tr><td></td><td>[[[7],[0],[0],[5]],true]</td><td>[{"start":0,"times":[7,5],"numbers":[-6,-6],"length":2},{"start":3,"times":[5,7],"numbers":[-6,-6],"length":2},{"start":4,"times":[7,5],"numbers":[-6,-6],"length":2}]</td><td></td></tr>
   <tr><td></td><td>[[[5],[5],[2],[4]],true]</td><td>[{"start":1,"times":[5,2,5],"numbers":[-6,2,-4],"length":3},{"start":2,"times":[2,5,5],"numbers":[2,-4,-6],"length":3},{"start":0,"times":[5,5,2],"numbers":[-4,-6,2],"length":3},{"start":3,"times":[4],"numbers":[4],"length":1}]</td><td></td></tr>
   <tr><td></td><td>[[[6],[4],[4,5],[1]],true]</td><td>[{"start":2,"times":[4],"numbers":[4],"length":1},{"start":1,"times":[4],"numbers":[4],"length":1},{"start":3,"times":[1,6,5],"numbers":[-2,6,-4],"length":3},{"start":0,"times":[6,5,1],"numbers":[6,-4,-2],"length":3},{"start":2,"times":[5,1,6],"numbers":[-4,-2,6],"length":3}]</td><td></td></tr>
@@ -142,11 +154,13 @@
   <tr><th>No.</th><th>argument(s)</th><th>expected</th><th>result</th></tr>
   <tr><td></td><td>false</td><td>{"props":[],"arms":[]}</td><td></td></tr>
   <tr><td></td><td>[]</td><td>{"props":[],"arms":[]}</td><td></td></tr>
+  <tr><td></td><td>[3]</td><td>{"props":[],"arms":[]}</td><td></td></tr>
   <tr><td></td><td>[false]</td><td>{"props":[],"arms":[]}</td><td></td></tr>
-  <tr><td></td><td>[false,false]</td><td>{"props":[],"arms":[]}</td><td></td></tr>
+  <tr><td></td><td>[3,false]</td><td>{"props":[],"arms":[]}</td><td></td></tr>
   <tr><td></td><td>[[3],false]</td><td>{"props":[],"arms":[]}</td><td></td></tr>
   <tr><td></td><td>[[{}],false]</td><td>{"props":[],"arms":[]}</td><td></td></tr>
   <tr><td></td><td>[{"start":0,"times":[1,1],"numbers":[1,1],"length":2}]</td><td>{"props":[],"arms":[]}</td><td></td></tr>
+  <tr><td></td><td>[[{"start":0,"times":[1,1],"numbers":[1,1],"length":2}]]</td><td>{"props":[{"init":[{"x":-90,"y":0},{"x":-89,"y":6},{"x":-85,"y":12},{"x":-79,"y":16},{"x":-73,"y":18},{"x":-67,"y":20}],"loop":[{"x":-60,"y":20},{"x":-50,"y":15},{"x":-40,"y":12},{"x":-30,"y":9},{"x":-20,"y":7},{"x":-10,"y":5},{"x":0,"y":5},{"x":10,"y":5},{"x":20,"y":7},{"x":30,"y":9},{"x":40,"y":12},{"x":50,"y":15},{"x":60,"y":20},{"x":50,"y":15},{"x":40,"y":12},{"x":30,"y":9},{"x":20,"y":7},{"x":10,"y":5},{"x":0,"y":5},{"x":-10,"y":5},{"x":-20,"y":7},{"x":-30,"y":9},{"x":-40,"y":12},{"x":-50,"y":15}]}],"arms":[[{"init":[],"loop":[{"x":-90,"y":10},{"x":-89,"y":16},{"x":-85,"y":22},{"x":-79,"y":26},{"x":-73,"y":28},{"x":-67,"y":30},{"x":-60,"y":30},{"x":-53,"y":30},{"x":-47,"y":28},{"x":-41,"y":26},{"x":-35,"y":22},{"x":-31,"y":16},{"x":-30,"y":10},{"x":-31,"y":4},{"x":-35,"y":-2},{"x":-41,"y":-6},{"x":-47,"y":-8},{"x":-53,"y":-10},{"x":-60,"y":-10},{"x":-67,"y":-10},{"x":-73,"y":-8},{"x":-79,"y":-6},{"x":-85,"y":-2},{"x":-89,"y":4}]},{"init":[],"loop":[{"x":-70,"y":-30},{"x":-70,"y":-28},{"x":-68,"y":-26},{"x":-66,"y":-25},{"x":-64,"y":-24},{"x":-62,"y":-23},{"x":-60,"y":-23},{"x":-58,"y":-23},{"x":-56,"y":-24},{"x":-54,"y":-25},{"x":-52,"y":-26},{"x":-50,"y":-28},{"x":-50,"y":-30},{"x":-50,"y":-32},{"x":-52,"y":-34},{"x":-54,"y":-35},{"x":-56,"y":-36},{"x":-58,"y":-37},{"x":-60,"y":-37},{"x":-62,"y":-37},{"x":-64,"y":-36},{"x":-66,"y":-35},{"x":-68,"y":-34},{"x":-70,"y":-32}]}],[{"init":[{"x":90,"y":10},{"x":90,"y":10},{"x":90,"y":10},{"x":90,"y":10},{"x":90,"y":10},{"x":90,"y":10},{"x":90,"y":10},{"x":90,"y":10},{"x":90,"y":10},{"x":90,"y":10},{"x":90,"y":10},{"x":90,"y":10}],"loop":[{"x":90,"y":10},{"x":89,"y":16},{"x":85,"y":22},{"x":79,"y":26},{"x":73,"y":28},{"x":67,"y":30},{"x":60,"y":30},{"x":53,"y":30},{"x":47,"y":28},{"x":41,"y":26},{"x":35,"y":22},{"x":31,"y":16},{"x":30,"y":10},{"x":31,"y":4},{"x":35,"y":-2},{"x":41,"y":-6},{"x":47,"y":-8},{"x":53,"y":-10},{"x":60,"y":-10},{"x":67,"y":-10},{"x":73,"y":-8},{"x":79,"y":-6},{"x":85,"y":-2},{"x":89,"y":4}]},{"init":[{"x":70,"y":-30},{"x":70,"y":-30},{"x":70,"y":-30},{"x":70,"y":-30},{"x":70,"y":-30},{"x":70,"y":-30},{"x":70,"y":-30},{"x":70,"y":-30},{"x":70,"y":-30},{"x":70,"y":-30},{"x":70,"y":-30},{"x":70,"y":-30}],"loop":[{"x":70,"y":-30},{"x":70,"y":-28},{"x":68,"y":-26},{"x":66,"y":-25},{"x":64,"y":-24},{"x":62,"y":-23},{"x":60,"y":-23},{"x":58,"y":-23},{"x":56,"y":-24},{"x":54,"y":-25},{"x":52,"y":-26},{"x":50,"y":-28},{"x":50,"y":-30},{"x":50,"y":-32},{"x":52,"y":-34},{"x":54,"y":-35},{"x":56,"y":-36},{"x":58,"y":-37},{"x":60,"y":-37},{"x":62,"y":-37},{"x":64,"y":-36},{"x":66,"y":-35},{"x":68,"y":-34},{"x":70,"y":-32}]}]]}</td><td></td></tr>
   <tr><td></td><td>[false,[{"start":0,"times":[1,1],"numbers":[1,1],"length":2}]]</td><td>{"props":[],"arms":[]}</td><td></td></tr>
   <tr><td></td><td>[[{"times":[1,1],"numbers":[1,1],"length":2}],false]</td><td>{"props":[],"arms":[]}</td><td></td></tr>
   <tr><td></td><td>[[{"start":"a","times":[1,1],"numbers":[1,1],"length":2}],false]</td><td>{"props":[],"arms":[]}</td><td></td></tr>
