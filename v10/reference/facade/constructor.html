@@ -25,15 +25,14 @@
 <div>
 <dl>
   <dt>svg</dt>
-  <dd>An object representing the &lt;svg&gt; tag.</dd>
-  <dd>When a <a href="../core/index.html">Core</a> object is created within Facade, this tag is passed to its constructor. In addition, <a href="../animator/index.html">Animator</a> and <a href="../basiccreator/index.html">BasicCreator</a> objects are also created.</dd>
+  <dd>An object representing an HTML &lt;svg&gt; tag, or CSS selectors.</dd>
+  <dd>When a <a href="../core/index.html">Core</a> object is created within Facade, this parameter is passed to its constructor. In addition, <a href="../animator/index.html">Animator</a> and <a href="../basiccreator/index.html">BasicCreator</a> objects are also created.</dd>
 </dl>
 </div>
 
 <h2>Examples</h2>
 <div>
-<pre><code>const svg = document.getElementById("board");
-const facade = new jmotion.Facade(svg);
+<pre><code>const facade = new jmotion.Facade("#board");
 
 // facade = {
 //     "animator": {

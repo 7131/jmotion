@@ -28,7 +28,7 @@
 <p>The id attribute can be any string, but here I set it to "board". You can also set the size freely. I think it is usually set in the stylesheet. Depending on the environment, the namespace attribute xmlns="http://www.w3.org/2000/svg" is required, so specify it if it does not display.</p>
 <p>Preparations are over. After the &lt;svg&gt; is displayed, you can run the simulator by passing it to the Facade object inside the &lt;script&gt; tag. For example, the JavaScript for throwing siteswap 3 would be:</p>
 <pre><code>&lt;script&gt;
-const facade = new jmotion.Facade(document.getElementById("board"));
+const facade = new jmotion.Facade("#board");
 facade.startJuggling("3");
 &lt;/script&gt;
 </code></pre>

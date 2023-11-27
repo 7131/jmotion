@@ -50,9 +50,10 @@ new Core(element, cancel)
 <div>
 <dl>
   <dt>element (Optional)</dt>
-  <dd>An object representing an HTML tag.</dd>
-  <dd>When the &lt;svg&gt; tag is specified it becomes Core.prototype.svg property.</dd>
-  <dd>When a parent element such as &lt;div&gt; tag is specified, a newly created &lt;svg&gt; tag is set to Core.prototype.svg and also added as a child element of the element.</dd>
+  <dd>An object representing an HTML tag or CSS selectors.</dd>
+  <dd>When a string is specified, it is considered CSS selectors and the first object matching that selectors is used.</dd>
+  <dd>When the &lt;svg&gt; tag is specified as an object, it becomes Core.prototype.svg property.</dd>
+  <dd>When a parent element such as &lt;div&gt; tag is specified as an object, a newly created &lt;svg&gt; tag is set to Core.prototype.svg and also added as a child element of the element.</dd>
   <dd>If this argument is another element or omitted, a newly created &lt;svg&gt; tag is set to Core.prototype.svg, but not added to the DOM tree.</dd>
   <dt>cancel (Optional)</dt>
   <dd>Whether to cancel the creation of default graphic elements.</dd>
@@ -63,8 +64,7 @@ new Core(element, cancel)
 
 <h2>Examples</h2>
 <div>
-<pre><code>const svg = document.getElementById("board");
-const core = new jmotion.Core(svg);
+<pre><code>const core = new jmotion.Core("#board");
 
 // core = {
 //     "back": g#board_back,

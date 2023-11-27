@@ -9,7 +9,7 @@ Controller.prototype = {
     // initialize the private fields
     "_initialize": function(e) {
         // DOM elements
-        this._facade = new jmotion.Facade(document.getElementById("board"));
+        this._facade = new jmotion.Facade("#board");
         this._pattern = document.getElementById("pattern");
         this._message = document.getElementById("message");
         this._startButton = document.getElementById("start");

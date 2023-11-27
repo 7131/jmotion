@@ -194,6 +194,9 @@ jmotion.VERSION = "1.0";
         const private = privatePart(this, new CorePrivate(this));
 
         // drawing area
+        if (typeof element == "string" || element instanceof String) {
+            element = document.querySelector(element);
+        }
         if (!(element instanceof SVGSVGElement)) {
             const div = element;
             element = private.getShape("svg", private.getNewId("jmotion_core"));
