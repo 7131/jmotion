@@ -14,7 +14,7 @@ const Controller = function() {
     this._rows = new Map();
 
     // events
-    window.addEventListener("load", this._initialize.bind(this), false);
+    window.addEventListener("load", this._initialize.bind(this));
 }
 
 // Controller prototype
@@ -32,7 +32,7 @@ Controller.prototype = {
                 // only sections with settings
                 this._functions.set(name, func);
                 this._buttons.set(name, button);
-                button.addEventListener("click", this._executeTest.bind(this), false);
+                button.addEventListener("click", this._executeTest.bind(this));
 
                 // get table
                 const table = section.getElementsByTagName("table")[0];
@@ -43,7 +43,7 @@ Controller.prototype = {
 
         // run all
         const all = document.getElementById("all");
-        all.addEventListener("click", this._executeAll.bind(this), false);
+        all.addEventListener("click", this._executeAll.bind(this));
     },
 
     // get the function
@@ -125,7 +125,7 @@ Controller.prototype = {
         const input = document.createElement("input");
         input.setAttribute("type", "checkbox");
         input.setAttribute("id", id);
-        input.addEventListener("click", this._toggleExpected.bind(this), false);
+        input.addEventListener("click", this._toggleExpected.bind(this));
         expect.appendChild(input);
 
         // label
