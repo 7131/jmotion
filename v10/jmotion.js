@@ -274,7 +274,7 @@ jmotion.VERSION = "1.0";
             // set to the layer
             for (const elements of arms) {
                 if (Array.isArray(elements)) {
-                    elements.forEach(layer.appendChild, layer);
+                    elements.concat().reverse().forEach(layer.appendChild, layer);
                     private.arms.push(elements);
                 }
             }
