@@ -1,27 +1,41 @@
-# File list of jmotion version 1.0
+# jmotion version 1.0
 
-<dl>
-  <dt>index.html</dt>
-    <dd>The description page for jmotion.</dd>
-  <dt>default.css</dt>
-    <dd>The default stylesheet.</dd>
-  <dt>jmotion.js</dt>
-    <dd>A library that defines a namespace containing all jmotion objects.</dd>
-  <dt>sample.html</dt>
-    <dd>A sample application of jmotion.</dd>
-  <dt>sample.css</dt>
-    <dd>The style sheet for the sample application.</dd>
-  <dt>sample.js</dt>
-    <dd>A controller for executing animations in response to user actions.</dd>
-  <dt>test.html</dt>
-    <dd>A page for testing jmotion.</dd>
-  <dt>test.css</dt>
-    <dd>The style sheet for the test page.</dd>
-  <dt>test.js</dt>
-    <dd>A controller that receives the input of the test page and outputs the test result to the table.</dd>
-  <dt>reference / *</dt>
-    <dd>The reference manual for jmotion.</dd>
-</dl>
+https://7131.github.io/jmotion/v10/
+
+This is the first version of jmotion.
+
+# How to use
+
+First, write the following line in &lt;head&gt; block of the HTML file.
+
+```HTML
+<script src="https://7131.github.io/jmotion/v10/jmotion.js"></script>
+```
+
+The URL of the original file is specified in the src attribute.
+You can download this file and save it on your own computer or server, in which case, specify the location in the src attribute.
+
+Then put the &lt;svg&gt; tag in the &lt;body&gt; block.
+
+```HTML
+<svg id="board" width="300" height="300"></svg>
+```
+
+The id attribute can be any string, but here I set it to "board".
+The size can also be set freely.
+I think it is usually set in the stylesheet.
+Depending on the environment, the namespace attribute xmlns="http://www.w3.org/2000/svg" is required, so specify it if it is not displayed.
+
+Preparations are over.
+After the &lt;svg&gt; is displayed, you can run the simulator by passing it to the Facade object inside the &lt;script&gt; tag.
+For example, the JavaScript for throwing siteswap 3 would be:
+
+```HTML
+<script>
+const facade = new jmotion.Facade("#board");
+facade.startJuggling("3");
+</script>
+```
 
 # Siteswap specifications by ABNF
 
