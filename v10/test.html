@@ -20,34 +20,34 @@
 <h2>Siteswap.analyze()</h2>
 <table>
   <tr><th>No.</th><th>argument(s)</th><th>expected</th><th>result</th></tr>
-  <tr><td></td><td>0</td><td>{"valid":true,"count":0,"period":1,"throws":[[0]],"state":[0],"synch":false,"text":"0"}</td><td></td></tr>
-  <tr><td></td><td>1</td><td>{"valid":true,"count":1,"period":1,"throws":[[1]],"state":[1],"synch":false,"text":"1"}</td><td></td></tr>
-  <tr><td></td><td>2</td><td>{"valid":true,"count":2,"period":1,"throws":[[2]],"state":[1,1],"synch":false,"text":"2"}</td><td></td></tr>
-  <tr><td></td><td>3</td><td>{"valid":true,"count":3,"period":1,"throws":[[3]],"state":[1,1,1],"synch":false,"text":"3"}</td><td></td></tr>
-  <tr><td></td><td>4</td><td>{"valid":true,"count":4,"period":1,"throws":[[4]],"state":[1,1,1,1],"synch":false,"text":"4"}</td><td></td></tr>
-  <tr><td></td><td>5</td><td>{"valid":true,"count":5,"period":1,"throws":[[5]],"state":[1,1,1,1,1],"synch":false,"text":"5"}</td><td></td></tr>
-  <tr><td></td><td>a</td><td>{"valid":true,"count":10,"period":1,"throws":[[10]],"state":[1,1,1,1,1,1,1,1,1,1],"synch":false,"text":"a"}</td><td></td></tr>
-  <tr><td></td><td>x</td><td>{"valid":true,"count":33,"period":1,"throws":[[33]],"state":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"synch":false,"text":"x"}</td><td></td></tr>
-  <tr><td></td><td>z</td><td>{"valid":true,"count":35,"period":1,"throws":[[35]],"state":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"synch":false,"text":"z"}</td><td></td></tr>
+  <tr><td></td><td>0</td><td>{"valid":true,"count":0,"period":1,"throws":[[0]],"state":[0],"sync":false,"text":"0"}</td><td></td></tr>
+  <tr><td></td><td>1</td><td>{"valid":true,"count":1,"period":1,"throws":[[1]],"state":[1],"sync":false,"text":"1"}</td><td></td></tr>
+  <tr><td></td><td>2</td><td>{"valid":true,"count":2,"period":1,"throws":[[2]],"state":[1,1],"sync":false,"text":"2"}</td><td></td></tr>
+  <tr><td></td><td>3</td><td>{"valid":true,"count":3,"period":1,"throws":[[3]],"state":[1,1,1],"sync":false,"text":"3"}</td><td></td></tr>
+  <tr><td></td><td>4</td><td>{"valid":true,"count":4,"period":1,"throws":[[4]],"state":[1,1,1,1],"sync":false,"text":"4"}</td><td></td></tr>
+  <tr><td></td><td>5</td><td>{"valid":true,"count":5,"period":1,"throws":[[5]],"state":[1,1,1,1,1],"sync":false,"text":"5"}</td><td></td></tr>
+  <tr><td></td><td>a</td><td>{"valid":true,"count":10,"period":1,"throws":[[10]],"state":[1,1,1,1,1,1,1,1,1,1],"sync":false,"text":"a"}</td><td></td></tr>
+  <tr><td></td><td>x</td><td>{"valid":true,"count":33,"period":1,"throws":[[33]],"state":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"sync":false,"text":"x"}</td><td></td></tr>
+  <tr><td></td><td>z</td><td>{"valid":true,"count":35,"period":1,"throws":[[35]],"state":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"sync":false,"text":"z"}</td><td></td></tr>
   <tr><td></td><td>1+2</td><td>{"valid":false,"message":"unknown character(s): +2"}</td><td></td></tr>
   <tr><td></td><td>1*2</td><td>{"valid":false,"message":"syntax error: * 2"}</td><td></td></tr>
-  <tr><td></td><td>12</td><td>{"valid":false,"count":0,"period":0,"throws":[],"state":[],"synch":false,"text":"12","message":"impossible to juggle"}</td><td></td></tr>
-  <tr><td></td><td>20</td><td>{"valid":true,"count":1,"period":2,"throws":[[2],[0]],"state":[1],"synch":false,"text":"20"}</td><td></td></tr>
-  <tr><td></td><td>02</td><td>{"valid":true,"count":1,"period":2,"throws":[[0],[2]],"state":[0,1],"synch":false,"text":"02"}</td><td></td></tr>
-  <tr><td></td><td>3 1</td><td>{"valid":true,"count":2,"period":2,"throws":[[3],[1]],"state":[1,1],"synch":false,"text":"3 1"}</td><td></td></tr>
-  <tr><td></td><td>&nbsp; 1	&#x3000;	3</td><td>{"valid":true,"count":2,"period":2,"throws":[[1],[3]],"state":[1,0,1],"synch":false,"text":"&#x00A0; 1   3"}</td><td></td></tr>
-  <tr><td></td><td>efg</td><td>{"valid":true,"count":15,"period":3,"throws":[[14],[15],[16]],"state":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],"synch":false,"text":"efg"}</td><td></td></tr>
-  <tr><td></td><td>EFG</td><td>{"valid":true,"count":15,"period":3,"throws":[[14],[15],[16]],"state":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],"synch":false,"text":"efg"}</td><td></td></tr>
-  <tr><td></td><td>&#xFF45;&#xFF46;&#xFF47;</td><td>{"valid":true,"count":15,"period":3,"throws":[[14],[15],[16]],"state":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],"synch":false,"text":"efg"}</td><td></td></tr>
-  <tr><td></td><td>&#xFF25;&#xFF26;&#xFF27;</td><td>{"valid":true,"count":15,"period":3,"throws":[[14],[15],[16]],"state":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],"synch":false,"text":"efg"}</td><td></td></tr>
-  <tr><td></td><td>[12]</td><td>{"valid":true,"count":3,"period":1,"throws":[[1,2]],"state":[2,1],"synch":false,"text":"[12]"}</td><td></td></tr>
-  <tr><td></td><td>20[34]</td><td>{"valid":true,"count":3,"period":3,"throws":[[2],[0],[3,4]],"state":[1,0,1,1],"synch":false,"text":"20[34]"}</td><td></td></tr>
-  <tr><td></td><td>[34][32]</td><td>{"valid":true,"count":6,"period":2,"throws":[[3,4],[3,2]],"state":[2,2,2],"synch":false,"text":"[34][32]"}</td><td></td></tr>
-  <tr><td></td><td>[34][32]0</td><td>{"valid":true,"count":4,"period":3,"throws":[[3,4],[3,2],[0]],"state":[2,2],"synch":false,"text":"[34][32]0"}</td><td></td></tr>
-  <tr><td></td><td>[123]</td><td>{"valid":true,"count":6,"period":1,"throws":[[1,2,3]],"state":[3,2,1],"synch":false,"text":"[123]"}</td><td></td></tr>
-  <tr><td></td><td>[abcd]</td><td>{"valid":true,"count":46,"period":1,"throws":[[10,11,12,13]],"state":[4,4,4,4,4,4,4,4,4,4,3,2,1],"synch":false,"text":"[abcd]"}</td><td></td></tr>
-  <tr><td></td><td>[30]</td><td>{"valid":true,"count":3,"period":1,"throws":[[3]],"state":[1,1,1],"synch":false,"text":"[30]"}</td><td></td></tr>
-  <tr><td></td><td>[00]</td><td>{"valid":true,"count":0,"period":1,"throws":[[0]],"state":[0],"synch":false,"text":"[00]"}</td><td></td></tr>
+  <tr><td></td><td>12</td><td>{"valid":false,"count":0,"period":0,"throws":[],"state":[],"sync":false,"text":"12","message":"impossible to juggle"}</td><td></td></tr>
+  <tr><td></td><td>20</td><td>{"valid":true,"count":1,"period":2,"throws":[[2],[0]],"state":[1],"sync":false,"text":"20"}</td><td></td></tr>
+  <tr><td></td><td>02</td><td>{"valid":true,"count":1,"period":2,"throws":[[0],[2]],"state":[0,1],"sync":false,"text":"02"}</td><td></td></tr>
+  <tr><td></td><td>3 1</td><td>{"valid":true,"count":2,"period":2,"throws":[[3],[1]],"state":[1,1],"sync":false,"text":"3 1"}</td><td></td></tr>
+  <tr><td></td><td>&nbsp; 1	&#x3000;	3</td><td>{"valid":true,"count":2,"period":2,"throws":[[1],[3]],"state":[1,0,1],"sync":false,"text":"&#x00A0; 1   3"}</td><td></td></tr>
+  <tr><td></td><td>efg</td><td>{"valid":true,"count":15,"period":3,"throws":[[14],[15],[16]],"state":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],"sync":false,"text":"efg"}</td><td></td></tr>
+  <tr><td></td><td>EFG</td><td>{"valid":true,"count":15,"period":3,"throws":[[14],[15],[16]],"state":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],"sync":false,"text":"efg"}</td><td></td></tr>
+  <tr><td></td><td>&#xFF45;&#xFF46;&#xFF47;</td><td>{"valid":true,"count":15,"period":3,"throws":[[14],[15],[16]],"state":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],"sync":false,"text":"efg"}</td><td></td></tr>
+  <tr><td></td><td>&#xFF25;&#xFF26;&#xFF27;</td><td>{"valid":true,"count":15,"period":3,"throws":[[14],[15],[16]],"state":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],"sync":false,"text":"efg"}</td><td></td></tr>
+  <tr><td></td><td>[12]</td><td>{"valid":true,"count":3,"period":1,"throws":[[1,2]],"state":[2,1],"sync":false,"text":"[12]"}</td><td></td></tr>
+  <tr><td></td><td>20[34]</td><td>{"valid":true,"count":3,"period":3,"throws":[[2],[0],[3,4]],"state":[1,0,1,1],"sync":false,"text":"20[34]"}</td><td></td></tr>
+  <tr><td></td><td>[34][32]</td><td>{"valid":true,"count":6,"period":2,"throws":[[3,4],[3,2]],"state":[2,2,2],"sync":false,"text":"[34][32]"}</td><td></td></tr>
+  <tr><td></td><td>[34][32]0</td><td>{"valid":true,"count":4,"period":3,"throws":[[3,4],[3,2],[0]],"state":[2,2],"sync":false,"text":"[34][32]0"}</td><td></td></tr>
+  <tr><td></td><td>[123]</td><td>{"valid":true,"count":6,"period":1,"throws":[[1,2,3]],"state":[3,2,1],"sync":false,"text":"[123]"}</td><td></td></tr>
+  <tr><td></td><td>[abcd]</td><td>{"valid":true,"count":46,"period":1,"throws":[[10,11,12,13]],"state":[4,4,4,4,4,4,4,4,4,4,3,2,1],"sync":false,"text":"[abcd]"}</td><td></td></tr>
+  <tr><td></td><td>[30]</td><td>{"valid":true,"count":3,"period":1,"throws":[[3]],"state":[1,1,1],"sync":false,"text":"[30]"}</td><td></td></tr>
+  <tr><td></td><td>[00]</td><td>{"valid":true,"count":0,"period":1,"throws":[[0]],"state":[0],"sync":false,"text":"[00]"}</td><td></td></tr>
   <tr><td></td><td>[3]</td><td>{"valid":false,"message":"syntax error: ]"}</td><td></td></tr>
   <tr><td></td><td>3[]</td><td>{"valid":false,"message":"syntax error: ]"}</td><td></td></tr>
   <tr><td></td><td>[]</td><td>{"valid":false,"message":"syntax error: ]"}</td><td></td></tr>
@@ -56,9 +56,9 @@
   <tr><td></td><td>34]</td><td>{"valid":false,"message":"syntax error: ]"}</td><td></td></tr>
   <tr><td></td><td>]34]</td><td>{"valid":false,"message":"syntax error: ] 3 4 ]"}</td><td></td></tr>
   <tr><td></td><td>[3[12]]</td><td>{"valid":false,"message":"syntax error: [ 1 2 ] ]"}</td><td></td></tr>
-  <tr><td></td><td>(4,2)</td><td>{"valid":true,"count":3,"period":2,"throws":[[4],[2]],"state":[1,1,1],"synch":true,"text":"(4,2)"}</td><td></td></tr>
-  <tr><td></td><td>(4,0)</td><td>{"valid":true,"count":2,"period":2,"throws":[[4],[0]],"state":[1,0,1],"synch":true,"text":"(4,0)"}</td><td></td></tr>
-  <tr><td></td><td>(0,0)</td><td>{"valid":true,"count":0,"period":2,"throws":[[0],[0]],"state":[0],"synch":true,"text":"(0,0)"}</td><td></td></tr>
+  <tr><td></td><td>(4,2)</td><td>{"valid":true,"count":3,"period":2,"throws":[[4],[2]],"state":[1,1,1],"sync":true,"text":"(4,2)"}</td><td></td></tr>
+  <tr><td></td><td>(4,0)</td><td>{"valid":true,"count":2,"period":2,"throws":[[4],[0]],"state":[1,0,1],"sync":true,"text":"(4,0)"}</td><td></td></tr>
+  <tr><td></td><td>(0,0)</td><td>{"valid":true,"count":0,"period":2,"throws":[[0],[0]],"state":[0],"sync":true,"text":"(0,0)"}</td><td></td></tr>
   <tr><td></td><td>(4,3)</td><td>{"valid":false,"message":"syntax error: 3 )"}</td><td></td></tr>
   <tr><td></td><td>(4,22)</td><td>{"valid":false,"message":"syntax error: 2 )"}</td><td></td></tr>
   <tr><td></td><td>(44,2)</td><td>{"valid":false,"message":"syntax error: 4 , 2 )"}</td><td></td></tr>
@@ -80,20 +80,20 @@
   <tr><td></td><td>(4,2)3</td><td>{"valid":false,"message":"syntax error: 3"}</td><td></td></tr>
   <tr><td></td><td>(4,x)</td><td>{"valid":false,"message":"syntax error: x )"}</td><td></td></tr>
   <tr><td></td><td>(4,x2)</td><td>{"valid":false,"message":"syntax error: x 2 )"}</td><td></td></tr>
-  <tr><td></td><td>(4,2x)</td><td>{"valid":false,"count":0,"period":0,"throws":[],"state":[],"synch":true,"text":"(4,2x)","message":"impossible to juggle"}</td><td></td></tr>
-  <tr><td></td><td>(4,0x)</td><td>{"valid":true,"count":2,"period":2,"throws":[[4],[0]],"state":[1,0,1],"synch":true,"text":"(4,0x)"}</td><td></td></tr>
-  <tr><td></td><td>(0,0x)</td><td>{"valid":true,"count":0,"period":2,"throws":[[0],[0]],"state":[0],"synch":true,"text":"(0,0x)"}</td><td></td></tr>
-  <tr><td></td><td>(4,2x)(2x,4)</td><td>{"valid":true,"count":3,"period":4,"throws":[[4],[1],[3],[4]],"state":[1,1,0,1],"synch":true,"text":"(4,2x)(2x,4)"}</td><td></td></tr>
-  <tr><td></td><td>(4,2x)*</td><td>{"valid":true,"count":3,"period":4,"throws":[[4],[1],[3],[4]],"state":[1,1,0,1],"synch":true,"text":"(4,2x)(2x,4)"}</td><td></td></tr>
-  <tr><td></td><td>(0,0x)*</td><td>{"valid":true,"count":0,"period":4,"throws":[[0],[0],[0],[0]],"state":[0],"synch":true,"text":"(0,0x)(0x,0)"}</td><td></td></tr>
-  <tr><td></td><td>(4x,2x)</td><td>{"valid":true,"count":3,"period":2,"throws":[[5],[1]],"state":[1,1,0,1],"synch":true,"text":"(4x,2x)"}</td><td></td></tr>
-  <tr><td></td><td>(4x,2x)*</td><td>{"valid":false,"count":0,"period":0,"throws":[],"state":[],"synch":true,"text":"(4x,2x)(2x,4x)","message":"impossible to juggle"}</td><td></td></tr>
-  <tr><td></td><td>(6x,0)*</td><td>{"valid":true,"count":3,"period":4,"throws":[[7],[0],[0],[5]],"state":[1,0,0,1,1],"synch":true,"text":"(6x,0)(0,6x)"}</td><td></td></tr>
-  <tr><td></td><td>(4x,6x)(2,4)</td><td>{"valid":true,"count":4,"period":4,"throws":[[5],[5],[2],[4]],"state":[1,1,1,1],"synch":true,"text":"(4x,6x)(2,4)"}</td><td></td></tr>
-  <tr><td></td><td>(6,4)([44x],2x)</td><td>{"valid":true,"count":5,"period":4,"throws":[[6],[4],[4,5],[1]],"state":[1,1,2,1],"synch":true,"text":"(6,4)([44x],2x)"}</td><td></td></tr>
-  <tr><td></td><td>(2,4)([44x],2x)*</td><td>{"valid":true,"count":4,"period":8,"throws":[[2],[4],[4,5],[1],[4],[2],[3],[4,3]],"state":[1,1,1,1],"synch":true,"text":"(2,4)([44x],2x)(4,2)(2x,[44x])"}</td><td></td></tr>
-  <tr><td></td><td>(4,[00])</td><td>{"valid":true,"count":2,"period":2,"throws":[[4],[0]],"state":[1,0,1],"synch":true,"text":"(4,[00])"}</td><td></td></tr>
-  <tr><td></td><td>(4,[0x0])</td><td>{"valid":true,"count":2,"period":2,"throws":[[4],[0]],"state":[1,0,1],"synch":true,"text":"(4,[0x0])"}</td><td></td></tr>
+  <tr><td></td><td>(4,2x)</td><td>{"valid":false,"count":0,"period":0,"throws":[],"state":[],"sync":true,"text":"(4,2x)","message":"impossible to juggle"}</td><td></td></tr>
+  <tr><td></td><td>(4,0x)</td><td>{"valid":true,"count":2,"period":2,"throws":[[4],[0]],"state":[1,0,1],"sync":true,"text":"(4,0x)"}</td><td></td></tr>
+  <tr><td></td><td>(0,0x)</td><td>{"valid":true,"count":0,"period":2,"throws":[[0],[0]],"state":[0],"sync":true,"text":"(0,0x)"}</td><td></td></tr>
+  <tr><td></td><td>(4,2x)(2x,4)</td><td>{"valid":true,"count":3,"period":4,"throws":[[4],[1],[3],[4]],"state":[1,1,0,1],"sync":true,"text":"(4,2x)(2x,4)"}</td><td></td></tr>
+  <tr><td></td><td>(4,2x)*</td><td>{"valid":true,"count":3,"period":4,"throws":[[4],[1],[3],[4]],"state":[1,1,0,1],"sync":true,"text":"(4,2x)(2x,4)"}</td><td></td></tr>
+  <tr><td></td><td>(0,0x)*</td><td>{"valid":true,"count":0,"period":4,"throws":[[0],[0],[0],[0]],"state":[0],"sync":true,"text":"(0,0x)(0x,0)"}</td><td></td></tr>
+  <tr><td></td><td>(4x,2x)</td><td>{"valid":true,"count":3,"period":2,"throws":[[5],[1]],"state":[1,1,0,1],"sync":true,"text":"(4x,2x)"}</td><td></td></tr>
+  <tr><td></td><td>(4x,2x)*</td><td>{"valid":false,"count":0,"period":0,"throws":[],"state":[],"sync":true,"text":"(4x,2x)(2x,4x)","message":"impossible to juggle"}</td><td></td></tr>
+  <tr><td></td><td>(6x,0)*</td><td>{"valid":true,"count":3,"period":4,"throws":[[7],[0],[0],[5]],"state":[1,0,0,1,1],"sync":true,"text":"(6x,0)(0,6x)"}</td><td></td></tr>
+  <tr><td></td><td>(4x,6x)(2,4)</td><td>{"valid":true,"count":4,"period":4,"throws":[[5],[5],[2],[4]],"state":[1,1,1,1],"sync":true,"text":"(4x,6x)(2,4)"}</td><td></td></tr>
+  <tr><td></td><td>(6,4)([44x],2x)</td><td>{"valid":true,"count":5,"period":4,"throws":[[6],[4],[4,5],[1]],"state":[1,1,2,1],"sync":true,"text":"(6,4)([44x],2x)"}</td><td></td></tr>
+  <tr><td></td><td>(2,4)([44x],2x)*</td><td>{"valid":true,"count":4,"period":8,"throws":[[2],[4],[4,5],[1],[4],[2],[3],[4,3]],"state":[1,1,1,1],"sync":true,"text":"(2,4)([44x],2x)(4,2)(2x,[44x])"}</td><td></td></tr>
+  <tr><td></td><td>(4,[00])</td><td>{"valid":true,"count":2,"period":2,"throws":[[4],[0]],"state":[1,0,1],"sync":true,"text":"(4,[00])"}</td><td></td></tr>
+  <tr><td></td><td>(4,[0x0])</td><td>{"valid":true,"count":2,"period":2,"throws":[[4],[0]],"state":[1,0,1],"sync":true,"text":"(4,[0x0])"}</td><td></td></tr>
   <tr><td></td><td>(4,[2])</td><td>{"valid":false,"message":"syntax error: ] )"}</td><td></td></tr>
   <tr><td></td><td>[(4,2)]</td><td>{"valid":false,"message":"syntax error: ( 4 , 2 ) ]"}</td><td></td></tr>
 </table>

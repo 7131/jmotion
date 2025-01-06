@@ -29,7 +29,7 @@
 
 <h2>Syntax</h2>
 <div>
-<pre><code>separate(throws, synch)
+<pre><code>separate(throws, sync)
 </code></pre>
 </div>
 
@@ -38,8 +38,8 @@
 <dl>
   <dt>throws</dt>
   <dd>An array of numeric arrays representing the siteswap. You can pass the throws property of the return value of <a href="./analyze.html">analyze()</a> as is.</dd>
-  <dt>synch</dt>
-  <dd>True if the siteswap is synchronous, false otherwise. You can pass the synch property of the return value of <a href="./analyze.html">analyze()</a> as is.</dd>
+  <dt>sync</dt>
+  <dd>True if the siteswap is synchronous, false otherwise. You can pass the sync property of the return value of <a href="./analyze.html">analyze()</a> as is.</dd>
 </dl>
 </div>
 
@@ -61,7 +61,7 @@
 <h2>Examples</h2>
 <div>
 <pre><code>const result = jmotion.Siteswap.analyze("(4x,2x)");
-const table = jmotion.Siteswap.separate(result.throws, result.synch);
+const table = jmotion.Siteswap.separate(result.throws, result.sync);
 
 // table = [
 //     {

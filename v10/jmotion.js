@@ -47,8 +47,8 @@ jmotion.VERSION = "1.0";
             }
 
             // create coordinate list
-            const table = jmotion.Siteswap.separate(result.throws, result.synch);
-            const orbits = this.creator.calculateOrbits(table, result.synch);
+            const table = jmotion.Siteswap.separate(result.throws, result.sync);
+            const orbits = this.creator.calculateOrbits(table, result.sync);
             this.animator.props = orbits.props;
             this.animator.arms = orbits.arms;
             this.animator.core.setScale(this.creator.getScale());
@@ -194,12 +194,17 @@ jmotion.VERSION = "1.0";
         const private = privatePart(this, new CorePrivate(this));
 
         // drawing area
+        const id = private.getNewId("jmotion_core");
         if (typeof element == "string" || element instanceof String) {
             element = document.querySelector(element);
         }
-        if (!(element instanceof SVGSVGElement)) {
+        if (element instanceof SVGSVGElement) {
+            if (element.id == "") {
+                element.id = id;
+            }
+        } else {
             const div = element;
-            element = private.getShape("svg", private.getNewId("jmotion_core"));
+            element = private.getShape("svg", id);
             if (div && typeof div.appendChild == "function") {
                 // for the parent element
                 div.appendChild(element);
@@ -615,12 +620,12 @@ jmotion.VERSION = "1.0";
     CreatorPublic.prototype = {
 
         // calculate orbits
-        "calculateOrbits": function(table, synch) {
+        "calculateOrbits": function(table, sync) {
             const private = privatePart(this);
 
             // check prop data
             const state = { "props": [], "arms": [] };
-            if (!Array.isArray(table) || table.some(elem => !private.isValidProp(elem, synch))) {
+            if (!Array.isArray(table) || table.some(elem => !private.isValidProp(elem, sync))) {
                 return state;
             }
 
@@ -641,10 +646,10 @@ jmotion.VERSION = "1.0";
 
             // a list of coordinates for each prop
             for (const prop of table) {
-                state.props.push(private.getPropStates(prop, orbit.right.prop, orbit.left.prop, synch));
+                state.props.push(private.getPropStates(prop, orbit.right.prop, orbit.left.prop, sync));
             }
             state.arms.push(private.getArmStates(orbit.right.arms, false));
-            state.arms.push(private.getArmStates(orbit.left.arms, !synch));
+            state.arms.push(private.getArmStates(orbit.left.arms, !sync));
             return state;
         },
 
@@ -675,7 +680,7 @@ jmotion.VERSION = "1.0";
     CreatorPrivate.prototype = {
 
         // whether it is valid prop data
-        "isValidProp": function(prop, synch) {
+        "isValidProp": function(prop, sync) {
             // time of first throw
             if (isNaN(prop.start) || prop.start < 0) {
                 return false;
@@ -693,7 +698,7 @@ jmotion.VERSION = "1.0";
             if (prop.numbers.some(elem => isNaN(elem) || elem == 0)) {
                 return false;
             }
-            if (!synch && prop.numbers.some(elem => elem < 0)) {
+            if (!sync && prop.numbers.some(elem => elem < 0)) {
                 return false;
             }
 
@@ -752,7 +757,7 @@ jmotion.VERSION = "1.0";
         },
 
         // get a list of prop states
-        "getPropStates": function(prop, right, left, synch) {
+        "getPropStates": function(prop, right, left, sync) {
             const states = { "init": [], "loop": [] };
             let forward = right;
             let opposite = left;
@@ -761,7 +766,7 @@ jmotion.VERSION = "1.0";
             let lag = prop.start % 2;
             if (lag == 1) {
                 [forward, opposite] = [opposite, forward];
-                if (!synch) {
+                if (!sync) {
                     Array.prototype.push.apply(states.init, new Array(this.div).fill(forward[0][0]));
                 }
             }
@@ -811,7 +816,7 @@ jmotion.VERSION = "1.0";
                         if (prop.times[j] % 2 == 1) {
                             // when throwing to the opposite hand
                             [forward, opposite] = [opposite, forward];
-                            if (!synch) {
+                            if (!sync) {
                                 lag = 1 - lag;
                             }
                         }
@@ -899,7 +904,7 @@ jmotion.VERSION = "1.0";
     PropsConverter.prototype = {
 
         // separate by prop
-        "separate": function(throws, synch) {
+        "separate": function(throws, sync) {
             // check siteswap array
             try {
                 const negative = elem => isNaN(elem) || elem < 0;
@@ -920,7 +925,7 @@ jmotion.VERSION = "1.0";
             const sum = (acc, cur) => acc + cur;
             const count = throws.reduce((acc, cur) => cur.reduce(sum, acc), 0);
             const table = this._createTable(unit, count);
-            return this._createProps(table, unit.length, synch);
+            return this._createProps(table, unit.length, sync);
         },
 
         // create a throw table
@@ -958,7 +963,7 @@ jmotion.VERSION = "1.0";
         },
 
         // create a list of props
-        "_createProps": function(table, length, synch) {
+        "_createProps": function(table, length, sync) {
             const props = [];
             for (const row of table) {
                 const prop = { "start": 0, "times": [], "numbers": [], "length": 0 };
@@ -972,7 +977,7 @@ jmotion.VERSION = "1.0";
                 const first = row[start];
                 prop.start = start;
                 prop.times.push(first);
-                prop.numbers.push(this._getNumber(synch, first, start));
+                prop.numbers.push(this._getNumber(sync, first, start));
 
                 // get repeating pattern
                 let position = start + first;
@@ -983,7 +988,7 @@ jmotion.VERSION = "1.0";
                         break;
                     }
                     prop.times.push(number);
-                    prop.numbers.push(this._getNumber(synch, number, position));
+                    prop.numbers.push(this._getNumber(sync, number, position));
                     position += number;
                 }
                 prop.length = prop.times.length;
@@ -992,9 +997,9 @@ jmotion.VERSION = "1.0";
         },
 
         // get a number that represents the height
-        "_getNumber": function(synch, number, position) {
+        "_getNumber": function(sync, number, position) {
             // check if conversion is required
-            if (!synch || number % 2 == 0) {
+            if (!sync || number % 2 == 0) {
                 return number;
             }
 
@@ -1081,7 +1086,7 @@ jmotion.VERSION = "1.0";
             }
 
             // validate the synchronous siteswap
-            const result = this._validateSynch(root);
+            const result = this._validateSync(root);
             result.text = root.children.reduce(join, "");
             return result;
         },
@@ -1116,23 +1121,23 @@ jmotion.VERSION = "1.0";
 
             // validate the array of numeric arrays
             const result = this._validateNumbers(throws);
-            result.synch = false;
+            result.sync = false;
             return result;
         },
 
         // validate the synchronous siteswap
-        "_validateSynch": function(tree) {
+        "_validateSync": function(tree) {
             // convert to array of numeric arrays
             const throws = [];
             for (const both of tree.children) {
                 for (let side = 0; side <= 1; side++) {
                     const props = [];
                     const one = both.children[side * 2 + 1].children[0];
-                    if (one.label == "SynchMulti") {
+                    if (one.label == "SyncMulti") {
                         // multiplex pattern
                         let zero = false;
                         for (let i = 1; i < one.children.length - 1; i++) {
-                            const number = this._convertSynchBeat(one.children[i], side);
+                            const number = this._convertSyncBeat(one.children[i], side);
                             if (number == 0) {
                                 zero = true;
                             } else {
@@ -1144,7 +1149,7 @@ jmotion.VERSION = "1.0";
                         }
                     } else {
                         // uniplex pattern
-                        props.push(this._convertSynchBeat(one, side));
+                        props.push(this._convertSyncBeat(one, side));
                     }
                     throws.push(props);
                 }
@@ -1152,12 +1157,12 @@ jmotion.VERSION = "1.0";
 
             // validate the array of numeric arrays
             const result = this._validateNumbers(throws);
-            result.synch = true;
+            result.sync = true;
             return result;
         },
 
         // convert a synchronous siteswap beat
-        "_convertSynchBeat": function(simple, side) {
+        "_convertSyncBeat": function(simple, side) {
             // with x
             if (simple.children.length <= 1) {
                 return this._alphabet.indexOf(simple.text);
@@ -1521,7 +1526,7 @@ jmotion.VERSION = "1.0";
             "AsyncMulti=4",
             "#6#=2",
             "#6#=1",
-            "Synch=2",
+            "Sync=2",
             "#7#=2",
             "#7#=1",
             "#8#=1",
@@ -1530,10 +1535,10 @@ jmotion.VERSION = "1.0";
             "OneHand=1",
             "#9#=1",
             "#9#=1",
-            "SynchSimple=2",
+            "SyncSimple=2",
             "#10#=1",
             "#10#=0",
-            "SynchMulti=4",
+            "SyncMulti=4",
             "#11#=2",
             "#11#=1",
         ],
@@ -1592,7 +1597,7 @@ jmotion.VERSION = "1.0";
     // Siteswap converter
     const SiteswapConverter = {
 
-        // Pattern ::= Async | Synch ;
+        // Pattern ::= Async | Sync ;
         "Pattern": function(tree) {
             tree.text = tree.children[0].text;
         },
@@ -1627,8 +1632,8 @@ jmotion.VERSION = "1.0";
             tree.text = tree.children.reduce(this._join, "");
         },
 
-        // Synch ::= BothHand+ '*'? ;
-        "Synch": function(tree) {
+        // Sync ::= BothHand+ '*'? ;
+        "Sync": function(tree) {
             tree.text = tree.children.reduce(this._join, "");
         },
 
@@ -1637,18 +1642,18 @@ jmotion.VERSION = "1.0";
             tree.text = tree.children.reduce(this._join, "");
         },
 
-        // OneHand ::= SynchSimple | SynchMulti ;
+        // OneHand ::= SyncSimple | SyncMulti ;
         "OneHand": function(tree) {
             tree.text = tree.children[0].text;
         },
 
-        // SynchSimple ::= Even 'x'? ;
-        "SynchSimple": function(tree) {
+        // SyncSimple ::= Even 'x'? ;
+        "SyncSimple": function(tree) {
             tree.text = tree.children.reduce(this._join, "");
         },
 
-        // SynchMulti ::= '[' SynchSimple SynchSimple+ ']' ;
-        "SynchMulti": function(tree) {
+        // SyncMulti ::= '[' SyncSimple SyncSimple+ ']' ;
+        "SyncMulti": function(tree) {
             tree.text = tree.children.reduce(this._join, "");
         },
 

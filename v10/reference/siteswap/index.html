@@ -25,6 +25,26 @@
 </dl>
 </div>
 
+<h2>Siteswap specifications</h2>
+<div>
+<p>For reference, I describe the specifications of the pattern to be accepted as a siteswap in <a href="https://7131.github.io/haba/notation.html">HABA format</a>.</p>
+<pre>
+Pattern ::= Async | Sync ;
+Async ::= EachHand+ ;
+EachHand ::= AsyncSimple | AsyncMulti ;
+AsyncSimple ::= Even | Odd ;
+Even ::= "[02468acegikmoqsuwy]" ;
+Odd ::= "[13579bdfhjlnprtvz]" | 'x' ;
+AsyncMulti ::= '[' AsyncSimple AsyncSimple+ ']' ;
+Sync ::= BothHand+ '*'? ;
+BothHand ::= '(' OneHand ',' OneHand ')' ;
+OneHand ::= SyncSimple | SyncMulti ;
+SyncSimple ::= Even 'x'? ;
+SyncMulti ::= '[' SyncSimple SyncSimple+ ']' ;
+Space ::= "\s+" ;
+</pre>
+</div>
+
 <footer>
   <p><a href="../../index.html">jmotion top page</a></p>
 </footer>

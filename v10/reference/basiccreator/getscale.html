@@ -66,9 +66,9 @@
 <h2>Examples</h2>
 <div>
 <pre><code>const result = jmotion.Siteswap.analyze("7");
-const table = jmotion.Siteswap.separate(result.throws, result.synch);
+const table = jmotion.Siteswap.separate(result.throws, result.sync);
 const creator = new jmotion.BasicCreator();
-const orbits = creator.calculateOrbits(table, result.synch);
+const orbits = creator.calculateOrbits(table, result.sync);
 const scale = creator.getScale();
 
 // scale = 1.5
