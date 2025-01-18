@@ -11,7 +11,6 @@
 <body>
 <article>
 <h1>Core.prototype.drawArms()</h1>
-<div>
 <p>The drawArms() method draws all arms given a list of coordinates.</p>
 <svg id="ref_core_drawarms" class="border" width="300" height="300" viewBox="-150 -255 300 300">
   <defs>
@@ -66,29 +65,28 @@
 ]
 </code></pre>
 <p>The palm coordinates are the same as the wrist coordinates (p0 and q0). If the last joint, such as the shoulder, does not move, its coordinates can be omitted.</p>
-</div>
 
+<section>
 <h2>Syntax</h2>
-<div>
 <pre><code>drawArms(arms)
 </code></pre>
-</div>
+</section>
 
+<section>
 <h2>Parameters</h2>
-<div>
 <dl>
   <dt>arms</dt>
   <dd>An array of arrays of joint coordinates for each arm.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Return value</h2>
-<div>
 <p>none</p>
-</div>
+</section>
 
+<section>
 <h2>Examples</h2>
-<div>
 <pre><code>const core = new jmotion.Core("#board");
 const arms = [
     [
@@ -102,13 +100,14 @@ const arms = [
 ];
 core.drawArms(arms);
 </code></pre>
-</div>
+</section>
 
 <footer>
   <p><a href="./index.html">Core object</a></p>
   <p><a href="../../index.html">jmotion top page</a></p>
 </footer>
-</article>
 
+</article>
 </body>
+
 </html>

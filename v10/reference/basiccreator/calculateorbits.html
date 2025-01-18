@@ -11,7 +11,6 @@
 <body>
 <article>
 <h1>BasicCreator.prototype.calculateOrbits()</h1>
-<div>
 <p>The calculateOrbits() method calculates right and left arm movements and prop orbits based on throwing data.</p>
 <svg id="ref_creator_orbits" class="border" width="300" height="300" viewBox="-150 -200 300 300">
   <defs>
@@ -72,16 +71,15 @@
 </table>
 <p>For example, siteswap 7131 has a maximum value of 7, so among the digits it contains, the height of 7 is 360, the height of 1 is 10, and the height of 3 is 40.</p>
 <p>First calculate the scale as shown in the <a href="./getscale.html">getScale()</a> method, then find the height of each number. The height of 1 is 15 &div; scale. If 3 or greater, the height is (number - 1)<sup>2</sup> &times; 15 &div; scale. This is based on a height that uses the entire 300&times;300 drawing area if siteswap 5 is thrown. It is not a value calculated from gravitational acceleration.</p>
-</div>
 
+<section>
 <h2>Syntax</h2>
-<div>
 <pre><code>calculateOrbits(table, sync)
 </code></pre>
-</div>
+</section>
 
+<section>
 <h2>Parameters</h2>
-<div>
 <dl>
   <dt>table</dt>
   <dd>An array of throwing data. The throwing data for each prop is an object like this:</dd>
@@ -98,10 +96,10 @@
   <dt>sync</dt>
   <dd>True if the throwing is synchronous, false otherwise. You can pass the sync property of the return value of <a href="../siteswap/analyze.html">Siteswap.analyze()</a> as is.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Return value</h2>
-<div>
 <p>An object with the following properties:</p>
 <dl>
   <dt>arms</dt>
@@ -126,10 +124,10 @@
   </dd>
   <dd>The "init" is the initial action and the "loop" is the repeat action. The pi0, pl1, etc. are the coordinates to display the props. The "init" can be an empty array. The size of the "loop" array is the sum of the height (absolute value) for one cycle contained in the argument throwing data, multiplied by the number of divisions.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Examples</h2>
-<div>
 <pre><code>const result = jmotion.Siteswap.analyze("3");
 const table = jmotion.Siteswap.separate(result.throws, result.sync);
 const creator = new jmotion.BasicCreator();
@@ -168,13 +166,14 @@ const orbits = creator.calculateOrbits(table, result.sync);
 //     ],
 // }
 </code></pre>
-</div>
+</section>
 
 <footer>
   <p><a href="./index.html">BasicCreator object</a></p>
   <p><a href="../../index.html">jmotion top page</a></p>
 </footer>
-</article>
 
+</article>
 </body>
+
 </html>

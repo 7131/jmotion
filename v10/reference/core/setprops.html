@@ -11,7 +11,6 @@
 <body>
 <article>
 <h1>Core.prototype.setProps()</h1>
-<div>
 <p>The setProps() method sets the graphic elements of the props list. The middle layer is used.</p>
 <svg id="ref_core_setprops" class="border" width="300" height="300" viewBox="-150 -255 300 300">
   <defs>
@@ -38,29 +37,28 @@
   </g>
 </svg>
 <p>Any graphic elements that can be set in the &lt;svg&gt; tag will be added to Core.prototype.defs in the specified order. However, at the moment no drawing has been done yet, and for that you need to call <a href="./drawprops.html">drawProps()</a> method. That method internally creates SVGUseElement objects (&lt;use&gt; tag) for the number of props, and sequentially references the elements specified here. When there are no more elements to reference, it starts over and uses the same elements in order.</p>
-</div>
 
+<section>
 <h2>Syntax</h2>
-<div>
 <pre><code>setProps(elements)
 </code></pre>
-</div>
+</section>
 
+<section>
 <h2>Parameters</h2>
-<div>
 <dl>
   <dt>elements</dt>
   <dd>An array of graphic elements.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Return value</h2>
-<div>
 <p>none</p>
-</div>
+</section>
 
+<section>
 <h2>Examples</h2>
-<div>
 <pre><code>const core = new jmotion.Core("#board", true);
 const elements = [
     document.getElementById("ball"),
@@ -75,13 +73,14 @@ core.setProps(elements);
 //     "ring": circle#ring,
 // }
 </code></pre>
-</div>
+</section>
 
 <footer>
   <p><a href="./index.html">Core object</a></p>
   <p><a href="../../index.html">jmotion top page</a></p>
 </footer>
-</article>
 
+</article>
 </body>
+
 </html>

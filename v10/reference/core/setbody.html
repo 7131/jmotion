@@ -11,7 +11,6 @@
 <body>
 <article>
 <h1>Core.prototype.setBody()</h1>
-<div>
 <p>The setBody() mothod sets immovable graphic elements such as the head and body. By default, the back layer is used.</p>
 <svg id="ref_core_setbody" class="border" width="300" height="300" viewBox="-150 -255 300 300">
   <defs>
@@ -37,18 +36,17 @@
   </g>
 </svg>
 <p>Any graphic elements that can be set in the &lt;svg&gt; tag will be added to the drawing layer in the specified order. You can also add them directly to the drawing layer without using this method.</p>
-</div>
 
+<section>
 <h2>Syntax</h2>
-<div>
 <pre><code>setBody(elements)
 setBody(elements, append)
 setBody(elements, append, layer)
 </code></pre>
-</div>
+</section>
 
+<section>
 <h2>Parameters</h2>
-<div>
 <dl>
   <dt>elements</dt>
   <dd>An array of graphic elements.</dd>
@@ -60,15 +58,15 @@ setBody(elements, append, layer)
   <dd>If this argument is omitted, the graphic elements are placed on Core.prototype.back.</dd>
   <dd>In either case, drawing layers that were not targeted remain unchanged.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Return value</h2>
-<div>
 <p>none</p>
-</div>
+</section>
 
+<section>
 <h2>Examples</h2>
-<div>
 <pre><code>const core = new jmotion.Core("#board", true);
 const elements = [
     document.getElementById("head"),
@@ -83,13 +81,14 @@ core.setBody(elements);
 //     "shoulder": line#shoulder,
 // }
 </code></pre>
-</div>
+</section>
 
 <footer>
   <p><a href="./index.html">Core object</a></p>
   <p><a href="../../index.html">jmotion top page</a></p>
 </footer>
-</article>
 
+</article>
 </body>
+
 </html>

@@ -11,7 +11,6 @@
 <body>
 <article>
 <h1>Animator</h1>
-<div>
 <p>The Animator object achieves animation by having <a href="../core/index.html">Core</a> continuously draw still images. The graphic elements of the still image are preset in Core, and the display positions are shifted for each index number. The index number changes every 40 milliseconds, resulting in an animation of 25 frames per second.</p>
 <table>
   <tr><th colspan="2">index number</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr>
@@ -26,18 +25,17 @@
 <p>Prop A has two initial actions, ai0 and ai1, and six loop actions, al0 through al5. Initially the "init" coordinates are used in order, and when the end of the "init" is reached, the "loop" coordinates are used in order. When the end of the "loop" is reached, the iteration returns to the first coordinate al0 and is used again in order.</p>
 <p>Prop B has 3 "init" coordinates and 7 (or more) "loop" coordinates. In this way, there is no problem even if the number of "init" and "loop" are different for each prop.</p>
 <p>Prop C has 0 "init" coordinates and 4 "loop" coordinates. If there are no "init" coordinates, the "loop" coordinates are used from the beginning. If there are no "loop" coordinates, subsequent index numbers do not change the display.</p>
-</div>
 
+<section>
 <h2>Constructor</h2>
-<div>
 <dl>
   <dt><a href="./constructor.html">Animator()</a></dt>
   <dd>Creates a new Animator object.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Properties</h2>
-<div>
 <dl>
   <dt>Animator.prototype.arms</dt>
   <dd>An array of arms. One arm is an array of joint state lists, set arms as an array. The state list is an object like the following (same as the prop state list), and set the objects as an array for the number of joints.</dd>
@@ -62,10 +60,10 @@
   </dd>
   <dd>You can set the props property of the return value of <a href="../basiccreator/calculateorbits.html">BasicCreator.prototype.calculateOrbits()</a> as it is.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Methods</h2>
-<div>
 <dl>
   <dt><a href="./getindex.html">Animator.prototype.getIndex()</a></dt>
   <dd>Returns the animation index number.</dd>
@@ -78,12 +76,13 @@
   <dt><a href="./stop.html">Animator.prototype.stop()</a></dt>
   <dd>Stops the animation.</dd>
 </dl>
-</div>
+</section>
 
 <footer>
   <p><a href="../../index.html">jmotion top page</a></p>
 </footer>
-</article>
 
+</article>
 </body>
+
 </html>

@@ -11,20 +11,18 @@
 <body>
 <article>
 <h1>Core.prototype.setStyle()</h1>
-<div>
 <p>The setStyle() method sets visual styles of graphic elements. By default, it applies to the front and back layers.</p>
 <p>Visual styles are applied to all child elements immediately below the layer at once. Visual styles that are invalid for that child element are ignored, even if they are set.</p>
-</div>
 
+<section>
 <h2>Syntax</h2>
-<div>
 <pre><code>setStyle(style)
 setStyle(style, layer)
 </code></pre>
-</div>
+</section>
 
+<section>
 <h2>Parameters</h2>
-<div>
 <dl>
   <dt>style</dt>
   <dd>An object that contains visual styles.</dd>
@@ -32,15 +30,15 @@ setStyle(style, layer)
   <dd>A drawing layer or an array of drawing layers to apply visual styles to.</dd>
   <dd>If this argument is omitted, visual styles will be applied to Core.prototype.front and Core.prototype.back.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Return value</h2>
-<div>
 <p>none</p>
-</div>
+</section>
 
+<section>
 <h2>Visual styles</h2>
-<div>
 <p>An object with the following properties. All properties are optional and only those specified apply.</p>
 <dl>
   <dt>fill</dt>
@@ -51,10 +49,10 @@ setStyle(style, layer)
   <dd>Width of lines and outlines of graphic elements. The initial value of the default element is 1. You can pass the return value of <a href="../basiccreator/getwidth.html">BasicCreator.prototype.getWidth()</a> as is.</dd>
 </dl>
 <p>In addition to these, you can set attributes available on the &lt;svg&gt; graphic elements.</p>
-</div>
+</section>
 
+<section>
 <h2>Examples</h2>
-<div>
 <pre><code>const core = new jmotion.Core("#board");
 const style = {
     "stroke": "blue",
@@ -62,13 +60,14 @@ const style = {
 };
 core.setStyle(style);
 </code></pre>
-</div>
+</section>
 
 <footer>
   <p><a href="./index.html">Core object</a></p>
   <p><a href="../../index.html">jmotion top page</a></p>
 </footer>
-</article>
 
+</article>
 </body>
+
 </html>

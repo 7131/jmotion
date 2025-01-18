@@ -11,13 +11,11 @@
 <body>
 <article>
 <h1>jmotion - Juggling Simulator Library</h1>
-<div>
 <p>jmotion is a JavaScript library for running juggling simulator on the web. It is pronounced like "Jay-motion". You can easily execute animation by specifying "siteswap", which is a numerical sequence that represents the juggling pattern, or you can control its part by directly specifying the coordinates of graphic elements.</p>
 <p><a href="./sample.html">sample app</a></p>
-</div>
 
+<section>
 <h2>How to use</h2>
-<div>
 <p>First, write the following line in &lt;head&gt; block of the HTML file.</p>
 <pre><code>&lt;script src="https://7131.github.io/jmotion/v10/jmotion.js"&gt;&lt;/script&gt;
 </code></pre>
@@ -32,10 +30,10 @@ const facade = new jmotion.Facade("#board");
 facade.startJuggling("3");
 &lt;/script&gt;
 </code></pre>
-</div>
+</section>
 
+<section>
 <h2>Object correlation</h2>
-<div>
 <p>The following diagram shows the correlation between the objects defined in the jmotion namespace and the HTML tags.</p>
 <svg id="jmotion_correlate" width="380" height="270">
   <marker id="jmotion_correlate_arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
@@ -84,10 +82,10 @@ facade.startJuggling("3");
   <dt>Siteswap</dt>
   <dd>This object parses the input string and converts it into data that can be easily handled by the program.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Reference</h2>
-<div>
 <p>When you load this library, it adds the jmotion namespace to your global namespace. All the objects shown below belong to the jmotion namespace.</p>
 <ul>
   <li><a href="./reference/animator/index.html">Animator</a> object
@@ -135,9 +133,9 @@ facade.startJuggling("3");
     </ul>
   </li>
 </ul>
-</div>
+</section>
 
 </article>
-
 </body>
+
 </html>

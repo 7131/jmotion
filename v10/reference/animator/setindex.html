@@ -11,32 +11,30 @@
 <body>
 <article>
 <h1>Animator.prototype.setIndex()</h1>
-<div>
 <p>The setIndex() method sets the animation index number. In addition, each graphic element is drawn in its current state.</p>
 <p>The index number is 0 when the <a href="./index.html">Animator</a> object is created and automatically increases as the animation progresses. The index number never decreases or returns to 0 unless you use this method.</p>
-</div>
 
+<section>
 <h2>Syntax</h2>
-<div>
 <pre><code>setIndex(index)
 </code></pre>
-</div>
+</section>
 
+<section>
 <h2>Parameters</h2>
-<div>
 <dl>
   <dt>index</dt>
   <dd>A number greater than or equal to 0. If you specify a value less than 0 or a non-numeric value, the index number will be 0.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Return value</h2>
-<div>
 <p>none</p>
-</div>
+</section>
 
+<section>
 <h2>Examples</h2>
-<div>
 <pre><code>const core = new jmotion.Core("#board");
 const animator = new jmotion.Animator(core);
 const before = animator.getIndex();
@@ -46,13 +44,14 @@ const after = animator.getIndex();
 // before = 0
 // after = 10
 </code></pre>
-</div>
+</section>
 
 <footer>
   <p><a href="./index.html">Animator object</a></p>
   <p><a href="../../index.html">jmotion top page</a></p>
 </footer>
-</article>
 
+</article>
 </body>
+
 </html>

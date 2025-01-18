@@ -11,7 +11,6 @@
 <body>
 <article>
 <h1>BasicCreator.prototype.getScale()</h1>
-<div>
 <p>The getScale() method returns the scale that should be used for graphics.</p>
 <svg id="ref_creator_getscale" class="border" width="300" height="300" viewBox="-300 -510 600 600">
   <defs>
@@ -39,21 +38,20 @@
   <use x="70" y="-267" fill="olive" href="#ref_creator_getscale_ball" />
 </svg>
 <p>The default scale of 1 only shows around the body, even when throwing a lot of props. Use this method to get the appropriate scale for all props to display and set it to <a href="../core/setscale.html">Core.prototype.setScale()</a>.</p>
-</div>
 
+<section>
 <h2>Syntax</h2>
-<div>
 <pre><code>getScale()
 </code></pre>
-</div>
+</section>
 
+<section>
 <h2>Parameters</h2>
-<div>
 <p>none</p>
-</div>
+</section>
 
+<section>
 <h2>Return value</h2>
-<div>
 <p>A positive real value representing the scale.</p>
 <p>The scale is calculated with the maximum height (absolute value) contained in the arguments of the last <a href="./calculateorbits.html">calculateOrbits()</a> call.</p>
 <table>
@@ -61,10 +59,10 @@
   <tr><th>scale</th><td>1</td><td>(max value - 1) &div; 4</td></tr>
 </table>
 <p>If the maximum value is 5 or less, the scale is always 1. If the maximum value is 6 or greater, for example 7, then (7 - 1) &div; 4 = 1.5.</p>
-</div>
+</section>
 
+<section>
 <h2>Examples</h2>
-<div>
 <pre><code>const result = jmotion.Siteswap.analyze("7");
 const table = jmotion.Siteswap.separate(result.throws, result.sync);
 const creator = new jmotion.BasicCreator();
@@ -73,13 +71,14 @@ const scale = creator.getScale();
 
 // scale = 1.5
 </code></pre>
-</div>
+</section>
 
 <footer>
   <p><a href="./index.html">BasicCreator object</a></p>
   <p><a href="../../index.html">jmotion top page</a></p>
 </footer>
-</article>
 
+</article>
 </body>
+
 </html>

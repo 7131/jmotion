@@ -11,7 +11,6 @@
 <body>
 <article>
 <h1>Core.prototype.setHands()</h1>
-<div>
 <p>The setHands() method sets palm graphic elements. By default, the front layer is used.</p>
 <svg id="ref_core_sethands" class="border" width="300" height="300" viewBox="-150 -255 300 300">
   <defs>
@@ -34,17 +33,16 @@
 </svg>
 <p>Both palms are expected to be SVGUseElement objects (&lt;use&gt; tags). If you specify a different graphic element, the specified element is added to Core.prototype.defs and an SVGUseElement object referencing it is created internally and added to the drawing layer.</p>
 <p>The palms to be moved by <a href="./drawarms.html">drawArms()</a> must be set in advance by this method.</p>
-</div>
 
+<section>
 <h2>Syntax</h2>
-<div>
 <pre><code>setHands(elements)
 setHands(elements, layer)
 </code></pre>
-</div>
+</section>
 
+<section>
 <h2>Parameters</h2>
-<div>
 <dl>
   <dt>elements</dt>
   <dd>An array of graphic elements.</dd>
@@ -53,15 +51,15 @@ setHands(elements, layer)
   <dd>If this argument is omitted, the graphic elements are placed on Core.prototype.front.</dd>
   <dd>In either case, existing palm elements are deleted.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Return value</h2>
-<div>
 <p>none</p>
-</div>
+</section>
 
+<section>
 <h2>Examples</h2>
-<div>
 <pre><code>const core = new jmotion.Core("#board", true);
 const elements = [
     document.getElementById("hand"),
@@ -72,13 +70,14 @@ core.setHands(elements);
 //     "board_hand_use": use#board_hand_use,
 // }
 </code></pre>
-</div>
+</section>
 
 <footer>
   <p><a href="./index.html">Core object</a></p>
   <p><a href="../../index.html">jmotion top page</a></p>
 </footer>
-</article>
 
+</article>
 </body>
+
 </html>

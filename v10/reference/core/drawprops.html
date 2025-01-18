@@ -11,7 +11,6 @@
 <body>
 <article>
 <h1>Core.prototype.drawProps()</h1>
-<div>
 <p>The drawProps() method draws all props given a list of coordinates.</p>
 <svg id="ref_core_drawprops" class="border" width="300" height="300" viewBox="-150 -255 300 300">
   <defs>
@@ -48,29 +47,28 @@
 <p>Specify the coordinates of the number of props as an array. The number of props specified here will be drawn in Core.prototype.middle regardless of the number set by <a href="./setprops.html">setProps()</a> method. A coordinate is a DOMPoint-like object with x and y properties.</p>
 <pre><code>{ "x": 0, "y": 0 }
 </code></pre>
-</div>
 
+<section>
 <h2>Syntax</h2>
-<div>
 <pre><code>drawProps(props)
 </code></pre>
-</div>
+</section>
 
+<section>
 <h2>Parameters</h2>
-<div>
 <dl>
   <dt>props</dt>
   <dd>An array of prop coordinates.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Return value</h2>
-<div>
 <p>none</p>
-</div>
+</section>
 
+<section>
 <h2>Examples</h2>
-<div>
 <pre><code>const core = new jmotion.Core("#board");
 const props = [
     { "x": 12, "y": -219 },
@@ -79,13 +77,14 @@ const props = [
 ];
 core.drawProps(props);
 </code></pre>
-</div>
+</section>
 
 <footer>
   <p><a href="./index.html">Core object</a></p>
   <p><a href="../../index.html">jmotion top page</a></p>
 </footer>
-</article>
 
+</article>
 </body>
+
 </html>

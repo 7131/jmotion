@@ -11,7 +11,6 @@
 <body>
 <article>
 <h1>Siteswap.separate()</h1>
-<div>
 <p>The separate() method analyzes siteswap data and returns throwing data for each prop. For example, if the siteswap is 531, three props <span class="color1">A</span>, <span class="color2">B</span>, and <span class="color3">C</span> are thrown as shown in the table below.</p>
 <table>
   <tr><th>time</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td></tr>
@@ -25,26 +24,25 @@
   <li>The first time <span class="color3">C</span> was thrown is 2, and the throwing pattern is 1-5-1-5-... in order.</li>
 </ul>
 <p>These are the "throwing data for each prop".</p>
-</div>
 
+<section>
 <h2>Syntax</h2>
-<div>
 <pre><code>separate(throws, sync)
 </code></pre>
-</div>
+</section>
 
+<section>
 <h2>Parameters</h2>
-<div>
 <dl>
   <dt>throws</dt>
   <dd>An array of numeric arrays representing the siteswap. You can pass the throws property of the return value of <a href="./analyze.html">analyze()</a> as is.</dd>
   <dt>sync</dt>
   <dd>True if the siteswap is synchronous, false otherwise. You can pass the sync property of the return value of <a href="./analyze.html">analyze()</a> as is.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Return value</h2>
-<div>
 <p>An array of objects with the following properties, where the size of the array is the number of props.</p>
 <dl>
   <dt>length</dt>
@@ -56,10 +54,10 @@
   <dt>times</dt>
   <dd>An array of integers greater than or equal to 1 representing the throw times for the period. For synchronous, numbers with x are converted to odd numbers, where +1 is added to the left number and -1 to the right number. For example, (4x,2x) becomes 5 for 4x and 1 for 2x. Otherwise, it will be the same as the value of the numbers property.</dd>
 </dl>
-</div>
+</section>
 
+<section>
 <h2>Examples</h2>
-<div>
 <pre><code>const result = jmotion.Siteswap.analyze("(4x,2x)");
 const table = jmotion.Siteswap.separate(result.throws, result.sync);
 
@@ -84,13 +82,14 @@ const table = jmotion.Siteswap.separate(result.throws, result.sync);
 //     },
 // ]
 </code></pre>
-</div>
+</section>
 
 <footer>
   <p><a href="./index.html">Siteswap object</a></p>
   <p><a href="../../index.html">jmotion top page</a></p>
 </footer>
-</article>
 
+</article>
 </body>
+
 </html>
