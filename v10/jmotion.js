@@ -765,7 +765,7 @@ jmotion.VERSION = "1.0";
             // before start
             let lag = prop.start % 2;
             if (lag == 1) {
-                [forward, opposite] = [opposite, forward];
+                [ forward, opposite ] = [ opposite, forward ];
                 if (!sync) {
                     Array.prototype.push.apply(states.init, new Array(this.div).fill(forward[0][0]));
                 }
@@ -815,7 +815,7 @@ jmotion.VERSION = "1.0";
                         const abs = Math.abs(number);
                         if (prop.times[j] % 2 == 1) {
                             // when throwing to the opposite hand
-                            [forward, opposite] = [opposite, forward];
+                            [ forward, opposite ] = [ opposite, forward ];
                             if (!sync) {
                                 lag = 1 - lag;
                             }
@@ -922,8 +922,7 @@ jmotion.VERSION = "1.0";
             }
 
             // create a list of props
-            const sum = (acc, cur) => acc + cur;
-            const count = throws.reduce((acc, cur) => cur.reduce(sum, acc), 0);
+            const count = throws.reduce((sub, elem) => sub + elem.reduce((acc, cur) => acc + cur), 0);
             const table = this._createTable(unit, count);
             return this._createProps(table, unit.length, sync);
         },
@@ -1120,9 +1119,7 @@ jmotion.VERSION = "1.0";
             }
 
             // validate the array of numeric arrays
-            const result = this._validateNumbers(throws);
-            result.sync = false;
-            return result;
+            return this._validateNumbers(throws, 1);
         },
 
         // validate the synchronous siteswap
@@ -1156,9 +1153,7 @@ jmotion.VERSION = "1.0";
             }
 
             // validate the array of numeric arrays
-            const result = this._validateNumbers(throws);
-            result.sync = true;
-            return result;
+            return this._validateNumbers(throws, 2);
         },
 
         // convert a synchronous siteswap beat
@@ -1181,67 +1176,59 @@ jmotion.VERSION = "1.0";
         },
 
         // validate the array of numeric arrays
-        "_validateNumbers": function(throws) {
-            // create a drop point array
-            const period = throws.length;
-            const drops = new Array(period);
-            for (let i = 0; i < period; i++) {
-                drops[i] = 0;
-            }
-
-            // get drop points
-            let sum = 0;
-            let max = 0;
-            for (let i = 0; i < period; i++) {
-                for (const prop of throws[i]) {
-                    const number = (prop + i) % period;
-                    drops[number]++;
-                    sum += prop;
-                    if (0 < prop) {
-                        max = Math.max(max, prop + i);
-                    }
-                }
-            }
-
+        "_validateNumbers": function(throws, unit) {
             // determine whether it is valid as a siteswap
-            const result = { "valid": false, "count": 0, "period": 0, "throws": [], "state": [] };
-            for (let i = 0; i < period; i++) {
-                if (drops[i] != throws[i].length) {
-                    return result;
-                }
+            const result = { "valid": false, "count": 0, "period": 0, "throws": [], "state": [], "sync": unit == 2 };
+            const length = throws.length;
+            const drops = new Array(length).fill(0);
+            throws.forEach((val, idx) => val.forEach(elem => drops[(elem + idx) % length]++));
+            if (drops.some((val, idx) => val != throws[idx].length)) {
+                return result;
             }
 
             // set result
             result.valid = true;
-            result.count = sum / period;
-            result.period = period;
+            result.count = throws.flat().reduce((acc, cur) => acc + cur) / length;
+            result.period = length;
             result.throws = throws;
+
+            // calculate the period
+            const half = Math.floor(length / 2);
+            let period = unit;
+            while (period <= half) {
+                // check half the length from the beginning
+                if (length % period == 0) {
+                    const sub = JSON.stringify(throws.slice(0, period));
+                    let start = period;
+                    let valid = true;
+                    while (valid && start < length) {
+                        const end = start + period;
+                        valid = sub == JSON.stringify(throws.slice(start, end));
+                        start = end;
+                    }
+                    if (valid) {
+                        result.period = period;
+                        break;
+                    }
+                }
+                period += unit;
+            }
+
+            // set state
+            const max = throws.flat().reduce((acc, cur) => Math.max(acc, cur));
             if (max == 0) {
                 result.state.push(0);
                 return result;
             }
-
-            // set state
-            for (let i = 0; i < max; i++) {
-                result.state.push(0);
+            const width = Math.ceil(max / length) * length;
+            const state = new Array(width + max).fill(0);
+            for (let i = 0; i < width; i += length) {
+                throws.forEach((val, idx) => val.forEach(elem => state[i + idx + elem]++));
             }
-            const loop = Math.ceil(max / period)
-            const width = loop * period;
-            let position = 0;
-            for (let i = 0; i < loop; i++) {
-                for (let j = 0; j < period; j++) {
-                    for (const prop of throws[j]) {
-                        const number = position + prop + j;
-                        if (width <= number) {
-                            result.state[number - width]++;
-                        }
-                    }
-                }
-                position += period;
+            while (state[state.length - 1] == 0) {
+                state.pop();
             }
-            while (result.state[result.state.length - 1] == 0) {
-                result.state.pop();
-            }
+            result.state = state.slice(width);
             return result;
         },
 
