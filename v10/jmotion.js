@@ -1015,7 +1015,6 @@ jmotion.VERSION = "1.0";
     // Siteswap analyzer class
     const SiteswapAnalyzer = function() {
         this._parser = new SiteswapParser();
-        this._alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
     }
 
     // Siteswap analyzer prototype
@@ -1101,7 +1100,7 @@ jmotion.VERSION = "1.0";
                     // multiplex pattern
                     let zero = false;
                     for (let i = 1; i < each.children.length - 1; i++) {
-                        const number = this._alphabet.indexOf(each.children[i].text);
+                        const number = parseInt(each.children[i].text, 36);
                         if (number == 0) {
                             zero = true;
                         } else {
@@ -1113,7 +1112,7 @@ jmotion.VERSION = "1.0";
                     }
                 } else {
                     // uniplex pattern
-                    props.push(this._alphabet.indexOf(each.text));
+                    props.push(parseInt(each.text, 36));
                 }
                 throws.push(props);
             }
@@ -1160,18 +1159,18 @@ jmotion.VERSION = "1.0";
         "_convertSyncBeat": function(simple, side) {
             // with x
             if (simple.children.length <= 1) {
-                return this._alphabet.indexOf(simple.text);
+                return parseInt(simple.text, 36);
             }
 
             // without x
-            const index = this._alphabet.indexOf(simple.children[0].text);
-            if (index == 0) {
-                return index;
+            const number = parseInt(simple.children[0].text, 36);
+            if (number == 0) {
+                return number;
             }
             if (side == 0) {
-                return index + 1;
+                return number + 1;
             } else {
-                return index - 1;
+                return number - 1;
             }
         },
 
