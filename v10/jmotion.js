@@ -277,11 +277,9 @@ jmotion.VERSION = "1.0";
             }
 
             // set to the layer
-            for (const elements of arms) {
-                if (Array.isArray(elements)) {
-                    elements.concat().reverse().forEach(layer.appendChild, layer);
-                    private.arms.push(elements);
-                }
+            for (const elements of arms.filter(Array.isArray, Array)) {
+                elements.concat().reverse().forEach(layer.appendChild, layer);
+                private.arms.push(elements);
             }
         },
 
@@ -556,9 +554,7 @@ jmotion.VERSION = "1.0";
 
             // create the shape
             const shape = document.createElementNS("http://www.w3.org/2000/svg", type);
-            for (const name in attribute) {
-                shape.setAttribute(name, attribute[name]);
-            }
+            Object.entries(attribute).forEach(elem => shape.setAttribute(...elem));
             return shape;
         },
 
@@ -575,12 +571,7 @@ jmotion.VERSION = "1.0";
 
         // erase elements from their own drawing layer
         "eraseLayer": function(elements) {
-            for (const element of elements) {
-                const parent = element.parentElement;
-                if (parent) {
-                    parent.removeChild(element);
-                }
-            }
+            elements.filter(elem => elem.parentElement).forEach(elem => elem.parentElement.removeChild(elem));
         },
 
     }
@@ -645,9 +636,7 @@ jmotion.VERSION = "1.0";
             orbit.left = private.createPathPoints(this.paths.left, this.offset.left);
 
             // a list of coordinates for each prop
-            for (const prop of table) {
-                state.props.push(private.getPropStates(prop, orbit.right.prop, orbit.left.prop, sync));
-            }
+            table.forEach(elem => state.props.push(private.getPropStates(elem, orbit.right.prop, orbit.left.prop, sync)));
             state.arms.push(private.getArmStates(orbit.right.arms, false));
             state.arms.push(private.getArmStates(orbit.left.arms, !sync));
             return state;
@@ -1242,9 +1231,7 @@ jmotion.VERSION = "1.0";
 
         // lexical analysis elements
         this._elements = [];
-        for (const term of terms) {
-            this._elements.push(new RegExp("^(" + term + ")", SiteswapGrammar.flag));
-        }
+        terms.forEach(elem => this._elements.push(new RegExp("^(" + elem + ")", SiteswapGrammar.flag)));
 
         // production rules
         this._rules = [];
@@ -1396,9 +1383,7 @@ jmotion.VERSION = "1.0";
 
             // join all child elements
             let text = "";
-            for (const child of tree.children) {
-                text += " " + this._joinTree(child);
-            }
+            tree.children.forEach(elem => text += " " + this._joinTree(elem));
             return text;
         },
 
