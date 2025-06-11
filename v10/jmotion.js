@@ -345,10 +345,10 @@ jmotion.VERSION = "1.0";
         // set display style
         "setStyle": function(style, layer) {
             // get layer list
-            const layers = [];
+            let layers = [];
             if (layer) {
                 if (Array.isArray(layer)) {
-                    Array.prototype.push.apply(layers, layer);
+                    layers = layer;
                 } else {
                     layers.push(layer);
                 }
@@ -756,21 +756,21 @@ jmotion.VERSION = "1.0";
             if (lag == 1) {
                 [ forward, opposite ] = [ opposite, forward ];
                 if (!sync) {
-                    Array.prototype.push.apply(states.init, new Array(this.div).fill(forward[0][0]));
+                    states.init = states.init.concat(new Array(this.div).fill(forward[0][0]));
                 }
             }
 
             // initial operation
             let time = prop.start;
             for (let i = 0; i < time - lag; i++) {
-                Array.prototype.push.apply(states.init, forward[i % forward.length].slice(0, this.div));
+                states.init = states.init.concat(forward[i % forward.length].slice(0, this.div));
             }
 
             // tweak
             const half = Math.floor(this.div / 2);
             let prev = prop.numbers[prop.length - 1];
             if (prev == 1) {
-                Array.prototype.push.apply(states.init, forward[time % forward.length].slice(0, half));
+                states.init = states.init.concat(forward[time % forward.length].slice(0, half));
             }
 
             // repetitive motion
@@ -789,14 +789,14 @@ jmotion.VERSION = "1.0";
 
                     // an orbit from catch to throw
                     if (prev == 1) {
-                        Array.prototype.push.apply(states.loop, forward[index].slice(half, start));
+                        states.loop = states.loop.concat(forward[index].slice(half, start));
                     } else {
-                        Array.prototype.push.apply(states.loop, forward[index].slice(0, start));
+                        states.loop = states.loop.concat(forward[index].slice(0, start));
                     }
 
                     // parabolic orbit from throw to catch
                     if (number == 2) {
-                        Array.prototype.push.apply(states.loop, forward[(index + 1) % forward.length].slice(0, this.div));
+                        states.loop = states.loop.concat(forward[(index + 1) % forward.length].slice(0, this.div));
                         time += 2;
                         index = (time - lag) % forward.length;
                     } else {
@@ -815,7 +815,7 @@ jmotion.VERSION = "1.0";
                         const air = Math.max(1, abs - 1);
                         const height = air * air * 15 / this.scale;
                         const points = this.createParabolaPoints(from, to, height, air * this.div);
-                        Array.prototype.push.apply(states.loop, points);
+                        states.loop = states.loop.concat(points);
                     }
                     prev = number;
                 }
@@ -858,13 +858,13 @@ jmotion.VERSION = "1.0";
                 states.push({ "init": [], "loop": [] });
                 if (lag) {
                     // before start
-                    Array.prototype.push.apply(states[i].init, new Array(this.div).fill(first[i][0]));
+                    states[i].init = states[i].init.concat(new Array(this.div).fill(first[i][0]));
                 }
             }
             for (const move of orbits) {
                 // repetitive motion
                 for (let i = 0; i < move.length; i++) {
-                    Array.prototype.push.apply(states[i].loop, move[i].slice(0, this.div));
+                    states[i].loop = states[i].loop.concat(move[i].slice(0, this.div));
                 }
             }
             return states;
@@ -905,9 +905,9 @@ jmotion.VERSION = "1.0";
             }
 
             // get data for one cycle
-            const unit = throws.map(elem => elem.concat());
+            let unit = throws.map(elem => elem.concat());
             if (unit.length % 2 == 1) {
-                Array.prototype.push.apply(unit, throws.map(elem => elem.concat()));
+                unit = unit.concat(throws.map(elem => elem.concat()));
             }
 
             // create a list of props
@@ -1064,10 +1064,10 @@ jmotion.VERSION = "1.0";
                     const nodes = [ both.children[0], both.children[3], both.children[2], both.children[1], both.children[4] ];
                     const text = nodes.reduce(join, "");
                     const mirror = new SiteswapTree(both.label, text);
-                    Array.prototype.push.apply(mirror.children, nodes);
+                    mirror.children = nodes;
                     follow.push(mirror);
                 }
-                Array.prototype.push.apply(root.children, follow);
+                root.children = root.children.concat(follow);
             } else {
                 root.children.push(term);
             }
@@ -1335,7 +1335,7 @@ jmotion.VERSION = "1.0";
 
                     // create a syntax tree
                     const node = new SiteswapTree(rule.symbol);
-                    Array.prototype.push.apply(node.children, nodes);
+                    node.children = nodes;
                     if (SiteswapConverter[node.label]) {
                         SiteswapConverter[node.label](node);
                     }
