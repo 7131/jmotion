@@ -1322,12 +1322,12 @@ jmotion.VERSION = "1.0";
                 } else {
                     // reduce
                     const rule = this._rules[action.number];
-                    const nodes = [];
+                    let nodes = [];
                     for (let i = 0; i < rule.count; i++) {
                         const top = stack.popTree();
                         if (top.label.charAt(0) == "#") {
                             // a non-terminal symbol that should be removed
-                            Array.prototype.unshift.apply(nodes, top.children);
+                            nodes = top.children.concat(nodes);
                         } else {
                             nodes.unshift(top);
                         }
