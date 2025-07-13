@@ -636,7 +636,7 @@ jmotion.VERSION = "1.0";
             orbit.left = private.createPathPoints(this.paths.left, this.offset.left);
 
             // a list of coordinates for each prop
-            table.forEach(elem => state.props.push(private.getPropStates(elem, orbit.right.prop, orbit.left.prop, sync)));
+            state.props = table.map(elem => private.getPropStates(elem, orbit.right.prop, orbit.left.prop, sync));
             state.arms.push(private.getArmStates(orbit.right.arms, false));
             state.arms.push(private.getArmStates(orbit.left.arms, !sync));
             return state;
@@ -918,9 +918,7 @@ jmotion.VERSION = "1.0";
 
         // create a throw table
         "_createTable": function(unit, count) {
-            // remove 0 height
-            const pattern = [];
-            unit.forEach(numbers => pattern.push(numbers.filter(elem => elem != 0)));
+            const pattern = unit.map(numbers => numbers.filter(elem => elem != 0));
 
             // set the throw
             const leading = pattern.length * count;
@@ -1228,10 +1226,7 @@ jmotion.VERSION = "1.0";
         const terms = SiteswapGrammar.terminals.concat(SiteswapGrammar.dummies);
         this._terminals = terms.map(this._quoteSingle);
         this._dummies = SiteswapGrammar.dummies.map(this._quoteSingle);
-
-        // lexical analysis elements
-        this._elements = [];
-        terms.forEach(elem => this._elements.push(new RegExp("^(" + elem + ")", SiteswapGrammar.flag)));
+        this._elements = terms.map(elem => new RegExp(`^(${elem})`, SiteswapGrammar.flag));
 
         // production rules
         this._rules = [];
@@ -1293,7 +1288,7 @@ jmotion.VERSION = "1.0";
 
             // get the result
             if (0 < text.length) {
-                const valid = tokens.reduce(this._joinTokens, "");
+                const valid = tokens.reduce((acc, cur) => acc + " " + cur.text, "");
                 return { "tokens": null, "valid": valid.trim(), "invalid": text };
             }
             return { "tokens": tokens };
@@ -1357,10 +1352,9 @@ jmotion.VERSION = "1.0";
             // the case of not to accept
             let valid = "";
             while (0 < stack.getCount()) {
-                const tree = stack.popTree();
-                valid = this._joinTree(tree) + " " + valid;
+                valid = this._joinTree(stack.popTree()) + " " + valid;
             }
-            const invalid = tokens.reduce(this._joinTokens, "");
+            const invalid = tokens.reduce((acc, cur) => acc + " " + cur.text, "");
             return { "tree": null, "valid": valid.trim(), "invalid": invalid.trim() };
         },
 
@@ -1370,21 +1364,12 @@ jmotion.VERSION = "1.0";
             return "'" + text + "'";
         },
 
-        // join the token strings
-        "_joinTokens": function(acc, cur) {
-            return acc + " " + cur.text;
-        },
-
         // join the tree strings
         "_joinTree": function(tree) {
             if (tree.text != "") {
                 return tree.text;
             }
-
-            // join all child elements
-            let text = "";
-            tree.children.forEach(elem => text += " " + this._joinTree(elem));
-            return text;
+            return tree.children.map(this._joinTree, this).join(" ");
         },
 
     }
