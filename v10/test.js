@@ -220,7 +220,7 @@ Controller.prototype = {
         if (errors.length == 0) {
             last.innerHTML = "All OK";
         } else {
-            last.innerHTML = "NG : " + errors.join();
+            last.innerHTML = `NG: ${errors.join()}`;
             last.classList.add("error");
         }
         this._buttons.forEach(elem => elem.disabled = false);

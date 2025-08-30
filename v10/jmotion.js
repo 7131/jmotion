@@ -1013,13 +1013,13 @@ jmotion.VERSION = "1.0";
             const pattern = this._getPattern(`${text}`);
             const lex = this._parser.tokenize(pattern);
             if (!lex.tokens) {
-                return { "valid": false, "message": "unknown character(s): " + lex.invalid };
+                return { "valid": false, "message": `unknown character(s): ${lex.invalid}` };
             }
 
             // syntactic analysis
             const syntax = this._parser.parse(lex.tokens);
             if (!syntax.tree) {
-                return { "valid": false, "message": "syntax error: " + syntax.invalid };
+                return { "valid": false, "message": `syntax error: ${syntax.invalid}` };
             }
 
             // pattern analysis
@@ -1288,7 +1288,7 @@ jmotion.VERSION = "1.0";
 
             // get the result
             if (0 < text.length) {
-                const valid = tokens.reduce((acc, cur) => acc + " " + cur.text, "");
+                const valid = tokens.map(elem => elem.text).join(" ");
                 return { "tokens": null, "valid": valid.trim(), "invalid": text };
             }
             return { "tokens": tokens };
@@ -1352,16 +1352,16 @@ jmotion.VERSION = "1.0";
             // the case of not to accept
             let valid = "";
             while (0 < stack.getCount()) {
-                valid = this._joinTree(stack.popTree()) + " " + valid;
+                valid = `${this._joinTree(stack.popTree())} ${valid}`;
             }
-            const invalid = tokens.reduce((acc, cur) => acc + " " + cur.text, "");
+            const invalid = tokens.map(elem => elem.text).join(" ");
             return { "tree": null, "valid": valid.trim(), "invalid": invalid.trim() };
         },
 
         // add the single quatations
         "_quoteSingle": function(cur) {
             const text = cur.replace(/\\(.)/g, "$1");
-            return "'" + text + "'";
+            return `'${text}'`;
         },
 
         // join the tree strings
@@ -1555,67 +1555,72 @@ jmotion.VERSION = "1.0";
 
         // Pattern ::= Async | Sync ;
         "Pattern": function(tree) {
-            tree.text = tree.children[0].text;
+            SiteswapConverter._setText(tree);
         },
 
         // Async ::= EachHand+ ;
         "Async": function(tree) {
-            tree.text = tree.children.reduce(this._join, "");
+            SiteswapConverter._joinText(tree);
         },
 
         // EachHand ::= AsyncSimple | AsyncMulti ;
         "EachHand": function(tree) {
-            tree.text = tree.children[0].text;
+            SiteswapConverter._setText(tree);
         },
 
         // AsyncSimple ::= Even | Odd ;
         "AsyncSimple": function(tree) {
-            tree.text = tree.children[0].text;
+            SiteswapConverter._setText(tree);
         },
 
         // Even ::= "[02468acegikmoqsuwy]" ;
         "Even": function(tree) {
-            tree.text = tree.children[0].text;
+            SiteswapConverter._setText(tree);
         },
 
         // Odd ::= "[13579bdfhjlnprtvz]" | 'x' ;
         "Odd": function(tree) {
-            tree.text = tree.children[0].text;
+            SiteswapConverter._setText(tree);
         },
 
         // AsyncMulti ::= '[' AsyncSimple AsyncSimple+ ']' ;
         "AsyncMulti": function(tree) {
-            tree.text = tree.children.reduce(this._join, "");
+            SiteswapConverter._joinText(tree);
         },
 
         // Sync ::= BothHand+ '*'? ;
         "Sync": function(tree) {
-            tree.text = tree.children.reduce(this._join, "");
+            SiteswapConverter._joinText(tree);
         },
 
         // BothHand ::= '(' OneHand ',' OneHand ')' ;
         "BothHand": function(tree) {
-            tree.text = tree.children.reduce(this._join, "");
+            SiteswapConverter._joinText(tree);
         },
 
         // OneHand ::= SyncSimple | SyncMulti ;
         "OneHand": function(tree) {
-            tree.text = tree.children[0].text;
+            SiteswapConverter._setText(tree);
         },
 
         // SyncSimple ::= Even 'x'? ;
         "SyncSimple": function(tree) {
-            tree.text = tree.children.reduce(this._join, "");
+            SiteswapConverter._joinText(tree);
         },
 
         // SyncMulti ::= '[' SyncSimple SyncSimple+ ']' ;
         "SyncMulti": function(tree) {
-            tree.text = tree.children.reduce(this._join, "");
+            SiteswapConverter._joinText(tree);
         },
 
-        // join the strings
-        "_join": function(acc, cur) {
-            return acc + cur.text;
+        // set the text
+        "_setText": function(tree) {
+            tree.text = tree.children[0].text;
+        },
+
+        // join the text
+        "_joinText": function(tree) {
+            tree.text = tree.children.map(elem => elem.text).join("");
         },
 
     }
