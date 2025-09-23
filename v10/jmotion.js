@@ -911,7 +911,7 @@ jmotion.VERSION = "1.0";
             }
 
             // create a list of props
-            const count = throws.reduce((sub, elem) => sub + elem.reduce((acc, cur) => acc + cur), 0);
+            const count = throws.flat().reduce((acc, cur) => acc + cur, 0);
             const table = this._createTable(unit, count);
             return this._createProps(table, unit.length, sync);
         },
@@ -1054,13 +1054,12 @@ jmotion.VERSION = "1.0";
 
             // synchronous siteswap
             const term = root.children.pop();
-            const join = (acc, cur) => acc + cur.text;
             if (term.text == "*") {
                 // mirror pattern
                 const follow = [];
                 for (const both of root.children) {
                     const nodes = [ both.children[0], both.children[3], both.children[2], both.children[1], both.children[4] ];
-                    const text = nodes.reduce(join, "");
+                    const text = nodes.map(elem => elem.text).join("");
                     const mirror = new SiteswapTree(both.label, text);
                     mirror.children = nodes;
                     follow.push(mirror);
@@ -1072,7 +1071,7 @@ jmotion.VERSION = "1.0";
 
             // validate the synchronous siteswap
             const result = this._validateSync(root);
-            result.text = root.children.reduce(join, "");
+            result.text = root.children.map(elem => elem.text).join("");
             return result;
         },
 
