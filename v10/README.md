@@ -1,6 +1,7 @@
 # jmotion version 1.0
 
-https://7131.github.io/jmotion/v10/
+English site: https://7131.github.io/jmotion/v10/<br>
+Japanese site: https://app.7131.jp/jmotion/v10/
 
 This is the first version of jmotion.
 
