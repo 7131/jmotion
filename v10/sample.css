@@ -36,11 +36,10 @@ footer {
     }
 
     input {
-        width: 90vh;
+        width: 70vh;
     }
 
     button {
-        margin-top: 0ex;
         width: auto;
     }
 
@@ -49,21 +48,8 @@ footer {
     }
 
     svg {
-        width: 90vh;
-        height: 90vh;
-    }
-
-    @media (min-width: 768px) {
-
-        #pattern {
-            width: 300px;
-        }
-
-        svg {
-            width: 300px;
-            height: 300px;
-        }
-
+        width: 70vh;
+        height: 70vh;
     }
 
 }
