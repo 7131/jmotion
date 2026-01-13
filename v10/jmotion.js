@@ -620,12 +620,8 @@ jmotion.VERSION = "1.0";
                 return state;
             }
 
-            // get numbers in data
-            const numbers = new Set();
-            table.forEach(elem => elem.numbers.forEach(numbers.add, numbers));
-            numbers.delete(2);
-
             // get scale
+            const numbers = new Set(table.map(elem => elem.numbers).flat());
             const max = Array.from(numbers).reduce((acc, cur) => Math.max(acc, Math.abs(cur)), 5);
             private.scale = (max - 1) / 4;
             private.div = private.divisions[Math.min(max - 5, private.divisions.length - 1)];
@@ -872,10 +868,10 @@ jmotion.VERSION = "1.0";
 
         // get the greatest common divisor
         "getGcd": function(a, b) {
-            if (b == 0) {
-                return a;
+            while (0 < b) {
+                [ a, b ] = [ b, a % b ];
             }
-            return this.getGcd(b, a % b);
+            return a;
         },
 
         // get the lowest common multiple
