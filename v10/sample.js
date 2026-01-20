@@ -32,10 +32,10 @@ Controller.prototype = {
     // "Start" button process
     "_start": function(e) {
         // parse the input text
-        this._message.innerHTML = "";
+        this._message.textContent = "";
         const message = this._facade.startJuggling(this._pattern.value);
         if (message != "") {
-            this._message.innerHTML = message;
+            this._message.textContent = message;
             return;
         }
 

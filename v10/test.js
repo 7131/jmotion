@@ -81,7 +81,7 @@ Controller.prototype = {
         for (let i = 1; i < rows.length; i++) {
             // row number
             const number = rows[i].cells[ColNum.NUMBER];
-            number.innerHTML = i;
+            number.textContent = i;
             number.classList.add("symbol");
 
             // expected value
@@ -106,10 +106,10 @@ Controller.prototype = {
         // the last row
         const last = rows[rows.length - 1];
         const total = last.parentNode.appendChild(last.cloneNode(true));
-        total.cells[ColNum.NUMBER].innerHTML = "total";
-        total.cells[ColNum.PARAMS].innerHTML = "";
-        total.cells[ColNum.EXPECT].innerHTML = "";
-        total.cells[ColNum.RESULT].innerHTML = "";
+        total.cells[ColNum.NUMBER].textContent = "total";
+        total.cells[ColNum.PARAMS].textContent = "";
+        total.cells[ColNum.EXPECT].textContent = "";
+        total.cells[ColNum.RESULT].textContent = "";
         this._setExpected(`${name}_total_view`, total.cells[ColNum.EXPECT], "");
     },
 
@@ -197,7 +197,7 @@ Controller.prototype = {
         // initialize the table
         for (let i = 1; i < rows.length; i++) {
             const result = rows[i].cells[ColNum.RESULT];
-            result.innerHTML = "";
+            result.textContent = "";
             result.classList.remove("error");
         }
 
@@ -207,9 +207,9 @@ Controller.prototype = {
             const message = this._executeRow(func, count, rows[i]);
             const result = rows[i].cells[ColNum.RESULT];
             if (message == "") {
-                result.innerHTML = "OK";
+                result.textContent = "OK";
             } else {
-                result.innerHTML = message;
+                result.textContent = message;
                 result.classList.add("error");
                 errors.push(i);
             }
@@ -218,9 +218,9 @@ Controller.prototype = {
         // finished
         const last = rows[rows.length - 1].cells[ColNum.RESULT];
         if (errors.length == 0) {
-            last.innerHTML = "All OK";
+            last.textContent = "All OK";
         } else {
-            last.innerHTML = `NG: ${errors.join()}`;
+            last.textContent = `NG: ${errors.join()}`;
             last.classList.add("error");
         }
         this._buttons.forEach(elem => elem.disabled = false);
@@ -229,7 +229,7 @@ Controller.prototype = {
     // execute by row
     "_executeRow": function(func, count, row) {
         // get arguments and expected value
-        const params = row.cells[ColNum.PARAMS].innerText;
+        const params = row.cells[ColNum.PARAMS].textContent;
         const expect = row.cells[ColNum.EXPECT].dataset.expected;
         if (params == "" && !expect) {
             return "";
