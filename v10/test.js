@@ -94,10 +94,7 @@ Controller.prototype = {
                 } else {
                     node = div[0];
                 }
-                while (node && !(node instanceof Text)) {
-                    node = node.firstChild;
-                }
-                if (node && node.textContent != "") {
+                if (node.textContent != "") {
                     this._setExpected(`${name}_${i}_view`, expect, node.textContent);
                 }
             }
@@ -116,9 +113,7 @@ Controller.prototype = {
     // set expected value column
     "_setExpected": function(id, expect, text) {
         // remove existing elements
-        while (expect.lastChild) {
-            expect.removeChild(expect.lastChild);
-        }
+        expect.textContent = "";
         expect.dataset.expected = text;
 
         // checkbox
@@ -151,14 +146,14 @@ Controller.prototype = {
             const rows = this._rows.get(match[1]);
             for (let i = 1; i < rows.length; i++) {
                 const expect = rows[i].cells[ColNum.EXPECT];
-                if (expect.firstChild) {
-                    expect.firstChild.checked = input.checked;
-                    divs.push(expect.lastChild);
+                if (expect.firstElementChild) {
+                    expect.firstElementChild.checked = input.checked;
+                    divs.push(expect.lastElementChild);
                 }
             }
         } else {
             // test row
-            divs.push(input.parentElement.lastChild);
+            divs.push(input.parentElement.lastElementChild);
         }
         if (input.checked) {
             // show
