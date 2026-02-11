@@ -1139,12 +1139,12 @@ jmotion.VERSION = "1.0";
 
         // convert a synchronous siteswap beat
         "_convertSyncBeat": function(simple, side) {
-            // with x
+            // without x
             if (simple.children.length <= 1) {
                 return parseInt(simple.text, 36);
             }
 
-            // without x
+            // with x
             const number = parseInt(simple.children[0].text, 36);
             if (number == 0) {
                 return number;
