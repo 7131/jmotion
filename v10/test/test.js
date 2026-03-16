@@ -1,268 +1,72 @@
-// Column number constants
-const ColNum = {
-    "NUMBER": 0,
-    "PARAMS": 1,
-    "EXPECT": 2,
-    "RESULT": 3,
-}
-
 // Controller class
-const Controller = function() {
-    // fields
-    this._functions = new Map();
-    this._buttons = new Map();
-    this._rows = new Map();
+class Controller {
+    #all;
+    #tests = { "analyze": AnalyzeData, "separate": SeparateData, "basic": BasicCreatorData };
+    #buttons = new Map();
 
-    // events
-    window.addEventListener("load", this._initialize.bind(this));
-}
-
-// Controller prototype
-Controller.prototype = {
+    // constructor
+    constructor() {
+        window.addEventListener("load", this.#initialize.bind(this));
+    }
 
     // initialize the page
-    "_initialize": function(e) {
-        const sections = document.getElementsByTagName("section");
-        // process by section
-        for (const section of sections) {
-            const button = section.getElementsByTagName("button")[0];
-            const name = button.dataset.function;
-            const func = this._getFunction(name);
-            if (func) {
-                // only sections with settings
-                this._functions.set(name, func);
-                this._buttons.set(name, button);
-                button.addEventListener("click", this._executeTest.bind(this));
+    #initialize(e) {
+        for (const id in this.#tests) {
+            const data = this.#tests[id];
 
-                // get table
-                const table = section.getElementsByTagName("table")[0];
-                this._rows.set(name, table.rows);
-                this._setRowData(name, table.rows);
+            // get title
+            const section = document.getElementById(id);
+            const title = section.querySelector("h2");
+            if (title != null && title.textContent.trim() == "") {
+                title.textContent = `${data.method}()`;
             }
+
+            // get table
+            const table = section.querySelector("table");
+            if (table == null || table.tBodies.length == 0) {
+                continue;
+            }
+            const test = new TestTable(id, table.tBodies[0]);
+            test.create(data);
+            test.completeEvent = this.#showButtons.bind(this);
+            test.replaceEvent = this.#replace.bind(this);
+
+            // get button
+            const button = section.querySelector("button");
+            button.addEventListener("click", this.#executeTest.bind(this));
+            this.#buttons.set(button, { "table": test, "method": data.method });
         }
 
         // run all
-        const all = document.getElementById("all");
-        all.addEventListener("click", this._executeAll.bind(this));
-    },
-
-    // get the function
-    "_getFunction": function(name) {
-        if (!name) {
-            return null;
-        }
-
-        // decomposing function names
-        const words = name.split(".");
-        if (words.length < 2) {
-            return null;
-        }
-
-        // get class
-        const cls = jmotion[words[0]];
-        if (!cls) {
-            return null;
-        }
-
-        // get function
-        if (words.length == 2) {
-            return cls[words[1]];
-        } else {
-            const instance = new cls();
-            return instance[words[2]].bind(instance);
-        }
-    },
-
-    // set row data
-    "_setRowData": function(name, rows) {
-        if (rows.length <= 1) {
-            return;
-        }
-        for (let i = 1; i < rows.length; i++) {
-            // row number
-            const number = rows[i].cells[ColNum.NUMBER];
-            number.textContent = i;
-            number.classList.add("symbol");
-
-            // expected value
-            const expect = rows[i].cells[ColNum.EXPECT];
-            if (0 < expect.childNodes.length) {
-                const div = expect.getElementsByTagName("div");
-                let node;
-                if (div.length == 0) {
-                    node = expect;
-                } else {
-                    node = div[0];
-                }
-                if (node.textContent != "") {
-                    this._setExpected(`${name}_${i}_view`, expect, node.textContent);
-                }
-            }
-        }
-
-        // the last row
-        const last = rows[rows.length - 1];
-        const total = last.parentNode.appendChild(last.cloneNode(true));
-        total.cells[ColNum.NUMBER].textContent = "total";
-        total.cells[ColNum.PARAMS].textContent = "";
-        total.cells[ColNum.EXPECT].textContent = "";
-        total.cells[ColNum.RESULT].textContent = "";
-        this._setExpected(`${name}_total_view`, total.cells[ColNum.EXPECT], "");
-    },
-
-    // set expected value column
-    "_setExpected": function(id, expect, text) {
-        // remove existing elements
-        expect.textContent = "";
-        expect.dataset.expected = text;
-
-        // checkbox
-        const input = document.createElement("input");
-        input.setAttribute("type", "checkbox");
-        input.setAttribute("id", id);
-        input.addEventListener("click", this._toggleExpected.bind(this));
-        expect.appendChild(input);
-
-        // label
-        const label = document.createElement("label");
-        label.setAttribute("for", id);
-        label.textContent = "Display";
-        expect.appendChild(label);
-
-        // string
-        const div = document.createElement("div");
-        div.classList.add("hidden");
-        div.textContent = text;
-        expect.appendChild(div);
-    },
-
-    // show or hide the expected column
-    "_toggleExpected": function(e) {
-        const input = e.currentTarget;
-        const divs = [];
-        const match = input.id.match(/^(.+)_total_view$/);
-        if (match) {
-            // total row
-            const rows = this._rows.get(match[1]);
-            for (let i = 1; i < rows.length; i++) {
-                const expect = rows[i].cells[ColNum.EXPECT];
-                if (expect.firstElementChild) {
-                    expect.firstElementChild.checked = input.checked;
-                    divs.push(expect.lastElementChild);
-                }
-            }
-        } else {
-            // test row
-            divs.push(input.parentElement.lastElementChild);
-        }
-        if (input.checked) {
-            // show
-            divs.forEach(elem => elem.classList.remove("hidden"));
-        } else {
-            // hide
-            divs.forEach(elem => elem.classList.add("hidden"));
-        }
-    },
+        this.#all = document.getElementById("all");
+        this.#all.addEventListener("click", this.#executeAll.bind(this));
+    }
 
     // execute all tests
-    "_executeAll": function(e) {
-        this._buttons.forEach(this._executeTable, this);
-    },
+    #executeAll(e) {
+        this.#all.disabled = true;
+        this.#buttons.keys().forEach(elem => elem.disabled = true);
+        for (const data of this.#buttons.values()) {
+            data.table.start(data.method);
+        }
+    }
 
     // execute a test
-    "_executeTest": function(e) {
-        this._executeTable(e.currentTarget);
-    },
+    #executeTest(e) {
+        const button = e.currentTarget;
+        button.disabled = true;
+        const data = this.#buttons.get(button);
+        data.table.start(data.method);
+    }
 
-    // execute by table
-    "_executeTable": function(button) {
-        // target function
-        const name = button.dataset.function;
-        const func = this._functions.get(name);
-        const rows = this._rows.get(name);
-
-        // number of arguments
-        const params = button.dataset.params;
-        let count = 2;
-        if (params && !isNaN(params)) {
-            count = parseInt(params, 10);
-        }
-        this._buttons.forEach(elem => elem.disabled = true);
-
-        // initialize the table
-        for (let i = 1; i < rows.length; i++) {
-            const result = rows[i].cells[ColNum.RESULT];
-            result.textContent = "";
-            result.classList.remove("error");
-        }
-
-        // start
-        const errors = [];
-        for (let i = 1; i < rows.length; i++) {
-            const message = this._executeRow(func, count, rows[i]);
-            const result = rows[i].cells[ColNum.RESULT];
-            if (message == "") {
-                result.textContent = "OK";
-            } else {
-                result.textContent = message;
-                result.classList.add("error");
-                errors.push(i);
-            }
-        }
-
-        // finished
-        const last = rows[rows.length - 1].cells[ColNum.RESULT];
-        if (errors.length == 0) {
-            last.textContent = "All OK";
-        } else {
-            last.textContent = `NG: ${errors.join()}`;
-            last.classList.add("error");
-        }
-        this._buttons.forEach(elem => elem.disabled = false);
-    },
-
-    // execute by row
-    "_executeRow": function(func, count, row) {
-        // get arguments and expected value
-        const params = row.cells[ColNum.PARAMS].textContent;
-        const expect = row.cells[ColNum.EXPECT].dataset.expected;
-        if (params == "" && !expect) {
-            return "";
-        }
-
-        // execute
-        let actual;
-        switch (count) {
-            case 0:
-                actual = func();
-                break;
-            case 1:
-                actual = func(params);
-                break;
-            default:
-                let data = params;
-                try {
-                    data = JSON.parse(params);
-                } catch {
-                    // if not JSON, treat as a single string
-                }
-                if (Array.isArray(data)) {
-                    actual = func(...data);
-                } else {
-                    actual = func(data);
-                }
-                break;
-        }
-        const result = JSON.stringify(actual, this._replace.bind(this));
-        if (result == expect) {
-            return "";
-        } else {
-            return result;
-        }
-    },
+    // show the buttons
+    #showButtons() {
+        this.#buttons.keys().forEach(elem => elem.disabled = false);
+        this.#all.disabled = false;
+    }
 
     // a function that change JSON stringification behavior
-    "_replace": function(key, value) {
+    #replace(key, value) {
         if (value instanceof SVGPoint) {
             return { "x": value.x, "y": value.y };
         }
@@ -278,7 +82,7 @@ Controller.prototype = {
             default:
                 return value;
         }
-    },
+    }
 
 }
 
