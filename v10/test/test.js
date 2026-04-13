@@ -3,6 +3,7 @@ class Controller {
     #all;
     #tests = { "analyze": AnalyzeData, "separate": SeparateData, "basic": BasicCreatorData };
     #buttons = new Map();
+    #count = 0;
 
     // constructor
     constructor() {
@@ -46,6 +47,7 @@ class Controller {
     #executeAll(e) {
         this.#all.disabled = true;
         this.#buttons.keys().forEach(elem => elem.disabled = true);
+        this.#count = this.#buttons.size;
         for (const data of this.#buttons.values()) {
             data.table.start(data.method);
         }
@@ -55,12 +57,17 @@ class Controller {
     #executeTest(e) {
         const button = e.currentTarget;
         button.disabled = true;
+        this.#count = 1;
         const data = this.#buttons.get(button);
         data.table.start(data.method);
     }
 
     // show the buttons
     #showButtons() {
+        this.#count--;
+        if (0 < this.#count) {
+            return;
+        }
         this.#buttons.keys().forEach(elem => elem.disabled = false);
         this.#all.disabled = false;
     }
