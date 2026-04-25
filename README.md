@@ -6,6 +6,8 @@ You can easily execute animation by specifying "siteswap", which is a numerical 
 See the directory by version.
 
 <dl>
+  <dt><a href="https://github.com/7131/jmotion/tree/main/v20">v20</a></dt>
+    <dd>Added several new features, made incompatible changes, and performed a major refactoring.</dd>
   <dt><a href="https://github.com/7131/jmotion/tree/main/v10">v10</a></dt>
     <dd>This is the first version of jmotion.</dd>
 </dl>

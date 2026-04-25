@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Animator() - jmotion reference</title>
+</head>
+
+<body>
+<header>
+<h1>Animator()</h1>
+<p>The Animator() constructor creates a new Animator object.</p>
+</header>
+
+<main>
+<section>
+<h2>Syntax</h2>
+<pre><code>new Animator(core)
+</code></pre>
+</section>
+
+<section>
+<h2>Parameters</h2>
+<dl>
+  <dt>core</dt>
+  <dd>A <a href="../core/index.html">Core</a> object, that will be set to Animator.prototype.core as is. Animator.prototype.props and Animator.prototype.arms are initialized as empty arrays.</dd>
+</dl>
+</section>
+
+<section>
+<h2>Examples</h2>
+<pre><code>const core = new jmotion.Core("#board");
+const animator = new jmotion.Animator(core);
+
+// animator = {
+//     "arms": [],
+//     "props": [],
+//     "core": {
+//         "back": g#board_back,
+//         "defs": defs#board_definition,
+//         "front": g#board_front,
+//         "middle": g#board_middle,
+//         "props": [
+//             use#board_prop_0,
+//             use#board_prop_1,
+//             ...
+//         ],
+//         "scale": 1,
+//         "svg": svg#board,
+//     },
+//     "index": 0,
+//     "speed": 1,
+//     "status": {
+//         "runnable": false,
+//         "running": false,
+//     },
+// }
+</code></pre>
+</section>
+</main>
+
+<footer>
+  <p><a href="./index.html">Animator object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</body>
+
+</html>

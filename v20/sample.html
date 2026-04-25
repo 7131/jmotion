@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="./sample.css">
+<script src="./jmotion.js"></script>
+<script src="./sample.js"></script>
+<title>jmotion sample</title>
+</head>
+
+<body>
+<header>
+<h1>jmotion sample</h1>
+</header>
+
+<main>
+<div class="table">
+  <div class="row">
+    <div class="cell"><label for="pattern">Pattern</label></div>
+    <div class="cell"><input type="text" id="pattern" value="3"></div>
+    <div class="cell" id="message"></div>
+  </div>
+  <div class="row">
+    <div class="cell"><label for="resolution">Resolution</label></div>
+    <div class="cell"><input type="range" id="resolution" min="0.2" max="2" step="0.1" value="1"></div>
+    <div class="cell"><button id="start">Start</button></div>
+  </div>
+</div>
+<div>
+  <svg id="board"></svg>
+</div>
+<div class="table">
+  <div class="row">
+    <div class="cell"><label for="speed">Speed</label></div>
+    <div class="cell"><input type="range" id="speed" min="0.2" max="2" step="0.1" value="1"></div>
+    <div class="cell"><button id="stop">Stop</button></div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <p><a href="./index.html">jmotion top page</a></p>
+</footer>
+</body>
+
+</html>

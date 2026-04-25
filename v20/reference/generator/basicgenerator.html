@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>BasicGenerator - jmotion reference</title>
+</head>
+
+<body>
+<header>
+<h1>BasicGenerator</h1>
+</header>
+
+<main>
+<p>For object descriptions, constructors, properties, methods, etc., please refer to <a href="../generator/index.html">CalmGenerator</a> as they are the same.</p>
+<p>The difference between BasicGenerator and CalmGenerator lies in the output of the calculateOrbits() method. BasicGenerator's output does not stop the motion even at siteswaps 0 or 2. In other words, the simulator moves the arm even when it does not have the ball, or when it has the ball but does not throw it. Therefore, use BasicGenerator if you want the arm to always move along the orbit, and use CalmGenerator if you want the arm to stop when not throwing the ball.</p>
+</main>
+
+<footer>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</body>
+
+</html>

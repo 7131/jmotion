@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Animator.prototype.start() - jmotion reference</title>
+</head>
+
+<body>
+<header>
+<h1>Animator.prototype.start()</h1>
+<p>The start() method starts the animation. Nothing happens if it is already running.</p>
+<p>The state list must already exist in the <a href="./index.html">Animator</a> object's Animator.prototype.props and Animator.prototype.arms.</p>
+</header>
+
+<main>
+<section>
+<h2>Syntax</h2>
+<pre><code>start()
+start(speed)
+</code></pre>
+</section>
+
+<section>
+<h2>Parameters</h2>
+<dl>
+  <dt>speed (optional)</dt>
+  <dd>A number that represents the index number increment, that will be set to Animator.prototype.speed as is.</dd>
+  <dd>For example, if you specify the real number 1.5, the internal index vary like 0, 1.5, 3, 4.5, 6, ..., but only integer part like 0, 1, 3, 4, 6, ... are used to display the graphic elements. This makes it appear to move at 1.5 times its normal speed. A negative value will make the animation appear to play in reverse (if you set the appropriate index beforehand).</dd>
+  <dd>If this argument is omitted, the current value of Animator.prototype.speed will be used.</dd>
+</dl>
+</section>
+
+<section>
+<h2>Return value</h2>
+<p>none</p>
+</section>
+
+<section>
+<h2>Examples</h2>
+<pre><code>const core = new jmotion.Core("#board");
+const animator = new jmotion.Animator(core);
+
+const pl0 = { "x":   0, "y": -30 };
+const pl1 = { "x": -30, "y":   0 };
+const pl2 = { "x":   0, "y":  30 };
+const pl3 = { "x":  30, "y":   0 };
+
+animator.props = [
+    {
+        "init": [],
+        "loop": [ pl0, pl1, pl2, pl3 ],
+    }
+];
+animator.start(0.1);
+</code></pre>
+</section>
+</main>
+
+<footer>
+  <p><a href="./index.html">Animator object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</body>
+
+</html>

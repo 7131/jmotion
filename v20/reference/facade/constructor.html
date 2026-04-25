@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Facade() - jmotion reference</title>
+</head>
+
+<body>
+<header>
+<h1>Facade()</h1>
+<p>The Facade() constructor creates a new Facade object.</p>
+</header>
+
+<main>
+<section>
+<h2>Syntax</h2>
+<pre><code>new Facade(svg)
+new Facade(svg, generator)
+</code></pre>
+</section>
+
+<section>
+<h2>Parameters</h2>
+<dl>
+  <dt>svg</dt>
+  <dd>An object representing an HTML tag, or CSS selectors.</dd>
+  <dd>When a <a href="../core/index.html">Core</a> object is created within Facade, this parameter is passed to its constructor. In addition, an <a href="../animator/index.html">Animator</a> object is created, and this Core object is passed to it.</dd>
+  <dt>generator (optional)</dt>
+  <dd>It is a orbit generator similar to the <a href="../generator/basicgenerator.html">BasicGenerator</a> object, that will be set to Facade.prototype.generator as is.</dd>
+  <dd>If this argument is omitted, the <a href="../generator/index.html">CalmGenerator</a> object is created.</dd>
+</dl>
+</section>
+
+<section>
+<h2>Examples</h2>
+<pre><code>const facade = new jmotion.Facade("#board");
+
+// facade = {
+//     "generator": {
+//         "offset": {
+//             "left": { "x": 0, "y": -10, },
+//             "right": { "x": 0, "y": -10, },
+//         },
+//         "paths": {
+//             "left": [
+//                 [ path, path ],
+//                 [ path, path ],
+//             ],
+//             "right": [
+//                 [ path, path ],
+//                 [ path, path ],
+//             ],
+//         },
+//         "resolution": 1,
+//         "scale": 1,
+//         "width": 1,
+//     },
+//     "animator": {
+//         "arms": [],
+//         "props": [],
+//         "core": {
+//             "back": g#board_back,
+//             "defs": defs#board_definition,
+//             "front": g#board_front,
+//             "middle": g#board_middle,
+//             "props": [
+//                 use#board_prop_0,
+//                 use#board_prop_1,
+//                 ...
+//             ],
+//             "scale": 1,
+//             "svg": svg#board,
+//         },
+//         "index": 0,
+//         "speed": 1,
+//         "status": {
+//             "runnable": false,
+//             "running": false,
+//         },
+//     },
+// }
+</code></pre>
+</section>
+</main>
+
+<footer>
+  <p><a href="./index.html">Facade object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</body>
+
+</html>

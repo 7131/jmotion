@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Facade.prototype.stopJuggling() - jmotion reference</title>
+</head>
+
+<body>
+<header>
+<h1>Facade.prototype.stopJuggling()</h1>
+<p>The stopJuggling() method stops the juggling animation. Nothing happens unless the animation is running.</p>
+</header>
+
+<main>
+<section>
+<h2>Syntax</h2>
+<pre><code>stopJuggling()
+</code></pre>
+</section>
+
+<section>
+<h2>Parameters</h2>
+<p>none</p>
+</section>
+
+<section>
+<h2>Return value</h2>
+<p>none</p>
+</section>
+
+<section>
+<h2>Examples</h2>
+<pre><code>const facade = new jmotion.Facade("#board");
+facade.startJuggling("531");
+setTimeout(facade.stopJuggling.bind(facade), 2000);
+</code></pre>
+</section>
+</main>
+
+<footer>
+  <p><a href="./index.html">Facade object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</body>
+
+</html>

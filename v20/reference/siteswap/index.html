@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Siteswap - jmotion reference</title>
+</head>
+
+<body>
+<header>
+<h1>Siteswap</h1>
+<p>The Siteswap object is a utility for analyzing siteswap. It is not a constructor and has no properties. All methods of Siteswap object are static.</p>
+</header>
+
+<main>
+<section>
+<h2>Methods</h2>
+<dl>
+  <dt><a href="./analyze.html">Siteswap.analyze()</a></dt>
+  <dd>Parses an input string and returns siteswap data.</dd>
+  <dt><a href="./separate.html">Siteswap.separate()</a></dt>
+  <dd>Analyzes siteswap data and returns throwing data for each prop.</dd>
+</dl>
+</section>
+
+<section>
+<h2>Siteswap specifications</h2>
+<p>For reference, I describe the specifications of the pattern to be accepted as a siteswap in <a href="https://7131.github.io/haba/notation.html">HABA format</a>.</p>
+<pre>
+Pattern ::= Async | Sync ;
+Async ::= EachHand+ ;
+EachHand ::= AsyncSimple | AsyncMulti ;
+AsyncSimple ::= Even | Odd ;
+Even ::= "[02468acegikmoqsuwy]" ;
+Odd ::= "[13579bdfhjlnprtvz]" | 'x' ;
+AsyncMulti ::= '[' AsyncSimple+ ']' ;
+Sync ::= BothHand+ '*'? ;
+BothHand ::= '(' OneHand ',' OneHand ')' ;
+OneHand ::= SyncSimple | SyncMulti ;
+SyncSimple ::= Even 'x'? ;
+SyncMulti ::= '[' SyncSimple+ ']' ;
+Space ::= "\s+" ;
+</pre>
+</section>
+</main>
+
+<footer>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</body>
+
+</html>

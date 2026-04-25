@@ -1,7 +1,7 @@
 // Controller class
 class Controller {
     #all;
-    #tests = { "analyze": AnalyzeData, "separate": SeparateData, "basic": BasicCreatorData };
+    #tests = { "analyze": AnalyzeData, "separate": SeparateData, "basic": BasicGeneratorData, "calm": CalmGeneratorData };
     #buttons = new Map();
     #count = 0;
 

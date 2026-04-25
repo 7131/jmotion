@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Core() - jmotion reference</title>
+</head>
+
+<body>
+<header>
+<h1>Core()</h1>
+<p>The Core() constructor creates a new Core object. At the same time, the following graphic elements are generated and retained internally.</p>
+</header>
+
+<main>
+<table class="left">
+  <tr><th>graphic element</th><th>tag</th><th>element ID</th><th>parent graphic element</th></tr>
+  <tr><td>SVG object</td><td>&lt;svg&gt;</td><td>jmotion_core_0</td><td>(none)</td></tr>
+  <tr><td>definitional part</td><td>&lt;defs&gt;</td><td>jmotion_core_0_definition</td><td>SVG object</td></tr>
+  <tr><td>back layer</td><td>&lt;g&gt;</td><td>jmotion_core_0_back</td><td>SVG object</td></tr>
+  <tr><td>middle layer</td><td>&lt;g&gt;</td><td>jmotion_core_0_middle</td><td>SVG object</td></tr>
+  <tr><td>front layer</td><td>&lt;g&gt;</td><td>jmotion_core_0_front</td><td>SVG object</td></tr>
+  <tr><td>hand</td><td>&lt;rect&gt;</td><td>jmotion_core_0_hand</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: red">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_red</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: lime">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_lime</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: blue">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_blue</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: orange">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_orange</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: gray">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_gray</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: maroon">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_maroon</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: green">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_green</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: aqua">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_aqua</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: olive">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_olive</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: fuchsia">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_fuchsia</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: teal">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_teal</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: yellow">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_yellow</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: navy">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_navy</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: silver">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_silver</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: purple">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_purple</td><td>definitional part</td></tr>
+  <tr><td>ball <span style="color: black">&#x25CF;</span></td><td>&lt;circle&gt;</td><td>jmotion_core_0_prop_black</td><td>definitional part</td></tr>
+  <tr><td>head</td><td>&lt;circle&gt;</td><td>jmotion_core_0_head</td><td>back layer</td></tr>
+  <tr><td>shoulder</td><td>&lt;line&gt;</td><td>jmotion_core_0_shoulder</td><td>back layer</td></tr>
+  <tr><td>right forearm</td><td>&lt;line&gt;</td><td>jmotion_core_0_right_0</td><td>back layer</td></tr>
+  <tr><td>right upper arm</td><td>&lt;line&gt;</td><td>jmotion_core_0_right_1</td><td>back layer</td></tr>
+  <tr><td>left forearm</td><td>&lt;line&gt;</td><td>jmotion_core_0_left_0</td><td>back layer</td></tr>
+  <tr><td>left upper arm</td><td>&lt;line&gt;</td><td>jmotion_core_0_left_1</td><td>back layer</td></tr>
+  <tr><td>right hand</td><td>&lt;use&gt;</td><td>jmotion_core_0_right_hand</td><td>front layer</td></tr>
+  <tr><td>left hand</td><td>&lt;use&gt;</td><td>jmotion_core_0_left_hand</td><td>front layer</td></tr>
+</table>
+<p>If the same name already exists, jmotion_core_0 in the element ID is changed to jmotion_core_1, jmotion_core_2, ..., and if an existing &lt;svg&gt; tag is specified, it will be replaced by its ID.</p>
+<p>Depending on the number of balls required, the balls are used in order from the first to the last. If the number of balls is greater than the list, the balls of the same color are used in order from the beginning.</p>
+
+<section>
+<h2>Syntax</h2>
+<pre><code>new Core()
+new Core(element)
+new Core(element, cancel)
+</code></pre>
+</section>
+
+<section>
+<h2>Parameters</h2>
+<dl>
+  <dt>element (optional)</dt>
+  <dd>An object representing an HTML tag or CSS selectors.</dd>
+  <dd>When a string is specified, it is considered CSS selectors and the first object matching that selectors is used.</dd>
+  <dd>When the &lt;svg&gt; tag or the &lt;symbol&gt; tag is specified as an object, it becomes Core.prototype.svg property.</dd>
+  <dd>When a parent element such as &lt;div&gt; tag is specified as an object, a newly created &lt;svg&gt; tag is set to Core.prototype.svg and also added as a child element of the object.</dd>
+  <dd>If this argument is another element or omitted, a newly created &lt;svg&gt; tag is set to Core.prototype.svg, but not added to the DOM tree.</dd>
+  <dt>cancel (optional)</dt>
+  <dd>Whether to cancel the creation of default graphic elements.</dd>
+  <dd>If this argument is true, the creation and setting of the graphic elements are canceled and must be set and drawn separately.</dd>
+  <dd>If this argument is false or omitted, the default graphic elements are kept inside.</dd>
+</dl>
+</section>
+
+<section>
+<h2>Examples</h2>
+<pre><code>const core = new jmotion.Core("div");
+
+// core = {
+//     "back": g#jmotion_core_0_back,
+//     "defs": defs#jmotion_core_0_definition,
+//     "front": g#jmotion_core_0_front,
+//     "middle": g#jmotion_core_0_middle,
+//     "props": [
+//         use#jmotion_core_0_prop_0,
+//         use#jmotion_core_0_prop_1,
+//         ...
+//     ],
+//     "scale": 1,
+//     "svg": svg#jmotion_core_0,
+// }
+</code></pre>
+</section>
+</main>
+
+<footer>
+  <p><a href="./index.html">Core object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</body>
+
+</html>

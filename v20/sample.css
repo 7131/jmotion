@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+body {
+    line-height: 1.8;
+    margin-bottom: 10ex;
+}
+
+input {
+    width: 90vw;
+}
+
+button {
+    margin-top: 2ex;
+    width: 90vw;
+}
+
+svg {
+    margin-top: 2ex;
+    border: 1px solid gray;
+    width: 90vw;
+    height: 90vw;
+}
+
+.table .row {
+    margin-bottom: 1ex;
+}
+
+footer {
+    margin-top: 5ex;
+}
+
+@media (orientation: landscape) {
+
+    body {
+        line-height: 1.5;
+    }
+
+    input {
+        width: 40vh;
+    }
+
+    button {
+        width: auto;
+    }
+
+    svg {
+        width: 70vh;
+        height: 70vh;
+    }
+
+    .table {
+        display: table;
+    }
+
+    .table .row {
+        display: table-row;
+    }
+
+    .table .row .cell {
+        display: table-cell;
+        padding-right: 1ex;
+        dominant-baseline: middle;
+    }
+
+}
+

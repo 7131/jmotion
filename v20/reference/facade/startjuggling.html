@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>Facade.prototype.startJuggling() - jmotion reference</title>
+</head>
+
+<body>
+<header>
+<h1>Facade.prototype.startJuggling()</h1>
+<p>The startJuggling() method starts a juggling animation for the specified siteswap. Nothing happens if it is already running.</p>
+</header>
+
+<main>
+<section>
+<h2>Syntax</h2>
+<pre><code>startJuggling()
+startJuggling(text)
+</code></pre>
+</section>
+
+<section>
+<h2>Parameters</h2>
+<dl>
+  <dt>text (optional)</dt>
+  <dd>A string representing the siteswap. In addition to vanilla siteswap, you can specify multiplex and synchronous.</dd>
+  <dd>If this argument is omitted, the stopped animation will be resumed. Therefore, you must specify this argument at least once.</dd>
+</dl>
+</section>
+
+<section>
+<h2>Return value</h2>
+<p>An error message if the animation fails to start, or an empty string if it succeeds.</p>
+</section>
+
+<section>
+<h2>Examples</h2>
+<pre><code>const facade = new jmotion.Facade("#board");
+const response = facade.startJuggling("12");
+
+// response = "impossible to juggle"
+</code></pre>
+</section>
+</main>
+
+<footer>
+  <p><a href="./index.html">Facade object</a></p>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</body>
+
+</html>

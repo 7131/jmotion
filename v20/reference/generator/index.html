@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../../default.css">
+<title>CalmGenerator - jmotion reference</title>
+</head>
+
+<body>
+<header>
+<h1>CalmGenerator</h1>
+</header>
+
+<main>
+<p>The CalmGenerator object creates arms and props state list from each arm's orbit data and each props throwing data. It has the following features: the number of arms is fixed at two, alternating between "catch-to-throw" and "throw-to-catch" movements, and their times are equal.</p>
+
+<section>
+<h2>Constructor</h2>
+<dl>
+  <dt><a href="./constructor.html">CalmGenerator()</a></dt>
+  <dd>Creates a new CalmGenerator object.</dd>
+</dl>
+</section>
+
+<section>
+<h2>Properties</h2>
+<dl>
+  <dt>CalmGenerator.prototype.offset</dt>
+  <dd>An object with coordinates of the prop relative to the hand where the prop is on the hand.</dd>
+  <dd>The object has right and left properties, where right is relative to the right hand and left is relative to the left hand.</dd>
+  <dd>
+    <svg id="ref_generator_index_offset" class="border" width="300" height="300" viewBox="-160 -160 200 200">
+      <defs>
+        <circle id="ref_generator_index_ball" r="10" />
+        <rect id="ref_generator_index_hand" x="-10" y="0" width="20" height="5" />
+        <marker id="ref_generator_index_arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <polygon points="0,0 10,5 0,10" fill="green" />
+        </marker>
+      </defs>
+      <g id="ref_generator_index_body" stroke="black" fill="none">
+        <circle cx="0" cy="-120" r="20" />
+        <line x1="-50" y1="-90" x2="50" y2="-90" />
+        <line x1="-50" y1="-90" x2="-70" y2="-30" />
+        <line x1="-70" y1="-30" x2="-90" y2="10" />
+        <use x="-90" y="10" href="#ref_generator_index_hand" />
+      </g>
+      <use x="-90" y="0" stroke="red" fill="white" href="#ref_generator_index_ball" />
+      <g stroke="green" marker-end="url(#ref_generator_index_arrow)">
+        <line x1="-90" y1="10" x2="-90" y2="0" />
+      </g>
+      <g fill="green" font-size="70%">
+        <text x="-70" y="5">right = (0, -10)</text>
+      </g>
+    </svg>
+  </dd>
+  <dd>By default, both right and left are (0, -10).</dd>
+  <dt>CalmGenerator.prototype.paths</dt>
+  <dd>An object with arrays of arrays of orbits for each joint.</dd>
+  <dd>The object has right and left properties, where right is an array of arrays of right arm orbits and left is an array of arrays of left arm orbits. The orbit is an SVGPathElement object (&lt;path&gt; tag), but the transform attribute in that object has no effect, so specify it without transform.</dd>
+  <dd>
+    <svg id="ref_generator_index_paths" class="border" width="300" height="300" viewBox="-160 -160 200 200">
+      <use href="#ref_generator_index_body" />
+      <g stroke="green" fill="none" stroke-dasharray="3" marker-end="url(#ref_generator_index_arrow)">
+        <path d="M -70,-30 c 0,9 20,9 20,0" />
+        <path d="M -90,10 c 0,27 60,27 60,0" />
+      </g>
+      <g fill="green" font-size="70%">
+        <text x="-40" y="-25">elbow</text>
+        <text x="-20" y="15">hand</text>
+      </g>
+    </svg>
+  </dd>
+  <dd>The inner array contains all the joint orbits for one arm's "catch-to-throw" or "throw-to-catch" movement. The outer array contains them alternately as many times as desired. Usually the ending coordinate of one orbit and the starting coordinate of the subsequent orbit are the same.</dd>
+  <dd>
+<pre><code>[
+    [ hand0, elbow0, ... ],
+    [ hand1, elbow1, ... ],
+    ...
+]
+</code></pre>
+  </dd>
+  <dd>By default, both right and left draw the bottom half of the ellipse as "catch-to-throw" and the top half of the ellipse as "throw-to-catch". Both have two orbits, one for the hand and the other for the elbow.</dd>
+  <dd>If you set it yourself, make sure that the joints are in order from the hand to the shoulder.</dd>
+  <dt>CalmGenerator.prototype.resolution</dt>
+  <dd>The resolution used when <a href="./calculateorbits.html">calculateOrbits()</a> is called. The default is 1, and you can specify a positive real number.</dd>
+  <dt>CalmGenerator.prototype.scale (read-only)</dt>
+  <dd>A positive real number representing the scale.</dd>
+  <dd>It is the recommended scale for displaying all coordinates obtained from the previous <a href="./calculateorbits.html">calculateOrbits()</a> call, using the maximum value included in the siteswap.</dd>
+  <dd>
+    <table>
+      <tr><th>max value</th><td>1-5</td><td>6-z</td></tr>
+      <tr><th>scale</th><td>1</td><td>(max value - 1) &div; 4</td></tr>
+    </table>
+  </dd>
+  <dd>If the maximum value is 5 or less, the scale is always 1. If the maximum value is 6 or greater, for example 7, then (7 - 1) &div; 4 = 1.5.</dd>
+  <dt>CalmGenerator.prototype.width (read-only)</dt>
+  <dd>A positive real number representing the width of the line.</dd>
+  <dd>It is the recommended line width when setting scale based on CalmGenerator.prototype.scale, using the maximum value included in the siteswap.</dd>
+  <dd>
+    <table>
+      <tr><th>max value</th><td>1-5</td><td>6-z</td></tr>
+      <tr><th>line width</th><td>1</td><td>(max value + 5) &div; 10</td></tr>
+    </table>
+  </dd>
+  <dd>If the maximum value is 5 or less, the width is always 1. If the maximum value is 6 or greater, for example 7, then (7 + 5) &div; 10 = 1.2.</dd>
+</dl>
+</section>
+
+<section>
+<h2>Methods</h2>
+<dl>
+  <dt><a href="./calculateorbits.html">CalmGenerator.prototype.calculateOrbits()</a></dt>
+  <dd>Calculates right and left arm movements and prop orbits based on throwing data.</dd>
+</dl>
+</section>
+</main>
+
+<footer>
+  <p><a href="../../index.html">jmotion top page</a></p>
+</footer>
+</body>
+
+</html>
