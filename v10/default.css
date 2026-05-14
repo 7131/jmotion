@@ -71,6 +71,12 @@ footer {
     color: blue;
 }
 
+.obsolete {
+    padding: 1em;
+    color: red;
+    background-color: mistyrose;
+}
+
 @media (orientation: landscape) {
 
     body {

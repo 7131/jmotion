@@ -319,13 +319,13 @@ jmotion.VERSION = "1.0";
             const private = privatePart(this);
 
             // remove existing elements
-            const targets = private.pool.map(document.getElementById, document).filter(elem => elem);
-            targets.forEach(this.defs.removeChild, this.defs);
+            private.removeIds(private.pool);
             private.props = [];
             private.pool = [];
             if (!Array.isArray(elements)) {
                 return;
             }
+            private.removeIds(elements.map(elem => elem.id));
 
             // set as the definition
             for (let i = 0; i < elements.length; i++) {
@@ -572,6 +572,13 @@ jmotion.VERSION = "1.0";
         // erase elements from their own drawing layer
         "eraseLayer": function(elements) {
             elements.filter(elem => elem.parentElement).forEach(elem => elem.parentElement.removeChild(elem));
+        },
+
+        // remove elements with the same id from the svg
+        "removeIds": function(ids) {
+            const escapes = ids.map(elem => elem.replace(/\W/g, "\\$&"));
+            const elements = escapes.map(elem => this.public.svg.querySelector(`#${elem}`)).filter(elem => elem);
+            this.eraseLayer(elements);
         },
 
     }
