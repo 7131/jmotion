@@ -87,10 +87,11 @@ jmotion.VERSION = "1.0";
             if (0 < private.moveId) {
                 return;
             }
-            if (isNaN(speed)) {
+            const number = parseFloat(speed);
+            if (isNaN(number)) {
                 private.speed = 1;
             } else {
-                private.speed = speed;
+                private.speed = number;
             }
 
             // start
@@ -128,10 +129,11 @@ jmotion.VERSION = "1.0";
         "setIndex": function(index) {
             // get index
             const private = privatePart(this);
-            if (isNaN(index)) {
+            const number = parseFloat(index);
+            if (isNaN(number)) {
                 private.index = 0;
             } else {
-                private.index = Math.max(0, index);
+                private.index = Math.max(0, number);
             }
 
             // draw shapes
@@ -367,15 +369,15 @@ jmotion.VERSION = "1.0";
         // set screen scale
         "setScale": function(scale) {
             // get real number
-            const ratio = parseFloat(scale);
-            if (isNaN(ratio) || ratio <= 0) {
+            const number = parseFloat(scale);
+            if (isNaN(number) || number <= 0) {
                 return;
             }
 
             // change scale
             const private = privatePart(this);
-            const stride = private.area.width * ratio;
-            this.svg.setAttribute("viewBox", `${-stride / 2} ${private.area.y * ratio} ${stride} ${stride}`);
+            const stride = private.area.width * number;
+            this.svg.setAttribute("viewBox", `${-stride / 2} ${private.area.y * number} ${stride} ${stride}`);
         },
 
         // draw props
@@ -673,13 +675,19 @@ jmotion.VERSION = "1.0";
 
         // whether it is valid prop data
         "isValidProp": function(prop, sync) {
+            if (prop == null) {
+                return false;
+            }
+
             // time of first throw
-            if (isNaN(prop.start) || prop.start < 0) {
+            const start = parseInt(prop.start, 10);
+            if (isNaN(start) || start < 0) {
                 return false;
             }
 
             // length of one cycle
-            if (isNaN(prop.length) || prop.length < 0) {
+            const length = parseInt(prop.length, 10);
+            if (isNaN(length) || length < 0) {
                 return false;
             }
 
@@ -687,10 +695,11 @@ jmotion.VERSION = "1.0";
             if (!Array.isArray(prop.numbers) || prop.numbers.length != prop.length) {
                 return false;
             }
-            if (prop.numbers.some(elem => isNaN(elem) || elem == 0)) {
+            const numbers = prop.numbers.map(elem => parseInt(elem, 10));
+            if (numbers.some(elem => isNaN(elem) || elem == 0)) {
                 return false;
             }
-            if (!sync && prop.numbers.some(elem => elem < 0)) {
+            if (!sync && numbers.some(elem => elem < 0)) {
                 return false;
             }
 
@@ -698,7 +707,8 @@ jmotion.VERSION = "1.0";
             if (!Array.isArray(prop.times) || prop.times.length != prop.length) {
                 return false;
             }
-            if (prop.times.some(elem => isNaN(elem) || elem < 1)) {
+            const times = prop.times.map(elem => parseInt(elem, 10));
+            if (times.some(elem => isNaN(elem) || elem <= 0)) {
                 return false;
             }
             return true;
@@ -897,24 +907,24 @@ jmotion.VERSION = "1.0";
 
         // separate by prop
         "separate": function(throws, sync) {
-            // check siteswap array
-            try {
-                const negative = elem => isNaN(elem) || elem < 0;
-                if (throws.length == 0 || throws.some(elem => elem.length == 0 || elem.some(negative))) {
-                    return [];
-                }
-            } catch {
+            if (!Array.isArray(throws) || throws.length == 0) {
+                return [];
+            }
+            if (throws.some(elem => !Array.isArray(elem) || elem.length == 0)) {
+                return [];
+            }
+            let unit = throws.map(group => group.map(elem => parseInt(elem, 10)));
+            if (unit.some(group => group.some(elem => isNaN(elem) || elem < 0))) {
                 return [];
             }
 
             // get data for one cycle
-            let unit = throws.map(elem => elem.concat());
             if (unit.length % 2 == 1) {
-                unit = unit.concat(throws.map(elem => elem.concat()));
+                unit = unit.concat(unit.map(elem => elem.concat()));
             }
 
             // create a list of props
-            const count = throws.flat().reduce((acc, cur) => acc + cur, 0);
+            const count = unit.flat().reduce((acc, cur) => acc + cur, 0);
             const table = this._createTable(unit, count);
             return this._createProps(table, unit.length, sync);
         },

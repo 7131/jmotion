@@ -592,13 +592,19 @@ jmotion.VERSION = "2.0";
 
         // whether it is valid prop data
         isValidProp(prop, sync) {
+            if (prop == null) {
+                return false;
+            }
+
             // time of first throw
-            if (isNaN(prop.start) || prop.start < 0) {
+            const start = parseInt(prop.start, 10);
+            if (isNaN(start) || start < 0) {
                 return false;
             }
 
             // length of one cycle
-            if (isNaN(prop.length) || prop.length < 0) {
+            const length = parseInt(prop.length, 10);
+            if (isNaN(length) || length < 0) {
                 return false;
             }
 
@@ -606,10 +612,11 @@ jmotion.VERSION = "2.0";
             if (!Array.isArray(prop.numbers) || prop.numbers.length != prop.length) {
                 return false;
             }
-            if (prop.numbers.some(elem => isNaN(elem) || elem == 0)) {
+            const numbers = prop.numbers.map(elem => parseInt(elem, 10));
+            if (numbers.some(elem => isNaN(elem) || elem == 0)) {
                 return false;
             }
-            if (!sync && prop.numbers.some(elem => elem < 0)) {
+            if (!sync && numbers.some(elem => elem < 0)) {
                 return false;
             }
 
@@ -617,7 +624,8 @@ jmotion.VERSION = "2.0";
             if (!Array.isArray(prop.times) || prop.times.length != prop.length) {
                 return false;
             }
-            if (prop.times.some(elem => isNaN(elem) || elem < 1)) {
+            const times = prop.times.map(elem => parseInt(elem, 10));
+            if (times.some(elem => isNaN(elem) || elem <= 0)) {
                 return false;
             }
             return true;
@@ -938,7 +946,11 @@ jmotion.VERSION = "2.0";
             if (!Array.isArray(throws) || throws.length == 0) {
                 return state;
             }
-            if (throws.some(elem => !Array.isArray(elem) || elem.length == 0 || elem.some(val => isNaN(val) || val < 0))) {
+            if (throws.some(elem => !Array.isArray(elem) || elem.length == 0)) {
+                return state;
+            }
+            const unit = throws.map(group => group.map(elem => parseInt(elem, 10)));
+            if (unit.some(group => group.some(elem => isNaN(elem) || elem < 0))) {
                 return state;
             }
 
@@ -953,7 +965,7 @@ jmotion.VERSION = "2.0";
             orbit.left = this.#createPathPoints(this.paths.left, this.offset.left);
 
             // a list of coordinates for each prop
-            const timing = this.#createTimings(throws, sync);
+            const timing = this.#createTimings(unit, sync);
             state.props = table.map(elem => this.#getPropStates(elem, orbit.right.prop, orbit.left.prop, timing, sync));
             state.arms.push(this.#getArmStates(orbit.right.arms, timing, 0, false));
             state.arms.push(this.#getArmStates(orbit.left.arms, timing, 1, !sync));
@@ -1181,18 +1193,21 @@ jmotion.VERSION = "2.0";
             if (!Array.isArray(throws) || throws.length == 0) {
                 return [];
             }
-            if (throws.some(elem => !Array.isArray(elem) || elem.length == 0 || elem.some(val => isNaN(val) || val < 0))) {
+            if (throws.some(elem => !Array.isArray(elem) || elem.length == 0)) {
+                return [];
+            }
+            let unit = throws.map(group => group.map(elem => parseInt(elem, 10)));
+            if (unit.some(group => group.some(elem => isNaN(elem) || elem < 0))) {
                 return [];
             }
 
             // get data for one cycle
-            let unit = throws.map(elem => elem.concat());
             if (unit.length % 2 == 1) {
-                unit = unit.concat(throws.map(elem => elem.concat()));
+                unit = unit.concat(unit.map(elem => elem.concat()));
             }
 
             // create a list of props
-            const count = throws.flat().reduce((acc, cur) => acc + cur, 0);
+            const count = unit.flat().reduce((acc, cur) => acc + cur, 0);
             const table = this.#createTable(unit, count);
             return this.#createProps(table, unit.length, sync);
         }
