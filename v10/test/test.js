@@ -28,7 +28,7 @@ class Controller {
                 continue;
             }
             const test = new TestTable(id, table.tBodies[0]);
-            test.create(data);
+            test.generate(data);
             test.completeEvent = this.#setButtons.bind(this);
             test.replaceEvent = this.#replace.bind(this);
 

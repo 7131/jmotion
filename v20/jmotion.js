@@ -43,7 +43,7 @@ jmotion.VERSION = "2.0";
                 return result.message;
             }
 
-            // create coordinate list
+            // generate coordinate list
             const table = jmotion.Siteswap.separate(result.throws, result.sync);
             const orbits = this.generator.calculateOrbits(table, result.sync, result.throws);
             this.#animator.props = orbits.props;
@@ -647,8 +647,8 @@ jmotion.VERSION = "2.0";
             return path;
         }
 
-        // create a list of coordinates along the path
-        createPathPoints(moves, offset) {
+        // generate a list of coordinates along the path
+        generatePathPoints(moves, offset) {
             const convert = elem => new DOMPoint(elem.x + offset.x, elem.y + offset.y);
             const division = this.divisions[this.max];
             const arms = [];
@@ -676,8 +676,8 @@ jmotion.VERSION = "2.0";
             return { "arms": arms, "prop": prop };
         }
 
-        // create a coordinate list for a parabolic orbit
-        createParabolaPoints(s, e, h, div) {
+        // generate a coordinate list for a parabolic orbit
+        generateParabolaPoints(s, e, h, div) {
             // transform parabola y = h/(w^2) (x - v)^2 - h passing through (v - w, 0), (v, -h), (v + w, 0) so that it passes through (sx, sy), (ex, ey)
             h = h || 0.01;
             div = div || 1;
@@ -814,8 +814,8 @@ jmotion.VERSION = "2.0";
 
             // a list of coordinates along the path
             const orbit = {};
-            orbit.right = this.#common.createPathPoints(this.paths.right, this.offset.right);
-            orbit.left = this.#common.createPathPoints(this.paths.left, this.offset.left);
+            orbit.right = this.#common.generatePathPoints(this.paths.right, this.offset.right);
+            orbit.left = this.#common.generatePathPoints(this.paths.left, this.offset.left);
 
             // a list of coordinates for each prop
             state.props = table.map(elem => this.#getPropStates(elem, orbit.right.prop, orbit.left.prop, sync));
@@ -894,7 +894,7 @@ jmotion.VERSION = "2.0";
                         const to = forward[index][end];
                         const air = Math.max(1, abs - 1);
                         const height = air * air * 15 / this.scale;
-                        const points = this.#common.createParabolaPoints(from, to, height, air * division);
+                        const points = this.#common.generateParabolaPoints(from, to, height, air * division);
                         states.loop = states.loop.concat(points);
                     }
                     prev = number;
@@ -961,19 +961,19 @@ jmotion.VERSION = "2.0";
 
             // a list of coordinates along the path
             const orbit = {};
-            orbit.right = this.#createPathPoints(this.paths.right, this.offset.right);
-            orbit.left = this.#createPathPoints(this.paths.left, this.offset.left);
+            orbit.right = this.#generatePathPoints(this.paths.right, this.offset.right);
+            orbit.left = this.#generatePathPoints(this.paths.left, this.offset.left);
 
             // a list of coordinates for each prop
-            const timing = this.#createTimings(unit, sync);
+            const timing = this.#generateTimings(unit, sync);
             state.props = table.map(elem => this.#getPropStates(elem, orbit.right.prop, orbit.left.prop, timing, sync));
             state.arms.push(this.#getArmStates(orbit.right.arms, timing, 0, false));
             state.arms.push(this.#getArmStates(orbit.left.arms, timing, 1, !sync));
             return state;
         }
 
-        // create timings to throw
-        #createTimings(throws, sync) {
+        // generate timings to throw
+        #generateTimings(throws, sync) {
             const timing = new Array(throws.length).fill().map(() => []);
             for (let i = 0; i < throws.length; i++) {
                 for (const number of throws[i]) {
@@ -992,10 +992,10 @@ jmotion.VERSION = "2.0";
             return timing.concat(timing);
         }
 
-        // create a list of coordinates along the path
-        #createPathPoints(moves, offset) {
+        // generate a list of coordinates along the path
+        #generatePathPoints(moves, offset) {
             const division = this.#common.divisions[this.#common.max];
-            const orbit = this.#common.createPathPoints(moves, offset);
+            const orbit = this.#common.generatePathPoints(moves, offset);
             const arms = { "move": orbit.arms, "calm": [], "length": moves.length };
             const prop = { "move": orbit.prop, "calm": [], "length": moves.length };
             const first = orbit.arms.find(elem => 0 < elem.length);
@@ -1106,7 +1106,7 @@ jmotion.VERSION = "2.0";
                         const to = forward.move[index][end];
                         const air = Math.max(1, abs - 1);
                         const height = air * air * 15 / this.#common.scale;
-                        const points = this.#common.createParabolaPoints(from, to, height, air * division);
+                        const points = this.#common.generateParabolaPoints(from, to, height, air * division);
                         states.loop = states.loop.concat(points);
                     }
                     prev = number;
@@ -1206,14 +1206,14 @@ jmotion.VERSION = "2.0";
                 unit = unit.concat(unit.map(elem => elem.concat()));
             }
 
-            // create a list of props
+            // generate a list of props
             const count = unit.flat().reduce((acc, cur) => acc + cur, 0);
-            const table = this.#createTable(unit, count);
-            return this.#createProps(table, unit.length, sync);
+            const table = this.#generateTable(unit, count);
+            return this.#generateProps(table, unit.length, sync);
         }
 
-        // create a throw table
-        #createTable(unit, count) {
+        // generate a throw table
+        #generateTable(unit, count) {
             const pattern = unit.map(numbers => numbers.filter(elem => elem != 0));
 
             // set the throw
@@ -1244,8 +1244,8 @@ jmotion.VERSION = "2.0";
             return table.map(elem => elem.row.slice(leading));
         }
 
-        // create a list of props
-        #createProps(table, length, sync) {
+        // generate a list of props
+        #generateProps(table, length, sync) {
             const props = [];
             for (const row of table) {
                 const prop = { "start": 0, "times": [], "numbers": [], "length": 0 };
