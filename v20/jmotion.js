@@ -636,7 +636,7 @@ jmotion.VERSION = "2.0";
             // in ellipse x^2/a^2 + y^2/b^2 = 1, let b = 2/3 a (since it is basically ey = sy, a = length / 2 holds)
             const dx = ex - sx;
             const dy = ey - sy;
-            const length = Math.sqrt(dx * dx + dy * dy);
+            const length = Math.hypot(dx, dy);
             const a = -Math.sign(dx) * length / 2;
             const b = a * 2 / 3;
 
